@@ -1,0 +1,8 @@
+src/.vs
+src/Around.Core/bin/
+src/Around.Core/obj/
+src/Around.DataAccess.SqlServer/bin/
+src/Around.DataAccess.SqlServer/obj/
+src/Around.Web/bin/
+src/Around.Web/obj/
+src/Around.Web/Properties
