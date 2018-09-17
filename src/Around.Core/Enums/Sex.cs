@@ -1,8 +1,8 @@
-﻿using System;
-
-namespace Around.Core.Enums
+﻿namespace Around.Core.Enums
 {
-    public Enum Sex
+    public enum Sex
     {
+        Male = 1,
+        Female = 2
     }
 }

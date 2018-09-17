@@ -2,7 +2,7 @@
 
 namespace Around.Core.Entities
 {
-    public class User
+    public abstract class User
     {
         public int Id { get; }
 
@@ -13,5 +13,11 @@ namespace Around.Core.Entities
         public int Age { get; }
 
         public Enum Sex { get; }
+
+        public DateTime DateOfBirth { get; }
+
+        public string Email { get; }
+
+        public string PhoneNumber { get; }
     }
 }

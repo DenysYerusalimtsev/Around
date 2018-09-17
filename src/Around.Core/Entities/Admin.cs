@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Around.Core.Entities
+﻿namespace Around.Core.Entities
 {
-    public class Admin
+    public class Admin : User
     {
     }
 }
