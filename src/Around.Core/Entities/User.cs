@@ -1,4 +1,5 @@
 ﻿using System;
+using Around.Core.Enums;
 
 namespace Around.Core.Entities
 {
@@ -12,7 +13,7 @@ namespace Around.Core.Entities
 
         public int Age { get; }
 
-        public Enum Sex { get; }
+        public Sex Sex { get; }
 
         public DateTime DateOfBirth { get; }
 
