@@ -9,7 +9,9 @@ namespace Around.DataAccess.SqlServer
 
         public DbSet<Brand> Brands { get; set; }
 
-        public DbSet<Check> Checks { get; set; }
+        public DbSet<Copter> Copters { get; set; }
+
+        public DbSet<Cheque> Cheques { get; set; }
 
         public DbSet<Client> Clients { get; set; }
 
@@ -21,7 +23,7 @@ namespace Around.DataAccess.SqlServer
 
         public DbSet<Passport> Passports { get; set; }
 
-        public DbSet<Rent> Trips { get; set; }
+        public DbSet<Rent> Rents { get; set; }
 
         public DronesharingContext()
         {

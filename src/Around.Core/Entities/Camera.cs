@@ -5,6 +5,8 @@ namespace Around.Core.Entities
 {
     public class Camera
     {
+        public int Id { get; }
+
         public CameraMount CameraMount { get; }
 
         public string Lens { get; set; }

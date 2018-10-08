@@ -2,6 +2,8 @@
 {
     public class LoadCapacity
     {
+        public int Id { get; }
+
         public int LoadMountsCount { get; }
 
         public double MaximumWeight { get; }

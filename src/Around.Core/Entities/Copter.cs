@@ -8,26 +8,46 @@ namespace Around.Core.Entities
 
         public string Name { get; }
 
-        public Brand Brand { get; }
+        public int BrandId { get; }
+
+        public virtual Brand Brand { get; }
 
         public DroneType DroneType { get; }
 
-        public Characteristics Characteristics { get; }
+        public int CharacteristicId { get; }
 
-        public Equipment Equipment { get; }
+        public virtual Characteristics Characteristics { get; }
 
-        public Camera Camera { get; }
+        public int EquipmentId { get; }
 
-        public RemoteControl RemoteControl { get; }
+        public virtual Equipment Equipment { get; }
 
-        public Aircraft Aircraft { get; }
+        public int CameraId { get; }
 
-        public Modes Modes { get; }
+        public virtual Camera Camera { get; }
 
-        public LoadCapacity LoadCapacity { get;}
+        public int RemoteControlId { get; }
 
-        public TransportCharacteristics TransportCharacteristics { get; }
+        public virtual RemoteControl RemoteControl { get; }
 
-        public Battery Battery { get; }
+        public int AircraftId { get; }
+
+        public virtual Aircraft Aircraft { get; }
+
+        public int ModesId { get; }
+
+        public virtual Modes Modes { get; }
+
+        public int LoadCapacityId { get; }
+
+        public virtual LoadCapacity LoadCapacity { get;}
+
+        public int TransportCharacteristicsId { get; }
+
+        public virtual TransportCharacteristics TransportCharacteristics { get; }
+
+        public int BatteryId { get; }
+
+        public virtual Battery Battery { get; }
     }
 }

@@ -6,6 +6,8 @@
 
         public string Name { get; }
 
-        public Country Country { get; }
+        public int CountryId { get; }
+
+        public virtual Country Country { get; }
     }
 }

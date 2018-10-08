@@ -2,6 +2,8 @@
 {
     public class Equipment
     {
+        public int Id { get; }
+
         public bool HasGps { get; }
 
         public int InternalMemory { get; }

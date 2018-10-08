@@ -2,6 +2,8 @@
 {
     public class TransportCharacteristics
     {
+        public int Id { get; }
+
         public bool HasAutopilot { get; }
 
         public int SeatCount { get; }

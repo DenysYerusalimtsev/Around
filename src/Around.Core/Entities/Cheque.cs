@@ -2,14 +2,16 @@
 
 namespace Around.Core.Entities
 {
-    public class Check
+    public class Cheque
     {
         public int Id { get; }
 
-        public Rent Trip { get; }
+        public int RentId { get; }
 
         public DateTime DateOfCreation { get; }
 
         public decimal TotalPrice { get; }
+
+        public virtual Rent Rent { get; }
     }
 }

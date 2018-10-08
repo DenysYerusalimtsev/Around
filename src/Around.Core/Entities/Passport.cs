@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Around.Core.Enums;
+using System;
 
 namespace Around.Core.Entities
 {
@@ -19,6 +20,8 @@ namespace Around.Core.Entities
         public DateTime FromDate { get; }
 
         public DateTime ToDate { get; }
+
+        public Sex Sex { get; }
 
         public string TechnicalCenter { get; }
 

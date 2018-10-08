@@ -2,6 +2,8 @@
 {
     public class Characteristics
     {
+        public virtual int Id { get; set; }
+
         public double AmbientTemperature { get; }
 
         public double Widht { get; }

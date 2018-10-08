@@ -5,6 +5,8 @@ namespace Around.Core.Entities
 {
     public class RemoteControl
     {
+        public int Id { get; }
+
         public ControlType ControlType { get; }
 
         public bool HasBuiltInDisplay { get; }

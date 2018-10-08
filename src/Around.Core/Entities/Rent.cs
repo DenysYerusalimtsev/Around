@@ -6,12 +6,17 @@ namespace Around.Core.Entities
     {
         public int Id { get; }
 
-        public int UserId { get; }
+        public int ClientId { get; }
 
-        public int DroneId { get; }
+        public int CopterId { get; }
 
         public DateTime StartTime { get; }
 
-        public  DateTime FinishTime { get; }
+        public DateTime FinishTime { get; }
+
+        public virtual Client Client { get; }
+
+        public virtual Copter Copter { get; }
+
     }
 }
