@@ -4,7 +4,7 @@ namespace Around.Core.Entities
 {
     public class Client : User
     {
-        public DriveLicense DriveLisence { get; }
+        public Passport DriveLisence { get; }
 
         public CreditCard CreditCard { get; }
     }

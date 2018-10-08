@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Around.DataAccess.SqlServer
 {
-    public class CarsharingContext : DbContext
+    public class DronesharingContext : DbContext
     {
         public DbSet<Admin> Admins { get; set; }
 
@@ -19,11 +19,11 @@ namespace Around.DataAccess.SqlServer
 
         public DbSet<Discount> Discounts { get; set; }
 
-        public DbSet<DriveLicense> DriveLicenses { get; set; }
+        public DbSet<Passport> Passports { get; set; }
 
-        public DbSet<Trip> Trips { get; set; }
+        public DbSet<Rent> Trips { get; set; }
 
-        public CarsharingContext()
+        public DronesharingContext()
         {
             Database.Migrate();
             Database.EnsureCreated();
@@ -31,7 +31,7 @@ namespace Around.DataAccess.SqlServer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DIMON01;Initial Catalog=CarsharingDB;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=DroneSharing;Trusted_Connection=True;");
         }
     }
 }

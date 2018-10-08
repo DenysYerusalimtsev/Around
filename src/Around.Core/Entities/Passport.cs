@@ -2,15 +2,19 @@
 
 namespace Around.Core.Entities
 {
-    public class DriveLicense
+    public class Passport
     {
         public int Id { get; }
+
+        public int RecordNumber { get; }
 
         public string FirstName { get; }
 
         public string LastNane { get; }
 
-        public string City { get; }
+        public string Nationality { get; }
+
+        public string BirthPlace { get; }
 
         public DateTime FromDate { get; }
 

@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Data;
 
 namespace Around.Core.Entities
 {
-    public class Trip
+    public class Rent
     {
         public int Id { get; }
 
         public int UserId { get; }
 
-        public int CarId { get; }
+        public int DroneId { get; }
 
         public DateTime StartTime { get; }
 

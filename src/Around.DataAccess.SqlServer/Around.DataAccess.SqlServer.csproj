@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Around.Core\Around.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+  </ItemGroup>
+
 </Project>

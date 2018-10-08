@@ -6,7 +6,7 @@ namespace Around.Core.Entities
     {
         public int Id { get; }
 
-        public Trip Trip { get; }
+        public Rent Trip { get; }
 
         public DateTime DateOfCreation { get; }
 
