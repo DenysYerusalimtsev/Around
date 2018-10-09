@@ -1,10 +1,15 @@
 ﻿using Around.Core.Entities;
+using Around.DataAccess.SqlServer.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Around.DataAccess.SqlServer
 {
     public class DronesharingContext : DbContext
     {
+        public DronesharingContext(DbContextOptions<DronesharingContext> options) : base(options)
+        {
+        }
+
         public DbSet<Admin> Admins { get; set; }
 
         public DbSet<Brand> Brands { get; set; }
@@ -25,15 +30,21 @@ namespace Around.DataAccess.SqlServer
 
         public DbSet<Rent> Rents { get; set; }
 
-        public DronesharingContext()
-        {
-            Database.Migrate();
-            Database.EnsureCreated();
-        }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=DroneSharing;Trusted_Connection=True;");
+            modelBuilder.ApplyConfiguration(new AdminConfigurations());
+            modelBuilder.ApplyConfiguration(new BrandConfiguration());
+            modelBuilder.ApplyConfiguration(new ChequeConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientConfiguration());
+            modelBuilder.ApplyConfiguration(new CopterConfiguration());
+            modelBuilder.ApplyConfiguration(new CountryConfiguration());
+            modelBuilder.ApplyConfiguration(new CreditCardConfiguration());
+            modelBuilder.ApplyConfiguration(new DiscountConfiguration());
+            modelBuilder.ApplyConfiguration(new PassportConfiguration());
+            modelBuilder.ApplyConfiguration(new RentConfiguration());
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
