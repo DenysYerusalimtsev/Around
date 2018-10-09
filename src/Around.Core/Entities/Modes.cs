@@ -11,5 +11,7 @@
         public bool HasCfmPositioning { get; }
 
         public bool HasFirstPersonView { get; }
+
+        public virtual Copter Copter { get; set; }
     }
 }

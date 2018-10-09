@@ -7,5 +7,7 @@
         public double ChargingSpeed { get; }
 
         public double Capacity { get; }
+
+        public virtual  Copter Copter { get;set; }
     }
 }

@@ -7,5 +7,7 @@
         public string Type { get; }
 
         public double Percentage { get; }
+
+        public virtual Client Client { get; set; }
     }
 }

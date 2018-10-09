@@ -20,5 +20,7 @@ namespace Around.Core.Entities
         public List<string> PhotoModes { get; }
 
         public Stabilization Stabilization { get; }
+
+        public virtual Copter Copter { get; set; }
     }
 }

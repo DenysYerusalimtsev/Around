@@ -16,5 +16,7 @@ namespace Around.Core.Entities
         public List<string> Connectors { get; } 
 
         public double MaximumRadius { get; }
+
+        public virtual Copter Copter { get; set; }
     }
 }

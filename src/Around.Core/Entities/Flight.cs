@@ -13,5 +13,7 @@
         public double MinimumSpeed { get; }
 
         public double FlightTime { get; }
+
+        public virtual Copter Copter { get; set; }
     }
 }

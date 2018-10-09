@@ -26,5 +26,7 @@ namespace Around.Core.Entities
         public string TechnicalCenter { get; }
 
         public string Snapshot { get; }
+
+        public virtual Client Client { get; set; }
     }
 }

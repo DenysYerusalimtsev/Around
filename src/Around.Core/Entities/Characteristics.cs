@@ -17,5 +17,7 @@
         public string Colour { get; }
 
         public double PropellersCount { get; }
+
+        public virtual Copter Copter { get; set; }
     }
 }

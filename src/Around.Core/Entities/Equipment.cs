@@ -18,5 +18,6 @@
 
         public bool HasBarometer { get; }
 
+        public virtual Copter Copter { get; set; }
     }
 }

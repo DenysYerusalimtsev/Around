@@ -15,5 +15,7 @@ namespace Around.Core.Entities
         public virtual List<CreditCard> CreditCards { get; }
 
         public virtual Discount Discount { get; }
+
+        public virtual List<Rent> Rent { get; set; }
     }
 }

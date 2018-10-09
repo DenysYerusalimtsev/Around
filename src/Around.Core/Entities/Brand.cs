@@ -9,5 +9,7 @@
         public int CountryId { get; }
 
         public virtual Country Country { get; }
+
+        public virtual Copter Copter { get; set; }
     }
 }

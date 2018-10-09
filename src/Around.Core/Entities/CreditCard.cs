@@ -7,5 +7,7 @@
         public string ValidThru { get; }
 
         public string Cvv { get; }
+
+        public virtual Client Client { get; set; }
     }
 }

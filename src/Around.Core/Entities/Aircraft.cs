@@ -13,5 +13,7 @@ namespace Around.Core.Entities
         public EngineType EngineType { get; }
 
         public string[] Connectors { get; }
+
+        public virtual Copter Copter { get; set; }
     }
 }
