@@ -4,19 +4,19 @@
     {
         public virtual int Id { get; set; }
 
-        public double AmbientTemperature { get; }
+        public double AmbientTemperature { get; set; }
 
-        public double Widht { get; }
+        public double Widht { get; set; }
 
-        public double Length { get; }
+        public double Length { get; set; }
 
-        public double Height { get; }
+        public double Height { get; set; }
 
-        public double Weight { get; }
+        public double Weight { get; set; }
 
-        public string Colour { get; }
+        public string Colour { get; set; }
 
-        public double PropellersCount { get; }
+        public double PropellersCount { get; set; }
 
         public virtual Copter Copter { get; set; }
     }

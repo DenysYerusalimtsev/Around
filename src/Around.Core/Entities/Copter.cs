@@ -4,54 +4,54 @@ namespace Around.Core.Entities
 {
     public class Copter
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public int BrandId { get; }
+        public int BrandId { get; set; }
 
-        public virtual Brand Brand { get; }
+        public virtual Brand Brand { get; set; }
 
-        public DroneType DroneType { get; }
+        public DroneType DroneType { get; set; }
 
-        public int CharacteristicId { get; }
+        public int CharacteristicId { get; set; }
 
-        public virtual Characteristics Characteristics { get; }
+        public virtual Characteristics Characteristics { get; set; }
 
-        public virtual int FlightId { get; }
+        public virtual int FlightId { get; set; }
 
-        public virtual Flight Flight { get; }
+        public virtual Flight Flight { get; set; }
 
-        public int EquipmentId { get; }
+        public int EquipmentId { get; set; }
 
-        public virtual Equipment Equipment { get; }
+        public virtual Equipment Equipment { get; set; }
 
-        public int CameraId { get; }
+        public int CameraId { get; set; }
 
-        public virtual Camera Camera { get; }
+        public virtual Camera Camera { get; set; }
 
-        public int RemoteControlId { get; }
+        public int RemoteControlId { get; set; }
 
-        public virtual RemoteControl RemoteControl { get; }
+        public virtual RemoteControl RemoteControl { get; set; }
 
-        public int AircraftId { get; }
+        public int AircraftId { get; set; }
 
-        public virtual Aircraft Aircraft { get; }
+        public virtual Aircraft Aircraft { get; set; }
 
-        public int ModesId { get; }
+        public int ModesId { get; set; }
 
-        public virtual Modes Modes { get; }
+        public virtual Modes Modes { get; set; }
 
-        public int LoadCapacityId { get; }
+        public int LoadCapacityId { get; set; }
 
-        public virtual LoadCapacity LoadCapacity { get;}
+        public virtual LoadCapacity LoadCapacity { get; set; }
 
-        public int TransportCharacteristicsId { get; }
+        public int TransportCharacteristicsId { get; set; }
 
-        public virtual TransportCharacteristics TransportCharacteristics { get; }
+        public virtual TransportCharacteristics TransportCharacteristics { get; set; }
 
-        public int BatteryId { get; }
+        public int BatteryId { get; set; }
 
-        public virtual Battery Battery { get; }
+        public virtual Battery Battery { get; set; }
     }
 }

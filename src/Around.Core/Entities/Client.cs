@@ -4,17 +4,17 @@ namespace Around.Core.Entities
 {
     public class Client : User
     {
-        public int PassportId { get; }
+        public int PassportId { get; set; }
 
-        public Passport Passport { get; }
+        public string CreditCardNumber { get; set; }
 
-        public string CreditCardNumber { get; }
+        public int DiscountId { get; set; }
 
-        public int DiscountId { get; }
+        public virtual Passport Passport { get; set; }
 
-        public virtual List<CreditCard> CreditCards { get; }
+        public virtual List<CreditCard> CreditCards { get; set; }
 
-        public virtual Discount Discount { get; }
+        public virtual Discount Discount { get; set; }
 
         public virtual List<Rent> Rent { get; set; }
     }

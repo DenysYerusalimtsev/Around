@@ -2,21 +2,21 @@
 {
     public class Equipment
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public bool HasGps { get; }
+        public bool HasGps { get; set; }
 
-        public int InternalMemory { get; }
+        public int InternalMemory { get; set; }
 
-        public bool HasMemoryCardSupport { get; }
+        public bool HasMemoryCardSupport { get; set; }
 
-        public bool HasGyroscope { get; }
+        public bool HasGyroscope { get; set; }
 
-        public bool HasMagnetometer { get; }
+        public bool HasMagnetometer { get; set; }
 
-        public bool HasAccelerometer { get; }
+        public bool HasAccelerometer { get; set; }
 
-        public bool HasBarometer { get; }
+        public bool HasBarometer { get; set; }
 
         public virtual Copter Copter { get; set; }
     }

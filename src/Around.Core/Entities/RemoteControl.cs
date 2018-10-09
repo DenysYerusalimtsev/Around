@@ -5,17 +5,17 @@ namespace Around.Core.Entities
 {
     public class RemoteControl
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public ControlType ControlType { get; }
+        public ControlType ControlType { get; set; }
 
-        public bool HasBuiltInDisplay { get; }
+        public bool HasBuiltInDisplay { get; set; }
 
-        public bool HasMobileDeviceMount { get; }
+        public bool HasMobileDeviceMount { get; set; }
 
-        public List<string> Connectors { get; } 
+        public string Connectors { get; set; } 
 
-        public double MaximumRadius { get; }
+        public double MaximumRadius { get; set; }
 
         public virtual Copter Copter { get; set; }
     }

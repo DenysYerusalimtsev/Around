@@ -1,18 +1,19 @@
 ﻿using Around.Core.Enums;
+using System.Collections.Generic;
 
 namespace Around.Core.Entities
 {
     public class Aircraft
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public FlameMaterial FlameMaterial { get; }
+        public FlameMaterial FlameMaterial { get; set; }
 
-        public bool HasFoldableDesign { get; }
+        public bool HasFoldableDesign { get; set; }
 
-        public EngineType EngineType { get; }
+        public EngineType EngineType { get; set; }
 
-        public string[] Connectors { get; }
+        public string Connectors { get; set; }
 
         public virtual Copter Copter { get; set; }
     }

@@ -2,17 +2,17 @@
 {
     public class Flight
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public double LiftingSpeed { get; }
+        public double LiftingSpeed { get; set; }
 
-        public double DescentSpeed { get; }
+        public double DescentSpeed { get; set; }
 
-        public double MaximumSpeed { get; }
+        public double MaximumSpeed { get; set; }
 
-        public double MinimumSpeed { get; }
+        public double MinimumSpeed { get; set; }
 
-        public double FlightTime { get; }
+        public double FlightTime { get; set; }
 
         public virtual Copter Copter { get; set; }
     }

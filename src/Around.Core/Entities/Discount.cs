@@ -2,11 +2,13 @@
 {
     public class Discount
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public string Type { get; }
+        public string Type { get; set; }
 
-        public double Percentage { get; }
+        public double Percentage { get; set; }
+
+        public virtual int ClientId { get; set; }
 
         public virtual Client Client { get; set; }
     }

@@ -4,14 +4,14 @@ namespace Around.Core.Entities
 {
     public class Cheque
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public int RentId { get; }
+        public int RentId { get; set; }
 
-        public DateTime DateOfCreation { get; }
+        public DateTime DateOfCreation { get; set; }
 
-        public decimal TotalPrice { get; }
+        public decimal TotalPrice { get; set; }
 
-        public virtual Rent Rent { get; }
+        public virtual Rent Rent { get; set; }
     }
 }

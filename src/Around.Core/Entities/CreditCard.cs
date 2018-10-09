@@ -2,11 +2,13 @@
 {
     public class CreditCard
     {
-        public string Number { get; }
+        public virtual int Id { get; set; }
 
-        public string ValidThru { get; }
+        public string Number { get; set; }
 
-        public string Cvv { get; }
+        public string ValidThru { get; set; }
+
+        public string Cvv { get; set; }
 
         public virtual Client Client { get; set; }
     }

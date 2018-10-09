@@ -2,11 +2,11 @@
 {
     public class Battery
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public double ChargingSpeed { get; }
+        public double ChargingSpeed { get; set; }
 
-        public double Capacity { get; }
+        public double Capacity { get; set; }
 
         public virtual  Copter Copter { get;set; }
     }

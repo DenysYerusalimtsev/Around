@@ -5,21 +5,21 @@ namespace Around.Core.Entities
 {
     public class Camera
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public CameraMount CameraMount { get; }
+        public CameraMount CameraMount { get; set; }
 
         public string Lens { get; set; }
 
-        public bool HasCameraRotation { get; }
+        public bool HasCameraRotation { get; set; }
 
-        public string IsoSensetivity { get; }
+        public string IsoSensetivity { get; set; }
 
-        public Resolution Resolution { get; }
+        public Resolution Resolution { get; set; }
 
-        public List<string> PhotoModes { get; }
+        public string PhotoModes { get; set; }
 
-        public Stabilization Stabilization { get; }
+        public Stabilization Stabilization { get; set; }
 
         public virtual Copter Copter { get; set; }
     }

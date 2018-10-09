@@ -12,6 +12,7 @@ namespace Around.DataAccess.SqlServer.Configurations
 
             builder.HasOne(x => x.Country)
                 .WithOne(x => x.Brand)
+                .HasForeignKey<Country>(x => x.Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.Id)

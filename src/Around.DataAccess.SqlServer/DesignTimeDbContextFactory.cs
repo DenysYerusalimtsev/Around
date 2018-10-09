@@ -1,7 +1,7 @@
-﻿using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Around.DataAccess.SqlServer
 {
@@ -10,8 +10,8 @@ namespace Around.DataAccess.SqlServer
         public DronesharingContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
-                // .SetBasePath(Directory.GetCurrentDirectory())
-                // .AddJsonFile("appsettings.json")
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
                 .Build();
 
             var builder = new DbContextOptionsBuilder<DronesharingContext>();
@@ -20,7 +20,7 @@ namespace Around.DataAccess.SqlServer
 
             builder.UseSqlServer(connectionString);
 
-            // builder.UseLazyLoadingProxies();
+            builder.UseLazyLoadingProxies();
 
             return new DronesharingContext(builder.Options);
         }

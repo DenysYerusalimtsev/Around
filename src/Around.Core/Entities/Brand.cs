@@ -2,13 +2,13 @@
 {
     public class Brand
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public int CountryId { get; }
+        public int CountryId { get; set; }
 
-        public virtual Country Country { get; }
+        public virtual Country Country { get; set; }
 
         public virtual Copter Copter { get; set; }
     }

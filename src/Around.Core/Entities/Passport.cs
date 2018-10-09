@@ -5,27 +5,27 @@ namespace Around.Core.Entities
 {
     public class Passport
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public int RecordNumber { get; }
+        public int RecordNumber { get; set; }
 
-        public string FirstName { get; }
+        public string FirstName { get; set; }
 
-        public string LastNane { get; }
+        public string LastNane { get; set; }
 
-        public string Nationality { get; }
+        public string Nationality { get; set; }
 
-        public string BirthPlace { get; }
+        public string BirthPlace { get; set; }
 
-        public DateTime FromDate { get; }
+        public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; }
+        public DateTime ToDate { get; set; }
 
-        public Sex Sex { get; }
+        public Sex Sex { get; set; }
 
-        public string TechnicalCenter { get; }
+        public string TechnicalCenter { get; set; }
 
-        public string Snapshot { get; }
+        public string Snapshot { get; set; }
 
         public virtual Client Client { get; set; }
     }

@@ -12,7 +12,7 @@ namespace Around.DataAccess.SqlServer.Configurations
 
             builder.HasMany(x => x.CreditCards)
                 .WithOne(x => x.Client)
-                .HasForeignKey(x => x.Number)
+                .HasForeignKey(x => x.Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x => x.Rent)
@@ -22,6 +22,7 @@ namespace Around.DataAccess.SqlServer.Configurations
 
             builder.HasOne(x => x.Discount)
                 .WithOne(x => x.Client)
+                .HasForeignKey<Discount>(x => x.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.Passport)
