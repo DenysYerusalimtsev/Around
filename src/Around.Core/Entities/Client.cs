@@ -1,4 +1,6 @@
-﻿namespace Around.Core.Entities
+﻿using System.Collections.Generic;
+
+namespace Around.Core.Entities
 {
     public class Client : User
     {
@@ -10,7 +12,7 @@
 
         public int DiscountId { get; }
 
-        public virtual CreditCard CreditCard { get; }
+        public virtual List<CreditCard> CreditCards { get; }
 
         public virtual Discount Discount { get; }
     }
