@@ -2,6 +2,8 @@
 {
     public class Flight
     {
+        public int Id { get; }
+
         public double LiftingSpeed { get; }
 
         public double DescentSpeed { get; }

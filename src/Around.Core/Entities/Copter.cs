@@ -18,6 +18,10 @@ namespace Around.Core.Entities
 
         public virtual Characteristics Characteristics { get; }
 
+        public virtual int FlightId { get; }
+
+        public virtual Flight Flight { get; }
+
         public int EquipmentId { get; }
 
         public virtual Equipment Equipment { get; }

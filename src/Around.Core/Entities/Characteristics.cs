@@ -14,7 +14,7 @@
 
         public double Weight { get; }
 
-        public double Colour { get; }
+        public string Colour { get; }
 
         public double PropellersCount { get; }
     }

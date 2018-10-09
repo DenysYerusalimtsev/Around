@@ -8,10 +8,10 @@ namespace Around.Core.Entities
 
         public FlameMaterial FlameMaterial { get; }
 
-        public bool FoldableDesign { get; }
+        public bool HasFoldableDesign { get; }
 
         public EngineType EngineType { get; }
 
-        public string Connectors { get; }
+        public string[] Connectors { get; }
     }
 }

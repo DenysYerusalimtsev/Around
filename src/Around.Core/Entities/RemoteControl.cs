@@ -11,11 +11,10 @@ namespace Around.Core.Entities
 
         public bool HasBuiltInDisplay { get; }
 
-        public bool MobileDeviceMount { get; }
+        public bool HasMobileDeviceMount { get; }
 
         public List<string> Connectors { get; } 
 
         public double MaximumRadius { get; }
-
     }
 }
