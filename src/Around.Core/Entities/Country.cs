@@ -5,5 +5,7 @@
         public string Code { get; }
 
         public string CountryName { get; }
+
+        public virtual Brand Brand { get; set; }
     }
 }

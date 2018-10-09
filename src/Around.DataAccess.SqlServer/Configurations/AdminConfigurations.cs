@@ -1,10 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Around.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Around.DataAccess.SqlServer.Configurations
 {
-    class AdminConfigurations
+    public class AdminConfigurations : IEntityTypeConfiguration<Admin>
     {
+        public void Configure(EntityTypeBuilder<Admin> builder)
+        {
+            builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+        }
     }
 }

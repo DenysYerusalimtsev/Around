@@ -18,5 +18,6 @@ namespace Around.Core.Entities
 
         public virtual Copter Copter { get; }
 
+        public virtual Cheque Cheque { get; set; }
     }
 }

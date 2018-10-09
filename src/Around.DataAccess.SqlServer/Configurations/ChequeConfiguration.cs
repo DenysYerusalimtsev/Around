@@ -1,6 +1,21 @@
-﻿namespace Around.DataAccess.SqlServer.Configurations
+﻿using Around.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Around.DataAccess.SqlServer.Configurations
 {
-    class ChequeConfiguration
+    public class ChequeConfiguration : IEntityTypeConfiguration<Cheque>
     {
+        public void Configure(EntityTypeBuilder<Cheque> builder)
+        {
+            builder.HasKey(x => x.Id);
+
+            builder.HasOne(x => x.Rent)
+                .WithOne(x => x.Cheque)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+        }
     }
 }
