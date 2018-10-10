@@ -18,6 +18,8 @@ namespace Around.DataAccess.SqlServer
 
         public DbSet<Cheque> Cheques { get; set; }
 
+        public DbSet<Flight> Flights { get; set; }
+
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<Country> Countries { get; set; }
