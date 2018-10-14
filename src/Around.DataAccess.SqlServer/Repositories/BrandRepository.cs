@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Around.Core.Entities;
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    class BrandRepository
+    public class BrandRepository : Repository<Brand>
     {
+        public BrandRepository(DronesharingContext context)
+            : base(context)
+        {
+            dbSet = db.Brands;
+        }
     }
 }

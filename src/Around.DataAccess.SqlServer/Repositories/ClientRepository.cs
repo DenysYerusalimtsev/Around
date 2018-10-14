@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Around.Core.Entities;
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    class ClientRepository
+    public class ClientRepository : Repository<Client>
     {
+        public ClientRepository(DronesharingContext context)
+            : base(context)
+        {
+            dbSet = db.Clients;
+        }
     }
 }

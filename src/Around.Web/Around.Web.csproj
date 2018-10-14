@@ -10,6 +10,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Around.Core\Around.Core.csproj" />
+    <ProjectReference Include="..\Around.DataAccess.SqlServer\Around.DataAccess.SqlServer.csproj" />
   </ItemGroup>
 
 </Project>

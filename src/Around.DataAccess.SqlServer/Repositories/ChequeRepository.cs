@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Around.Core.Entities;
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    class ChequeRepository
+    class ChequeRepository : Repository<Cheque>
     {
+        public ChequeRepository(DronesharingContext context)
+            : base(context)
+        {
+            dbSet = db.Cheques;
+        }
     }
 }
