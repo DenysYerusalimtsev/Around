@@ -2,12 +2,7 @@
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    class ChequeRepository : Repository<Cheque>
+    class ChequeRepository
     {
-        public ChequeRepository(DronesharingContext context)
-            : base(context)
-        {
-            dbSet = db.Cheques;
-        }
     }
 }

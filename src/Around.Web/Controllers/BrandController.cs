@@ -1,6 +1,6 @@
-﻿using Around.Core.Entities;
-using Around.Core.Interfaces;
+﻿using Around.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Around.Web.Controllers
 {
@@ -8,7 +8,12 @@ namespace Around.Web.Controllers
     [ApiController]
     public class BrandController : Controller
     {
-        private readonly IRepository<Brand> _brandRepository;
+        private readonly IBrandRepository _brandRepository;
+
+        public BrandController(IBrandRepository brandRepository)
+        {
+            _brandRepository = brandRepository;
+        }
 
         [HttpGet]
         [Route("brands")]
@@ -21,9 +26,9 @@ namespace Around.Web.Controllers
 
         [HttpGet]
         [Route("brand/{id}")]
-        public JsonResult GetBrand(int id)
+        public async Task<JsonResult> GetBrand(int id)
         {
-            var brand = _brandRepository.Get(id);
+            var brand = await _brandRepository.Get(id);
 
             return Json(brand);
         }

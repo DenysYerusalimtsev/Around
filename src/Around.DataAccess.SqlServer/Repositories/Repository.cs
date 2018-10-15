@@ -9,59 +9,59 @@ namespace Around.DataAccess.SqlServer.Repositories
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {
-        protected DronesharingContext db;
-        protected DbSet<T> dbSet;
+        protected DronesharingContext _db;
+        protected DbSet<T> _dbSet;
 
         public Repository(DronesharingContext context)
         {
-            db = context;
+            _db = context;
         }
 
         public void Create(T item)
         {
-            dbSet.Add(item);
+            _dbSet.Add(item);
         }
 
         public void Delete(int id)
         {
-            T obj = dbSet.Find(id);
+            T obj = _dbSet.Find(id);
             if (obj != null)
-                dbSet.Remove(obj);
+                _dbSet.Remove(obj);
         }
 
         public IEnumerable<T> Find(Func<T, bool> predicate)
         {
-            return dbSet.Where(predicate);
+            return _dbSet.Where(predicate);
         }
 
         public T FirstOrDefault(Func<T, bool> predicate)
         {
-            return dbSet.FirstOrDefault(predicate);
+            return _dbSet.FirstOrDefault(predicate);
         }
 
         public Task<T> FirstOrDefaultAsync(Func<T, bool> predicate)
         {
-            return Task.Run(() => dbSet.FirstOrDefault(predicate));
+            return Task.Run(() => _dbSet.FirstOrDefault(predicate));
         }
 
         public T Get(int id)
         {
-            return dbSet.Find(id);
+            return _dbSet.Find(id);
         }
 
         public T Get(string code)
         {
-            return dbSet.Find(code);
+            return _dbSet.Find(code);
         }
 
         public IEnumerable<T> GetAll()
         {
-            return dbSet;
+            return _dbSet.ToList();
         }
 
         public void Update(T item)
         {
-            dbSet.Update(item);
+            _dbSet.Update(item);
         }
     }
 }

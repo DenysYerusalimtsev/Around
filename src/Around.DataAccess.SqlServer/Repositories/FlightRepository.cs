@@ -2,12 +2,7 @@
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    public class FlightRepository : Repository<Flight>
+    public class FlightRepository
     {
-        public FlightRepository(DronesharingContext context)
-            : base(context)
-        {
-            dbSet = db.Flights;
-        }
     }
 }

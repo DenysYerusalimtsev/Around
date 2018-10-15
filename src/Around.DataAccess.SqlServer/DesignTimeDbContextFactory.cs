@@ -10,17 +10,14 @@ namespace Around.DataAccess.SqlServer
         public DronesharingContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json")
+               .Build();
 
             var builder = new DbContextOptionsBuilder<DronesharingContext>();
-
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             builder.UseSqlServer(connectionString);
-
-            builder.UseLazyLoadingProxies();
 
             return new DronesharingContext(builder.Options);
         }

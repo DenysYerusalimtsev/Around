@@ -10,10 +10,10 @@ namespace Around.DataAccess.SqlServer.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.Country)
-                .WithOne(x => x.Brand)
-                .HasForeignKey<Country>(x => x.Id)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Copters)
+               .WithOne(x => x.Brand)
+               .HasForeignKey(a => a.BrandId)
+               .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();

@@ -2,12 +2,7 @@
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    public class DiscountRepository : Repository<Discount>
+    public class DiscountRepository
     {
-        public DiscountRepository(DronesharingContext context)
-            : base(context)
-        {
-            dbSet = db.Discounts;
-        }
     }
 }

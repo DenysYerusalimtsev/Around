@@ -2,12 +2,7 @@
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    public class RentRepository : Repository<Rent>
+    public class RentRepository
     {
-        public RentRepository(DronesharingContext context)
-            : base(context)
-        {
-            dbSet = db.Rents;
-        }
     }
 }

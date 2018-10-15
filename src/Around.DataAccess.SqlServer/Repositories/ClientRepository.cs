@@ -2,12 +2,7 @@
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    public class ClientRepository : Repository<Client>
+    public class ClientRepository
     {
-        public ClientRepository(DronesharingContext context)
-            : base(context)
-        {
-            dbSet = db.Clients;
-        }
     }
 }

@@ -2,12 +2,7 @@
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    public class AdminRepositories : Repository<Admin>
+    public class AdminRepositories
     {
-        public AdminRepositories(DronesharingContext context)
-            : base(context)
-        {
-            dbSet = db.Admins;
-        }
     }
 }

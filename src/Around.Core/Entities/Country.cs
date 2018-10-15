@@ -1,4 +1,6 @@
-﻿namespace Around.Core.Entities
+﻿using System.Collections.Generic;
+
+namespace Around.Core.Entities
 {
     public class Country
     {
@@ -6,8 +8,6 @@
 
         public string CountryName { get; set; }
 
-        public virtual int Id { get; set; }
-
-        public virtual Brand Brand { get; set; }
+        public virtual List<Brand> Brands { get; set; }
     }
 }

@@ -2,12 +2,7 @@
 
 namespace Around.DataAccess.SqlServer.Repositories
 {
-    public class CountryRepository : Repository<Country>
+    public class CountryRepository
     {
-        public CountryRepository(DronesharingContext context)
-            : base(context)
-        {
-            dbSet = db.Countries;
-        }
     }
 }

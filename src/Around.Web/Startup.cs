@@ -1,12 +1,16 @@
 ﻿using Around.Core.Entities;
 using Around.Core.Interfaces;
+using Around.DataAccess.SqlServer;
 using Around.DataAccess.SqlServer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Around.Web
 {
@@ -24,7 +28,11 @@ namespace Around.Web
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddTransient<IRepository<Brand>, BrandRepository>();
+            services.AddDbContext<DronesharingContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
+            
+            services.AddTransient<IBrandRepository, BrandRepository>();
 
             services.AddSwaggerGen(c =>
             {

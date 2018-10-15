@@ -1,5 +1,4 @@
 ﻿using Around.Core.Enums;
-using System.Collections.Generic;
 
 namespace Around.Core.Entities
 {
