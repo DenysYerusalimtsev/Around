@@ -17,12 +17,14 @@ namespace Around.DataAccess.SqlServer.Repositories
 
         public void Create(Brand brand)
         {
-            throw new System.NotImplementedException();
+            _context.Brands.Add(brand);
         }
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var brand = _context.Brands.Find(id);
+            if (brand != null)
+                _context.Brands.Remove(brand);
         }
 
         public async Task<Brand> Get(int id)
@@ -30,9 +32,9 @@ namespace Around.DataAccess.SqlServer.Repositories
             return await _context.Brands.FirstOrDefaultAsync(b => b.Id == id);
         }
 
-        public Task<List<Brand>> GetAll()
+        public async Task<List<Brand>> GetAll()
         {
-            return _context.Brands.ToListAsync();
+            return await _context.Brands.ToListAsync();
         }
 
         public List<Brand> Search(string search)
@@ -42,7 +44,7 @@ namespace Around.DataAccess.SqlServer.Repositories
 
         public void Update(Brand brand)
         {
-            throw new System.NotImplementedException();
+            _context.Brands.Update(brand);
         }
     }
 }

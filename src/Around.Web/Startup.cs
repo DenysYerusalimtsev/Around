@@ -33,6 +33,14 @@ namespace Around.Web
             );
             
             services.AddTransient<IBrandRepository, BrandRepository>();
+            services.AddTransient<IAdminRepository, AdminRepository>();
+            services.AddTransient<IChequeRepository, ChequeRepository>();
+            services.AddTransient<IClientRepository, ClientRepository>();
+            services.AddTransient<ICopterRepository, CoptersRepository>();
+            services.AddTransient<ICountryRepository, CountryRepository>();
+            services.AddTransient<IDiscountRepository, DiscountRepository>();
+            services.AddTransient<IFlightRepository, FlightRepository>();
+            services.AddTransient<IRentRepository, RentRepository>();
 
             services.AddSwaggerGen(c =>
             {

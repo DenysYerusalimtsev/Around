@@ -1,10 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Around.Core.Entities;
 
 namespace Around.Core.Interfaces
 {
-    interface IRentRepository
+    public interface IRentRepository
     {
+        Task<List<Rent>> GetAllAsync();
+
+        Task<Rent> Get(int id);
+
+        void Create(Rent rent);
+
+        void Update(Rent rent);
+
+        List<Rent> Search(string search);
+
+        void Delete(int id);
     }
 }
