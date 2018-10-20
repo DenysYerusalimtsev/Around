@@ -6,7 +6,7 @@ namespace Around.Core.Interfaces
 {
     public interface IBrandRepository
     {
-        Task<List<Brand>> GetAll();
+        Task<List<Brand>> GetAllAsync();
 
         Task<Brand> Get(int id);
 

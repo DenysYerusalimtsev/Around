@@ -18,6 +18,7 @@ namespace Around.DataAccess.SqlServer.Repositories
         public void Create(Brand brand)
         {
             _context.Brands.Add(brand);
+            _context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -25,6 +26,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             var brand = _context.Brands.Find(id);
             if (brand != null)
                 _context.Brands.Remove(brand);
+            _context.SaveChanges();
         }
 
         public async Task<Brand> Get(int id)
@@ -32,7 +34,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             return await _context.Brands.FirstOrDefaultAsync(b => b.Id == id);
         }
 
-        public async Task<List<Brand>> GetAll()
+        public async Task<List<Brand>> GetAllAsync()
         {
             return await _context.Brands.ToListAsync();
         }

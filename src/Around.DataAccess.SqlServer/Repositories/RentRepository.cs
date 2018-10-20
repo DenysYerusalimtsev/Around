@@ -8,7 +8,7 @@ namespace Around.DataAccess.SqlServer.Repositories
 {
     public class RentRepository : IRentRepository
     {
-        private DronesharingContext _context;
+        private readonly DronesharingContext _context;
 
         public RentRepository(DronesharingContext context)
         {
