@@ -7,7 +7,7 @@ namespace Around.Core.Entities
     {
         public int Id { get; set; }
 
-        public int RecordNumber { get; set; }
+        public string RecordNumber { get; set; }
 
         public string FirstName { get; set; }
 

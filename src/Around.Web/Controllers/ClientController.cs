@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
+using Around.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Around.Web.Controllers
@@ -17,16 +19,26 @@ namespace Around.Web.Controllers
 
         [HttpGet]
         [Route("clients")]
-        public async Task<JsonResult> GetClients()
+        public async Task<IActionResult> GetClients()
         {
-            return Json(await _clientRepository.GetAll());
+            List<Client> clients = await _clientRepository.GetAll();
+            var response = new List<ClientDto>();
+
+            foreach (var client in clients)
+            {
+                response.Add(new ClientDto(client));
+            }
+            return Ok(response);
         }
 
         [HttpGet]
         [Route("clients/{id}")]
-        public async Task<JsonResult> GetClient(int id)
+        public async Task<IActionResult> GetClient(int id)
         {
-            return Json(await _clientRepository.Get(id));
+            var client = await _clientRepository.Get(id);
+            var response = new ClientDto(client);
+
+            return Ok(response);
         }
 
         [HttpPost]
