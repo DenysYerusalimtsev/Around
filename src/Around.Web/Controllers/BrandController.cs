@@ -1,7 +1,9 @@
-﻿using Around.Core.Interfaces;
+﻿using System.Collections.Generic;
+using Around.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Around.Core.Entities;
+using Around.Web.Models;
 
 namespace Around.Web.Controllers
 {
@@ -18,16 +20,26 @@ namespace Around.Web.Controllers
 
         [HttpGet]
         [Route("brands")]
-        public async Task<JsonResult> GetAllBrands()
+        public async Task<IActionResult> GetAllBrands()
         {
-            return Json(await _brandRepository.GetAllAsync());
+            List<Brand> brands = await _brandRepository.GetAllAsync();
+            var response = new List<BrandDto>();
+
+            foreach (var brand in brands)
+            {
+                response.Add(new BrandDto(brand));
+            }
+            return Ok(response);
         }
 
         [HttpGet]
         [Route("brand/{id}")]
-        public async Task<JsonResult> GetBrand(int id)
+        public async Task<IActionResult> GetBrand(int id)
         {
-            return Json(await _brandRepository.Get(id));
+            Brand brand = await _brandRepository.Get(id);
+            var response = new BrandDto(brand);
+           
+            return Ok(response);
         }
 
         [HttpPost]

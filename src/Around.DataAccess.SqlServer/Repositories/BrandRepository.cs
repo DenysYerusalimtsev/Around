@@ -31,12 +31,16 @@ namespace Around.DataAccess.SqlServer.Repositories
 
         public async Task<Brand> Get(int id)
         {
-            return await _context.Brands.FirstOrDefaultAsync(b => b.Id == id);
+            return await _context.Brands
+                .Include(b => b.Country)
+                .FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task<List<Brand>> GetAllAsync()
         {
-            return await _context.Brands.ToListAsync();
+            return await _context.Brands
+                .Include(b => b.Country)
+                .ToListAsync();
         }
 
         public List<Brand> Search(string search)
