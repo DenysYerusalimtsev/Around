@@ -13,7 +13,7 @@ namespace Around.DataAccess.SqlServer.Configurations
             builder.HasMany(x => x.Brands)
                 .WithOne(x => x.Country)
                 .HasForeignKey(x => x.CountryCode)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
