@@ -11,7 +11,7 @@ namespace Around.Core.Entities
 
         public string FirstName { get; set; }
 
-        public string LastNane { get; set; }
+        public string LastName { get; set; }
 
         public string Nationality { get; set; }
 

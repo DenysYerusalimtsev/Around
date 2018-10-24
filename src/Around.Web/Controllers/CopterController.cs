@@ -26,10 +26,9 @@ namespace Around.Web.Controllers
 
             foreach (var copter in copters)
             {
-                response.Add(new ClientDto(client));
+                response.Add(new CopterDto(copter));
             }
             return Ok(response);
-            return Json();
         }
 
         [HttpGet]
