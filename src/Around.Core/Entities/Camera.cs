@@ -21,6 +21,6 @@ namespace Around.Core.Entities
 
         public Stabilization Stabilization { get; set; }
 
-        public virtual Copter Copter { get; set; }
+        public virtual FullCharacteristics FullCharacteristics { get; set; }
     }
 }

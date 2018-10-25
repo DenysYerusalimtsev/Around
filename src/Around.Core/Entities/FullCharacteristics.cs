@@ -2,6 +2,8 @@
 {
     public class FullCharacteristics
     {
+        public int Id { get; set; }
+
         public int CharacteristicId { get; set; }
 
         public virtual int FlightId { get; set; }
@@ -41,5 +43,7 @@
         public virtual Aircraft Aircraft { get; set; }
 
         public virtual Battery Battery { get; set; }
+
+        public virtual Copter Copter { get; set; }
     }
 }

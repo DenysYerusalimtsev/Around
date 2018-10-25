@@ -10,6 +10,6 @@
 
         public bool HasAirbag { get; set; }
 
-        public virtual Copter Copter { get; set; }
+        public virtual FullCharacteristics FullCharacteristics { get; set; }
     }
 }

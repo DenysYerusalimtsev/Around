@@ -8,6 +8,6 @@
 
         public double Capacity { get; set; }
 
-        public virtual  Copter Copter { get;set; }
+        public virtual FullCharacteristics FullCharacteristics { get;set; }
     }
 }
