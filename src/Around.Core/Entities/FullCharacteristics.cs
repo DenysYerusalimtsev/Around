@@ -26,8 +26,6 @@
 
         public virtual Flight Flight { get; set; }
 
-        public virtual Brand Brand { get; set; }
-
         public virtual Characteristics Characteristics { get; set; }
 
         public virtual Camera Camera { get; set; }

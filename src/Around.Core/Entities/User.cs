@@ -1,4 +1,6 @@
-﻿namespace Around.Core.Entities
+﻿using System.Collections.Generic;
+
+namespace Around.Core.Entities
 {
     public abstract class User
     {

@@ -1,4 +1,5 @@
-﻿using Around.Core.Enums;
+﻿using System.Net.NetworkInformation;
+using Around.Core.Enums;
 
 namespace Around.Core.Entities
 {
@@ -19,6 +20,8 @@ namespace Around.Core.Entities
         public DroneType DroneType { get; set; }
 
         public int FullCharacteristicsId { get; set; }
+
+        public virtual Brand Brand { get; set; }
 
         public virtual FullCharacteristics FullCharacteristics { get; set; }
     }

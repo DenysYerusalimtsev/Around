@@ -19,7 +19,7 @@ namespace Around.Web.Controllers
 
         [HttpGet]
         [Route("copters")]
-        public async Task<JsonResult> GetCopter()
+        public async Task<IActionResult> GetCopter()
         {
             List<Copter> copters = await _copterRepository.GetAllAsync();
             var response = new List<CopterDto>();
@@ -33,7 +33,7 @@ namespace Around.Web.Controllers
 
         [HttpGet]
         [Route("copters/{id}")]
-        public async Task<JsonResult> GetCopter(int id)
+        public async Task<IActionResult> GetCopter(int id)
         {
             return Json(await _copterRepository.Get(id));
         }

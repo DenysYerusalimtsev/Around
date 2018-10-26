@@ -8,6 +8,8 @@
 
         public double DescentSpeed { get; set; }
 
+        public double MaximumHeight { get; set; }
+
         public double MaximumSpeed { get; set; }
 
         public double MinimumSpeed { get; set; }
