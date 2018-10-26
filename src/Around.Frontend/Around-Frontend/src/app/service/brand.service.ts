@@ -15,12 +15,12 @@ export class UserService {
     return this.http.get<Brand>(this.baseUrl + '/' + id);
   }
 
-  createBrand(user: Brand) {
-    return this.http.post(this.baseUrl, user);
+  createBrand(brand: Brand) {
+    return this.http.post(this.baseUrl, brand);
   }
 
-  updateBrand(user: Brand) {
-    return this.http.put(this.baseUrl + '/' + user.id, user);
+  updateBrand(brand: Brand) {
+    return this.http.put(this.baseUrl + '/' + brand.id, brand);
   }
 
   deleteBrand(id: number) {
