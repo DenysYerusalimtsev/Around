@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Brand } from '../model/brand';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Injectable()
-export class UserService {
+export class BrandService {
   constructor(private http: HttpClient) { }
   baseUrl = 'http://localhost:55555/brand/brands';
 
-  getUsers() {
+  form: FormGroup = new FormGroup({
+    id: new FormControl(null),
+    name: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
+  });
+
+  getBrands() {
     return this.http.get<Brand[]>(this.baseUrl);
   }
 
@@ -25,5 +32,13 @@ export class UserService {
 
   deleteBrand(id: number) {
     return this.http.delete(this.baseUrl + '/' + id);
+  }
+
+  initializeFormGroup() {
+    this.form.setValue({
+      id: 0,
+      name: '',
+      country: '',
+    });
   }
 }
