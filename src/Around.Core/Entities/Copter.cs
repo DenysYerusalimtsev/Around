@@ -9,6 +9,10 @@ namespace Around.Core.Entities
 
         public string Name { get; set; }
 
+        public Status Status { get; set; }
+
+        public double CostPerMinute { get; set; }
+
         public int BrandId { get; set; }
 
         public double MaxSpeed { get; set; }

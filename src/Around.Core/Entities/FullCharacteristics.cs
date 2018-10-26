@@ -4,6 +4,8 @@
     {
         public int Id { get; set; }
 
+        public int CopterId { get; set; }
+
         public int CharacteristicId { get; set; }
 
         public virtual int FlightId { get; set; }

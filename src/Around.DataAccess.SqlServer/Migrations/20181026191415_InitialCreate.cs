@@ -4,25 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Around.DataAccess.SqlServer.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Admins",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admins", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Cheques",
                 columns: table => new
@@ -114,9 +99,9 @@ namespace Around.DataAccess.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
-                    RecordNumber = table.Column<int>(nullable: false),
+                    RecordNumber = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
-                    LastNane = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
                     Nationality = table.Column<string>(nullable: true),
                     BirthPlace = table.Column<string>(nullable: true),
                     FromDate = table.Column<DateTime>(nullable: false),
@@ -153,6 +138,28 @@ namespace Around.DataAccess.SqlServer.Migrations
                         column: x => x.CountryCode,
                         principalTable: "Countries",
                         principalColumn: "Code",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Admins",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PassportId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admins", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Admins_Passports_PassportId",
+                        column: x => x.PassportId,
+                        principalTable: "Passports",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -163,18 +170,14 @@ namespace Around.DataAccess.SqlServer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    CostPerMinute = table.Column<double>(nullable: false),
                     BrandId = table.Column<int>(nullable: false),
+                    MaxSpeed = table.Column<double>(nullable: false),
+                    MaxFlightHeight = table.Column<double>(nullable: false),
+                    Control = table.Column<int>(nullable: false),
                     DroneType = table.Column<int>(nullable: false),
-                    CharacteristicId = table.Column<int>(nullable: false),
-                    FlightId = table.Column<int>(nullable: false),
-                    EquipmentId = table.Column<int>(nullable: false),
-                    CameraId = table.Column<int>(nullable: false),
-                    RemoteControlId = table.Column<int>(nullable: false),
-                    AircraftId = table.Column<int>(nullable: false),
-                    ModesId = table.Column<int>(nullable: false),
-                    LoadCapacityId = table.Column<int>(nullable: false),
-                    TransportCharacteristicsId = table.Column<int>(nullable: false),
-                    BatteryId = table.Column<int>(nullable: false)
+                    FullCharacteristicsId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -188,197 +191,29 @@ namespace Around.DataAccess.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Aircraft",
+                name: "FullCharacteristics",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
-                    FlameMaterial = table.Column<int>(nullable: false),
-                    HasFoldableDesign = table.Column<bool>(nullable: false),
-                    EngineType = table.Column<int>(nullable: false),
-                    Connectors = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CopterId = table.Column<int>(nullable: false),
+                    CharacteristicId = table.Column<int>(nullable: false),
+                    FlightId = table.Column<int>(nullable: false),
+                    EquipmentId = table.Column<int>(nullable: false),
+                    CameraId = table.Column<int>(nullable: false),
+                    RemoteControlId = table.Column<int>(nullable: false),
+                    AircraftId = table.Column<int>(nullable: false),
+                    ModesId = table.Column<int>(nullable: false),
+                    LoadCapacityId = table.Column<int>(nullable: false),
+                    TransportCharacteristicsId = table.Column<int>(nullable: false),
+                    BatteryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Aircraft", x => x.Id);
+                    table.PrimaryKey("PK_FullCharacteristics", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Aircraft_Copters_Id",
-                        column: x => x.Id,
-                        principalTable: "Copters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Battery",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    ChargingSpeed = table.Column<double>(nullable: false),
-                    Capacity = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Battery", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Battery_Copters_Id",
-                        column: x => x.Id,
-                        principalTable: "Copters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Camera",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    CameraMount = table.Column<int>(nullable: false),
-                    Lens = table.Column<string>(nullable: true),
-                    HasCameraRotation = table.Column<bool>(nullable: false),
-                    IsoSensetivity = table.Column<string>(nullable: true),
-                    Resolution = table.Column<int>(nullable: false),
-                    PhotoModes = table.Column<string>(nullable: true),
-                    Stabilization = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Camera", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Camera_Copters_Id",
-                        column: x => x.Id,
-                        principalTable: "Copters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Characteristics",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    AmbientTemperature = table.Column<double>(nullable: false),
-                    Widht = table.Column<double>(nullable: false),
-                    Length = table.Column<double>(nullable: false),
-                    Height = table.Column<double>(nullable: false),
-                    Weight = table.Column<double>(nullable: false),
-                    Colour = table.Column<string>(nullable: true),
-                    PropellersCount = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Characteristics", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Characteristics_Copters_Id",
-                        column: x => x.Id,
-                        principalTable: "Copters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Equipment",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    HasGps = table.Column<bool>(nullable: false),
-                    InternalMemory = table.Column<int>(nullable: false),
-                    HasMemoryCardSupport = table.Column<bool>(nullable: false),
-                    HasGyroscope = table.Column<bool>(nullable: false),
-                    HasMagnetometer = table.Column<bool>(nullable: false),
-                    HasAccelerometer = table.Column<bool>(nullable: false),
-                    HasBarometer = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Equipment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Equipment_Copters_Id",
-                        column: x => x.Id,
-                        principalTable: "Copters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Flights",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    LiftingSpeed = table.Column<double>(nullable: false),
-                    DescentSpeed = table.Column<double>(nullable: false),
-                    MaximumSpeed = table.Column<double>(nullable: false),
-                    MinimumSpeed = table.Column<double>(nullable: false),
-                    FlightTime = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Flights", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Flights_Copters_Id",
-                        column: x => x.Id,
-                        principalTable: "Copters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LoadCapacity",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    LoadMountsCount = table.Column<int>(nullable: false),
-                    MaximumWeight = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LoadCapacity", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LoadCapacity_Copters_Id",
-                        column: x => x.Id,
-                        principalTable: "Copters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Modes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    HasTracking = table.Column<bool>(nullable: false),
-                    HasTrick = table.Column<bool>(nullable: false),
-                    HasReturnBase = table.Column<bool>(nullable: false),
-                    HasCfmPositioning = table.Column<bool>(nullable: false),
-                    HasFirstPersonView = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Modes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Modes_Copters_Id",
-                        column: x => x.Id,
-                        principalTable: "Copters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RemoteControl",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    ControlType = table.Column<int>(nullable: false),
-                    HasBuiltInDisplay = table.Column<bool>(nullable: false),
-                    HasMobileDeviceMount = table.Column<bool>(nullable: false),
-                    Connectors = table.Column<string>(nullable: true),
-                    MaximumRadius = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RemoteControl", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RemoteControl_Copters_Id",
-                        column: x => x.Id,
+                        name: "FK_FullCharacteristics_Copters_CopterId",
+                        column: x => x.CopterId,
                         principalTable: "Copters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -419,6 +254,184 @@ namespace Around.DataAccess.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Aircraft",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    FlameMaterial = table.Column<int>(nullable: false),
+                    HasFoldableDesign = table.Column<bool>(nullable: false),
+                    EngineType = table.Column<int>(nullable: false),
+                    Connectors = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Aircraft", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Aircraft_FullCharacteristics_Id",
+                        column: x => x.Id,
+                        principalTable: "FullCharacteristics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Battery",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    ChargingSpeed = table.Column<double>(nullable: false),
+                    Capacity = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Battery", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Battery_FullCharacteristics_Id",
+                        column: x => x.Id,
+                        principalTable: "FullCharacteristics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Camera",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    CameraMount = table.Column<int>(nullable: false),
+                    Lens = table.Column<string>(nullable: true),
+                    HasCameraRotation = table.Column<bool>(nullable: false),
+                    IsoSensetivity = table.Column<string>(nullable: true),
+                    Resolution = table.Column<int>(nullable: false),
+                    PhotoModes = table.Column<string>(nullable: true),
+                    Stabilization = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Camera", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Camera_FullCharacteristics_Id",
+                        column: x => x.Id,
+                        principalTable: "FullCharacteristics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Characteristics",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FullCharacteristicsId = table.Column<int>(nullable: false),
+                    AmbientTemperature = table.Column<double>(nullable: false),
+                    Widht = table.Column<double>(nullable: false),
+                    Length = table.Column<double>(nullable: false),
+                    Height = table.Column<double>(nullable: false),
+                    Weight = table.Column<double>(nullable: false),
+                    Colour = table.Column<string>(nullable: true),
+                    PropellersCount = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Characteristics", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Characteristics_FullCharacteristics_FullCharacteristicsId",
+                        column: x => x.FullCharacteristicsId,
+                        principalTable: "FullCharacteristics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Equipment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    HasGps = table.Column<bool>(nullable: false),
+                    InternalMemory = table.Column<int>(nullable: false),
+                    HasMemoryCardSupport = table.Column<bool>(nullable: false),
+                    HasGyroscope = table.Column<bool>(nullable: false),
+                    HasMagnetometer = table.Column<bool>(nullable: false),
+                    HasAccelerometer = table.Column<bool>(nullable: false),
+                    HasBarometer = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Equipment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Equipment_FullCharacteristics_Id",
+                        column: x => x.Id,
+                        principalTable: "FullCharacteristics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Flights",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    LiftingSpeed = table.Column<double>(nullable: false),
+                    DescentSpeed = table.Column<double>(nullable: false),
+                    MaximumHeight = table.Column<double>(nullable: false),
+                    MaximumSpeed = table.Column<double>(nullable: false),
+                    MinimumSpeed = table.Column<double>(nullable: false),
+                    FlightTime = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Flights", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Flights_FullCharacteristics_Id",
+                        column: x => x.Id,
+                        principalTable: "FullCharacteristics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LoadCapacity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    LoadMountsCount = table.Column<int>(nullable: false),
+                    MaximumWeight = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LoadCapacity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LoadCapacity_FullCharacteristics_Id",
+                        column: x => x.Id,
+                        principalTable: "FullCharacteristics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Modes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    HasTracking = table.Column<bool>(nullable: false),
+                    HasTrick = table.Column<bool>(nullable: false),
+                    HasReturnBase = table.Column<bool>(nullable: false),
+                    HasCfmPositioning = table.Column<bool>(nullable: false),
+                    HasFirstPersonView = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Modes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Modes_FullCharacteristics_Id",
+                        column: x => x.Id,
+                        principalTable: "FullCharacteristics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TransportCharacteristics",
                 columns: table => new
                 {
@@ -431,17 +444,29 @@ namespace Around.DataAccess.SqlServer.Migrations
                 {
                     table.PrimaryKey("PK_TransportCharacteristics", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TransportCharacteristics_Copters_Id",
+                        name: "FK_TransportCharacteristics_FullCharacteristics_Id",
                         column: x => x.Id,
-                        principalTable: "Copters",
+                        principalTable: "FullCharacteristics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Admins_PassportId",
+                table: "Admins",
+                column: "PassportId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Brands_CountryCode",
                 table: "Brands",
                 column: "CountryCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Characteristics_FullCharacteristicsId",
+                table: "Characteristics",
+                column: "FullCharacteristicsId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Copters_BrandId",
@@ -457,6 +482,12 @@ namespace Around.DataAccess.SqlServer.Migrations
                 name: "IX_Discounts_ClientId",
                 table: "Discounts",
                 column: "ClientId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FullCharacteristics_CopterId",
+                table: "FullCharacteristics",
+                column: "CopterId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -506,22 +537,22 @@ namespace Around.DataAccess.SqlServer.Migrations
                 name: "Modes");
 
             migrationBuilder.DropTable(
-                name: "Passports");
-
-            migrationBuilder.DropTable(
-                name: "RemoteControl");
-
-            migrationBuilder.DropTable(
                 name: "Rents");
 
             migrationBuilder.DropTable(
                 name: "TransportCharacteristics");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "Passports");
 
             migrationBuilder.DropTable(
                 name: "Cheques");
+
+            migrationBuilder.DropTable(
+                name: "FullCharacteristics");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Copters");

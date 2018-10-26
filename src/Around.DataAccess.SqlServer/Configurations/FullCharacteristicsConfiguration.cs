@@ -20,11 +20,6 @@ namespace Around.DataAccess.SqlServer.Configurations
                 .HasForeignKey<Equipment>(a => a.Id)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(x => x.Characteristics)
-                .WithOne(x => x.FullCharacteristics)
-                .HasForeignKey<Characteristics>(a => a.Id)
-                .OnDelete(DeleteBehavior.Cascade);
-
             builder.HasOne(x => x.Flight)
                 .WithOne(x => x.FullCharacteristics)
                 .HasForeignKey<Flight>(a => a.Id)
@@ -55,6 +50,8 @@ namespace Around.DataAccess.SqlServer.Configurations
                 .HasForeignKey<Modes>(a => a.Id)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Property(x => x.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }

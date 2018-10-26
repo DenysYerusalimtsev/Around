@@ -1,5 +1,5 @@
 ﻿using Around.Core.Entities;
-using Microsoft.AspNetCore.Mvc;
+using Around.Core.Enums;
 
 namespace Around.Web.Models
 {
@@ -9,8 +9,10 @@ namespace Around.Web.Models
         {
             Id = copter.Id;
             Name = copter.Name;
+            Status = copter.Status.ToString();
+            CostPerMinute = copter.CostPerMinute;
             BrandName = copter.Brand.Name;
-            MaxSpeed = copter.FullCharacteristics.Flight.MaximumSpeed;
+            MaxSpeed = copter.MaxSpeed;
             MaxFlightHeight = copter.MaxFlightHeight;
             DroneType = copter.DroneType.ToString();
             Control = copter.Control.ToString();
@@ -19,6 +21,10 @@ namespace Around.Web.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Status { get; set; }
+
+        public double CostPerMinute { get; set; }
 
         public string BrandName { get; set; }
 

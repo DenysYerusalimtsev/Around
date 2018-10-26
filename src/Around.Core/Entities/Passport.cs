@@ -28,5 +28,7 @@ namespace Around.Core.Entities
         public string Snapshot { get; set; }
 
         public virtual Client Client { get; set; }
+
+        public virtual Admin Admin { get; set; }
     }
 }

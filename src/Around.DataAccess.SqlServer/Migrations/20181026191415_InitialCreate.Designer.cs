@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Around.DataAccess.SqlServer.Migrations
 {
     [DbContext(typeof(DronesharingContext))]
-    [Migration("20181015200206_Initial")]
-    partial class Initial
+    [Migration("20181026191415_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,11 +29,16 @@ namespace Around.DataAccess.SqlServer.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<int>("PassportId");
+
                     b.Property<string>("Password");
 
                     b.Property<string>("PhoneNumber");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PassportId")
+                        .IsUnique();
 
                     b.ToTable("Admins");
                 });
@@ -110,11 +115,15 @@ namespace Around.DataAccess.SqlServer.Migrations
 
             modelBuilder.Entity("Around.Core.Entities.Characteristics", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<double>("AmbientTemperature");
 
                     b.Property<string>("Colour");
+
+                    b.Property<int>("FullCharacteristicsId");
 
                     b.Property<double>("Height");
 
@@ -127,6 +136,9 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.Property<double>("Widht");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FullCharacteristicsId")
+                        .IsUnique();
 
                     b.ToTable("Characteristics");
                 });
@@ -177,31 +189,23 @@ namespace Around.DataAccess.SqlServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AircraftId");
-
-                    b.Property<int>("BatteryId");
-
                     b.Property<int>("BrandId");
 
-                    b.Property<int>("CameraId");
+                    b.Property<int>("Control");
 
-                    b.Property<int>("CharacteristicId");
+                    b.Property<double>("CostPerMinute");
 
                     b.Property<int>("DroneType");
 
-                    b.Property<int>("EquipmentId");
+                    b.Property<int>("FullCharacteristicsId");
 
-                    b.Property<int>("FlightId");
+                    b.Property<double>("MaxFlightHeight");
 
-                    b.Property<int>("LoadCapacityId");
-
-                    b.Property<int>("ModesId");
+                    b.Property<double>("MaxSpeed");
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("RemoteControlId");
-
-                    b.Property<int>("TransportCharacteristicsId");
+                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 
@@ -293,6 +297,8 @@ namespace Around.DataAccess.SqlServer.Migrations
 
                     b.Property<double>("LiftingSpeed");
 
+                    b.Property<double>("MaximumHeight");
+
                     b.Property<double>("MaximumSpeed");
 
                     b.Property<double>("MinimumSpeed");
@@ -300,6 +306,42 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Flights");
+                });
+
+            modelBuilder.Entity("Around.Core.Entities.FullCharacteristics", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AircraftId");
+
+                    b.Property<int>("BatteryId");
+
+                    b.Property<int>("CameraId");
+
+                    b.Property<int>("CharacteristicId");
+
+                    b.Property<int>("CopterId");
+
+                    b.Property<int>("EquipmentId");
+
+                    b.Property<int>("FlightId");
+
+                    b.Property<int>("LoadCapacityId");
+
+                    b.Property<int>("ModesId");
+
+                    b.Property<int>("RemoteControlId");
+
+                    b.Property<int>("TransportCharacteristicsId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CopterId")
+                        .IsUnique();
+
+                    b.ToTable("FullCharacteristics");
                 });
 
             modelBuilder.Entity("Around.Core.Entities.LoadCapacity", b =>
@@ -344,11 +386,11 @@ namespace Around.DataAccess.SqlServer.Migrations
 
                     b.Property<DateTime>("FromDate");
 
-                    b.Property<string>("LastNane");
+                    b.Property<string>("LastName");
 
                     b.Property<string>("Nationality");
 
-                    b.Property<int>("RecordNumber");
+                    b.Property<string>("RecordNumber");
 
                     b.Property<int>("Sex");
 
@@ -361,25 +403,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Passports");
-                });
-
-            modelBuilder.Entity("Around.Core.Entities.RemoteControl", b =>
-                {
-                    b.Property<int>("Id");
-
-                    b.Property<string>("Connectors");
-
-                    b.Property<int>("ControlType");
-
-                    b.Property<bool>("HasBuiltInDisplay");
-
-                    b.Property<bool>("HasMobileDeviceMount");
-
-                    b.Property<double>("MaximumRadius");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RemoteControl");
                 });
 
             modelBuilder.Entity("Around.Core.Entities.Rent", b =>
@@ -420,9 +443,17 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.ToTable("TransportCharacteristics");
                 });
 
+            modelBuilder.Entity("Around.Core.Entities.Admin", b =>
+                {
+                    b.HasOne("Around.Core.Entities.Passport", "Passport")
+                        .WithOne("Admin")
+                        .HasForeignKey("Around.Core.Entities.Admin", "PassportId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Around.Core.Entities.Aircraft", b =>
                 {
-                    b.HasOne("Around.Core.Entities.Copter", "Copter")
+                    b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("Aircraft")
                         .HasForeignKey("Around.Core.Entities.Aircraft", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -430,7 +461,7 @@ namespace Around.DataAccess.SqlServer.Migrations
 
             modelBuilder.Entity("Around.Core.Entities.Battery", b =>
                 {
-                    b.HasOne("Around.Core.Entities.Copter", "Copter")
+                    b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("Battery")
                         .HasForeignKey("Around.Core.Entities.Battery", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -441,12 +472,12 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.HasOne("Around.Core.Entities.Country", "Country")
                         .WithMany("Brands")
                         .HasForeignKey("CountryCode")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Around.Core.Entities.Camera", b =>
                 {
-                    b.HasOne("Around.Core.Entities.Copter", "Copter")
+                    b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("Camera")
                         .HasForeignKey("Around.Core.Entities.Camera", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -454,9 +485,9 @@ namespace Around.DataAccess.SqlServer.Migrations
 
             modelBuilder.Entity("Around.Core.Entities.Characteristics", b =>
                 {
-                    b.HasOne("Around.Core.Entities.Copter", "Copter")
+                    b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("Characteristics")
-                        .HasForeignKey("Around.Core.Entities.Characteristics", "Id")
+                        .HasForeignKey("Around.Core.Entities.Characteristics", "FullCharacteristicsId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -486,7 +517,7 @@ namespace Around.DataAccess.SqlServer.Migrations
 
             modelBuilder.Entity("Around.Core.Entities.Equipment", b =>
                 {
-                    b.HasOne("Around.Core.Entities.Copter", "Copter")
+                    b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("Equipment")
                         .HasForeignKey("Around.Core.Entities.Equipment", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -494,15 +525,23 @@ namespace Around.DataAccess.SqlServer.Migrations
 
             modelBuilder.Entity("Around.Core.Entities.Flight", b =>
                 {
-                    b.HasOne("Around.Core.Entities.Copter", "Copter")
+                    b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("Flight")
                         .HasForeignKey("Around.Core.Entities.Flight", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Around.Core.Entities.LoadCapacity", b =>
+            modelBuilder.Entity("Around.Core.Entities.FullCharacteristics", b =>
                 {
                     b.HasOne("Around.Core.Entities.Copter", "Copter")
+                        .WithOne("FullCharacteristics")
+                        .HasForeignKey("Around.Core.Entities.FullCharacteristics", "CopterId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Around.Core.Entities.LoadCapacity", b =>
+                {
+                    b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("LoadCapacity")
                         .HasForeignKey("Around.Core.Entities.LoadCapacity", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -510,7 +549,7 @@ namespace Around.DataAccess.SqlServer.Migrations
 
             modelBuilder.Entity("Around.Core.Entities.Modes", b =>
                 {
-                    b.HasOne("Around.Core.Entities.Copter", "Copter")
+                    b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("Modes")
                         .HasForeignKey("Around.Core.Entities.Modes", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -521,14 +560,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.HasOne("Around.Core.Entities.Client", "Client")
                         .WithOne("Passport")
                         .HasForeignKey("Around.Core.Entities.Passport", "Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Around.Core.Entities.RemoteControl", b =>
-                {
-                    b.HasOne("Around.Core.Entities.Copter", "Copter")
-                        .WithOne("RemoteControl")
-                        .HasForeignKey("Around.Core.Entities.RemoteControl", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -552,7 +583,7 @@ namespace Around.DataAccess.SqlServer.Migrations
 
             modelBuilder.Entity("Around.Core.Entities.TransportCharacteristics", b =>
                 {
-                    b.HasOne("Around.Core.Entities.Copter", "Copter")
+                    b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("TransportCharacteristics")
                         .HasForeignKey("Around.Core.Entities.TransportCharacteristics", "Id")
                         .OnDelete(DeleteBehavior.Cascade);

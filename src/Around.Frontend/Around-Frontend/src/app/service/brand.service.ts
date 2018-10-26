@@ -15,6 +15,7 @@ export class BrandService {
   });
 
   getBrands() {
+    console.log(this.http.get<Brand[]>(this.baseUrl));
     return this.http.get<Brand[]>(this.baseUrl);
   }
 

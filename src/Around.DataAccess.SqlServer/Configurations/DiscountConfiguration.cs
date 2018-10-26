@@ -9,6 +9,9 @@ namespace Around.DataAccess.SqlServer.Configurations
         public void Configure(EntityTypeBuilder<Discount> builder)
         {
             builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }

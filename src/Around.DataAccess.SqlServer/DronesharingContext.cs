@@ -45,6 +45,8 @@ namespace Around.DataAccess.SqlServer
             modelBuilder.ApplyConfiguration(new DiscountConfiguration());
             modelBuilder.ApplyConfiguration(new PassportConfiguration());
             modelBuilder.ApplyConfiguration(new RentConfiguration());
+            modelBuilder.ApplyConfiguration(new CharacteristicsConfiguration());
+            modelBuilder.ApplyConfiguration(new FullCharacteristicsConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

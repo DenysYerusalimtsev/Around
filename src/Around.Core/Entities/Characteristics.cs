@@ -4,6 +4,8 @@
     {
         public virtual int Id { get; set; }
 
+        public int FullCharacteristicsId { get; set; }
+
         public double AmbientTemperature { get; set; }
 
         public double Widht { get; set; }
