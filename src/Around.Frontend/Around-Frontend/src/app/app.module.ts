@@ -21,12 +21,16 @@ import { DialogBrandComponent } from './dialog-brand/dialog-brand.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NoopAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule
+  ],
+  entryComponents: [
+    DialogBrandComponent
   ],
   providers: [BrandService],
   bootstrap: [AppComponent]

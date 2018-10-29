@@ -19,7 +19,6 @@ namespace Around.Web.Controllers
         }
 
         [HttpGet]
-        [Route("brands")]
         public async Task<IActionResult> GetAllBrands()
         {
             List<Brand> brands = await _brandRepository.GetAllAsync();
@@ -43,7 +42,6 @@ namespace Around.Web.Controllers
         }
 
         [HttpPost]
-        [Route("create")]
         public void CreateBrand(Brand brand) => _brandRepository.Create(brand);
 
         [HttpPost]

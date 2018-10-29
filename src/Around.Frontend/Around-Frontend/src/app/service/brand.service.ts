@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Injectable()
 export class BrandService {
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://localhost:55555/api/Brand/brands';
+  baseUrl = 'http://localhost:55555/api/Brand/';
 
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
