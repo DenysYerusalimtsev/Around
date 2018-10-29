@@ -47,6 +47,7 @@ namespace Around.Web
                 c.SwaggerDoc("v1", new Info { Title = "Around API", Version = "v1" });
             });
 
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +69,10 @@ namespace Around.Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Around V1");
             });
 
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
 
             app.UseHttpsRedirection();
             app.UseMvc();

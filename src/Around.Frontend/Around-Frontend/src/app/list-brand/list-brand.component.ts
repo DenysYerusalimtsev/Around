@@ -18,7 +18,7 @@ export class ListBrandComponent implements OnInit {
     private dialog: MatDialog,
     private notificationService: NotificationService) { }
 
-    listData: MatTableDataSource<any>;
+    listData: MatTableDataSource<Brand>;
     displayedColumns: string[] = ['id', 'name', 'country'];
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -27,19 +27,15 @@ export class ListBrandComponent implements OnInit {
 
   ngOnInit() {
     this.service.getBrands()
-    .subscribe(data => {
-      this.brands = data;
-    });
+    .subscribe((brands => {
+      this.brands = brands;
+      console.log(this.brands);
 
-        this.listData = new MatTableDataSource(this.brands);
-        this.listData.sort = this.sort;
-        this.listData.paginator = this.paginator;
-        this.listData.filterPredicate = (data, filter) => {
-          return this.displayedColumns.some(ele => {
-            return ele !== 'actions' && data[ele].toLowerCase().indexOf(filter) !== -1;
-          });
-        };
-    }
+      this.listData = new MatTableDataSource(brands);
+      this.listData.sort = this.sort;
+      this.listData.paginator = this.paginator;
+   }));
+  }
 
   onSearchClear() {
     this.searchKey = '';

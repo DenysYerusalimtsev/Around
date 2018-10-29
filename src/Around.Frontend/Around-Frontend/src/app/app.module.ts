@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { BrandService } from './service/brand.service';
 import { environment } from '../environments/environment';
@@ -24,7 +25,8 @@ import { DialogBrandComponent } from './dialog-brand/dialog-brand.component';
     NoopAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [BrandService],
   bootstrap: [AppComponent]
