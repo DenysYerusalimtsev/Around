@@ -17,7 +17,7 @@
   
 </div>
 <div class="mat-elevation-z8">
-  <mat-table [dataSource]="listData"  matSort>
+  <mat-table [dataSource]="dataSource"  matSort>
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef  mat-sort-header>Id</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
@@ -29,6 +29,13 @@
     <ng-container matColumnDef="country">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.country}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="onDelete(row.id)"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
     </ng-container>
     <ng-container matColumnDef="loading">
       <mat-footer-cell *matFooterCellDef colspan="6">
@@ -42,8 +49,8 @@
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData.data.length!=null}"></mat-footer-row>
-    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource.data.length!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
   </mat-table>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
 </div>

@@ -5,6 +5,8 @@ import { NotificationService } from '../service/notification.service';
 import { BrandService } from '../service/brand.service';
 import { Brand } from '../model/brand';
 import { DialogBrandComponent } from '../dialog-brand/dialog-brand.component';
+import { Observable, from } from 'rxjs';
+import 'rxjs/add/observable/from';
 
 
 @Component({
@@ -18,24 +20,23 @@ export class ListBrandComponent implements OnInit {
     private dialog: MatDialog,
     private notificationService: NotificationService) { }
 
-    listData: MatTableDataSource<Brand>;
+    dataSource: MatTableDataSource<Brand>;
     displayedColumns: string[] = ['id', 'name', 'country'];
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     searchKey: string;
-    brands: Brand[];
 
-  ngOnInit() {
-    this.service.getBrands()
-    .subscribe((brands => {
-      this.brands = brands;
-      console.log(this.brands);
+    ngOnInit() {
+      this.service.getBrands()
+        .subscribe((data: Brand[]) => {
+          console.log(data);
+          console.log(data[0]);
 
-      this.listData = new MatTableDataSource(brands);
-      this.listData.sort = this.sort;
-      this.listData.paginator = this.paginator;
-   }));
-  }
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+     });
+    }
 
   onSearchClear() {
     this.searchKey = '';
@@ -43,7 +44,7 @@ export class ListBrandComponent implements OnInit {
   }
 
   applyFilter() {
-    this.listData.filter = this.searchKey.trim().toLowerCase();
+    this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
 
   onCreate() {

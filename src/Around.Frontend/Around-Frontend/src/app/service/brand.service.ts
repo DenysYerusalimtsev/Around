@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Brand } from '../model/brand';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BrandService {
@@ -16,10 +19,10 @@ export class BrandService {
 
   getBrands() {
     return this.http.get<Brand[]>(this.baseUrl);
-  }
+}
 
   getBrandById(id: number) {
-    return this.http.get<Brand>(this.baseUrl + '/' + id);
+    return this.http.get(this.baseUrl + '/' + id);
   }
 
   createBrand(brand: Brand) {
