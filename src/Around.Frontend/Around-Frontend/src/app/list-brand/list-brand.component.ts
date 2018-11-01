@@ -7,6 +7,7 @@ import { Brand } from '../model/brand';
 import { DialogBrandComponent } from '../dialog-brand/dialog-brand.component';
 import { Observable, from } from 'rxjs';
 import 'rxjs/add/observable/from';
+import { BrandDto } from '../interface/brand-dto';
 
 
 @Component({
@@ -22,20 +23,21 @@ export class ListBrandComponent implements OnInit {
 
     dataSource: MatTableDataSource<Brand>;
     displayedColumns: string[] = ['id', 'name', 'country'];
+    brands: Brand[] = [];
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     searchKey: string;
 
     ngOnInit() {
       this.service.getBrands()
-        .subscribe((data: Brand[]) => {
-          console.log(data);
-          console.log(data[0]);
+        .subscribe((data: BrandDto[]) => {
+            this.brands = data.map(dto => Brand.Create(dto));
 
-        this.dataSource = new MatTableDataSource(data);
+        console.log(this.brands);
+        this.dataSource = new MatTableDataSource(this.brands);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-     });
+        });
     }
 
   onSearchClear() {

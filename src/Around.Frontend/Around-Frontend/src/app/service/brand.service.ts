@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
+import { BrandDto } from '../interface/brand-dto';
 
 @Injectable()
 export class BrandService {
@@ -18,7 +19,7 @@ export class BrandService {
   });
 
   getBrands() {
-    return this.http.get<Brand[]>(this.baseUrl);
+    return this.http.get<BrandDto[]>(this.baseUrl);
 }
 
   getBrandById(id: number) {
