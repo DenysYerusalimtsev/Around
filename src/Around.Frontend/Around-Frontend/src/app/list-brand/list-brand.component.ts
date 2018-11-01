@@ -19,7 +19,9 @@ export class ListBrandComponent implements OnInit {
 
   constructor(private service: BrandService,
     private dialog: MatDialog,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService) {
+      this.dataSource = new MatTableDataSource();
+     }
 
     dataSource: MatTableDataSource<Brand>;
     displayedColumns: string[] = ['id', 'name', 'country'];
@@ -33,10 +35,10 @@ export class ListBrandComponent implements OnInit {
         .subscribe((data: BrandDto[]) => {
             this.brands = data.map(dto => Brand.Create(dto));
 
-        console.log(this.brands);
-        this.dataSource = new MatTableDataSource(this.brands);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+          console.log(this.brands);
+          this.dataSource.data = this.brands;
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
         });
     }
 
