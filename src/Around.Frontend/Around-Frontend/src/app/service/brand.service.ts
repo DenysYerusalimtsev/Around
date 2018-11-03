@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Brand } from '../model/brand';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import { BrandDto } from '../interface/brand-dto';
 

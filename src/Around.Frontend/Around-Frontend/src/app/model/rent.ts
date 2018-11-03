@@ -2,12 +2,12 @@ import { RentDto } from '../interface/rent-dto';
 
 export class Rent {
     constructor(
-    id: number,
-    clientName: string,
-    copterBrand: string,
-    copterName: string,
-    startTime: Date,
-    finishTime: Date) {
+        public id: number,
+        public clientName: string,
+        public copterBrand: string,
+        public copterName: string,
+        public startTime: Date,
+        public finishTime: Date) {
     }
     public static Create(dto: RentDto): Rent {
         return new Rent(dto.id, dto.clientName, dto.copterBrand,

@@ -2,13 +2,13 @@ import { CopterDto } from '../interface/copter-dto';
 
 export class Copter {
     constructor(
-    id: number,
-    name: string,
-    brandName: string,
-    maxSpeed: number,
-    maxFlightHeight: number,
-    control: string,
-    droneType: string) {
+        public id: number,
+        public name: string,
+        public brandName: string,
+        public maxSpeed: number,
+        public maxFlightHeight: number,
+        public control: string,
+        public droneType: string) {
     }
     public static Create(dto: CopterDto): Copter {
         return new Copter(dto.id, dto.name, dto.brandName,

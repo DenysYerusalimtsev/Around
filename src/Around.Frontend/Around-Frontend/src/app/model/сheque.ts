@@ -2,14 +2,14 @@ import { ChequeDto } from '../interface/cheque-dto';
 
 export class Cheque {
     constructor(
-        id: number,
-        clientName: string,
-        copterBrand: string,
-        copterName: string,
-        startTime: Date,
-        finishTime: Date,
-        dateOfCreation: Date,
-        totalPrice: number) {
+        public id: number,
+        public clientName: string,
+        public copterBrand: string,
+        public copterName: string,
+        public startTime: Date,
+        public finishTime: Date,
+        public dateOfCreation: Date,
+        public totalPrice: number) {
         }
 
     public static Create(dto: ChequeDto): Cheque {
