@@ -30,13 +30,19 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.country}}</mat-cell>
     </ng-container>
+
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
-        <button mat-icon-button color="warn" (click)="onDelete(row.id)"><mat-icon>delete_outline</mat-icon></button>
+        <button mat-icon-button color="primary" (click)="onEdit(row)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDelete(row.id)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
+
     <ng-container matColumnDef="loading">
       <mat-footer-cell *matFooterCellDef colspan="6">
         Loading data...

@@ -24,7 +24,7 @@ export class ListBrandComponent implements OnInit {
      }
 
     dataSource: MatTableDataSource<Brand>;
-    displayedColumns: string[] = ['id', 'name', 'country'];
+    displayedColumns: string[] = ['id', 'name', 'country', 'actions'];
     brands: Brand[] = [];
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
