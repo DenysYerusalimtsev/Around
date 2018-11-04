@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../service/notification.service';
 import { BrandService } from '../service/brand.service';
 import { MatDialogRef } from '@angular/material';
+import { BrandAggregate } from '../model/brand-aggregate';
 
 @Component({
   selector: 'app-dialog-brand',
@@ -25,9 +26,15 @@ export class DialogBrandComponent implements OnInit {
 
     onSubmit() {
       if (this.service.form.valid) {
-        this.service.createBrand(this.service.form.value);
+        const brand = new BrandAggregate(
+          this.service.form.controls['name'].value,
+          this.service.form.controls['country'].value);
+        this.service.createBrand(brand);
       } else {
-        this.service.updateBrand(this.service.form.value);
+          const brand = new BrandAggregate(
+          this.service.form.controls['name'].value,
+          this.service.form.controls['country'].value);
+          this.service.updateBrand(brand);
         }
         this.service.form.reset();
         this.service.initializeFormGroup();

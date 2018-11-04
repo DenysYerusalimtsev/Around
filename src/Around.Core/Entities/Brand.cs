@@ -4,6 +4,12 @@ namespace Around.Core.Entities
 {
     public class Brand
     {
+        public Brand(string name, string countryCode)
+        {
+            Name = name;
+            CountryCode = countryCode;
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

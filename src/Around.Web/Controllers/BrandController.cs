@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Around.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -42,14 +43,21 @@ namespace Around.Web.Controllers
         }
 
         [HttpPost]
-        public void CreateBrand(Brand brand) => _brandRepository.Create(brand);
+        public IActionResult CreateBrand([FromBody] [Required] BrandAggregate brandDto)
+        {
+            var brand = new Brand(brandDto.Name, brandDto.Country);
+            _brandRepository.Create(brand);
+            var response = new BrandDto(brand);
 
-        [HttpPost]
-        [Route("delete/{id}")]
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("brand{id}")]
         public void DeleteBrand(int id) => _brandRepository.Delete(id);
 
         [HttpPost]
-        [Route("update")]
+        [Route("{id}")]
         public void UpdateBrand(Brand brand) => _brandRepository.Update(brand);
     }
 }

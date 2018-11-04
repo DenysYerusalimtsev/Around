@@ -1,5 +1,4 @@
-﻿using Around.Core.Entities;
-using Around.Core.Interfaces;
+﻿using Around.Core.Interfaces;
 using Around.DataAccess.SqlServer;
 using Around.DataAccess.SqlServer.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -9,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace Around.Web
 {

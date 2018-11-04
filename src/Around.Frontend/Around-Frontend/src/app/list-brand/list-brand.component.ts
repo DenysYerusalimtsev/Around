@@ -5,7 +5,6 @@ import { NotificationService } from '../service/notification.service';
 import { BrandService } from '../service/brand.service';
 import { Brand } from '../model/brand';
 import { DialogBrandComponent } from '../dialog-brand/dialog-brand.component';
-import { Observable, from } from 'rxjs';
 import 'rxjs/add/observable/from';
 import { BrandDto } from '../interface/brand-dto';
 
