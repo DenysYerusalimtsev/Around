@@ -43,17 +43,16 @@ namespace Around.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateBrand([FromBody] [Required] BrandAggregate brandDto)
+        public IActionResult CreateBrand([FromBody] BrandAggregate brandDto)
         {
-            var brand = new Brand(brandDto.Name, brandDto.Country);
+            var brand = new Brand(brandDto.Name, brandDto.CountryCode);
             _brandRepository.Create(brand);
-            var response = new BrandDto(brand);
 
-            return Ok(response);
+            return Ok("Success");
         }
 
         [HttpDelete]
-        [Route("brand{id}")]
+        [Route("{id}")]
         public void DeleteBrand(int id) => _brandRepository.Delete(id);
 
         [HttpPost]

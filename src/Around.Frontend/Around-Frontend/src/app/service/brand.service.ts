@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Brand } from '../model/brand';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
@@ -27,15 +27,20 @@ export class BrandService {
 
   createBrand(brand: BrandAggregate) {
     console.log(brand);
-    return this.http.post(this.baseUrl, brand);
+
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.post(this.baseUrl, brand, options)
+    .subscribe(data => console.log('Works!'));
   }
 
   updateBrand(brand: BrandAggregate) {
-    return this.http.put(this.baseUrl + 'brand/', brand);
+    return this.http.put(this.baseUrl + 'brand/', brand)
+    .subscribe(data => console.log('Works!'));
   }
 
   deleteBrand(id: number) {
-    return this.http.delete(this.baseUrl + '/' + id);
+    return this.http.delete(this.baseUrl + '/' + id)
+    .subscribe(data => console.log('Works!'));
   }
 
   initializeFormGroup() {
