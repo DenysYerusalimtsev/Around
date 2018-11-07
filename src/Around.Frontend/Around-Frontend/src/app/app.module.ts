@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,12 +12,23 @@ import { environment } from '../environments/environment';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ListBrandComponent } from './list-brand/list-brand.component';
 import { DialogBrandComponent } from './dialog-brand/dialog-brand.component';
+import { GlobalErrorHandler, ApiService, PlacesApiService, StateService } from './core/services';
+import { SearchPlaceComponent } from './search-place/search-place.component';
+import { SelectPlacesDialogComponent } from './select-places-dialog/select-places-dialog.component';
+import { PlacesTableComponent } from './places-table/places-table.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { GoogleMapComponent } from './google-map/google-map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListBrandComponent,
-    DialogBrandComponent
+    DialogBrandComponent,
+    GoogleMapComponent,
+    SearchPlaceComponent,
+    SelectPlacesDialogComponent,
+    PlacesTableComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +43,7 @@ import { DialogBrandComponent } from './dialog-brand/dialog-brand.component';
   entryComponents: [
     DialogBrandComponent
   ],
-  providers: [BrandService],
+  providers: [BrandService, ApiService, PlacesApiService, StateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
