@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListBrandComponent } from './list-brand/list-brand.component';
 import { DialogBrandComponent } from './dialog-brand/dialog-brand.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { MapComponent } from './map-component/map-component';
 
 const routes: Routes = [
   { path: 'brands', component: ListBrandComponent },
-  { path: 'map', component: GoogleMapComponent }
+  { path: 'map', component: MapComponent }
 ];
 
 @NgModule({

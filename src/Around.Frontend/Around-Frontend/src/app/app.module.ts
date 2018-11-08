@@ -18,6 +18,7 @@ import { SelectPlacesDialogComponent } from './select-places-dialog/select-place
 import { PlacesTableComponent } from './places-table/places-table.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { MapComponent } from './map-component/map-component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { GoogleMapComponent } from './google-map/google-map.component';
     SearchPlaceComponent,
     SelectPlacesDialogComponent,
     PlacesTableComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
