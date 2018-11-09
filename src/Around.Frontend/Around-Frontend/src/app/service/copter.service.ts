@@ -13,7 +13,15 @@ export class CopterService {
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     name: new FormControl('', Validators.required),
-    country: new FormControl('', Validators.required),
+    status: new FormControl(null),
+    latidude: new FormControl(null),
+    longitude: new FormControl(null),
+    brandName: new FormControl('', Validators.required),
+    costPerMinute: new FormControl(null),
+    maxSpeed: new FormControl(null),
+    maxFlightHeight: new FormControl(null),
+    control: new FormControl(null),
+    droneType: new FormControl(null),
   });
 
   getCopters() {

@@ -17,12 +17,16 @@ namespace Around.DataAccess.SqlServer.Repositories
 
         public async Task<List<Copter>> GetAllAsync()
         {
-            return await _context.Copters.ToListAsync();
+            return await _context.Copters
+                .Include(c => c.Brand)
+                .ToListAsync();
         }
 
         public async Task<Copter> Get(int id)
         {
-            return await _context.Copters.FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Copters
+                .Include(c => c.Brand)
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public void Create(Copter copter)

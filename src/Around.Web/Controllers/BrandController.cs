@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Around.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

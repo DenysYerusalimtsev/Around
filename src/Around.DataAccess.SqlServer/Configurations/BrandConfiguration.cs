@@ -13,7 +13,7 @@ namespace Around.DataAccess.SqlServer.Configurations
             builder.HasMany(x => x.Copters)
                .WithOne(x => x.Brand)
                .HasForeignKey(a => a.BrandId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();

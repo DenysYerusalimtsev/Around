@@ -11,6 +11,10 @@ namespace Around.Core.Entities
 
         public Status Status { get; set; }
 
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
+
         public double CostPerMinute { get; set; }
 
         public int BrandId { get; set; }
@@ -23,7 +27,7 @@ namespace Around.Core.Entities
 
         public DroneType DroneType { get; set; }
 
-        public int FullCharacteristicsId { get; set; }
+        public int? FullCharacteristicsId { get; set; }
 
         public virtual Brand Brand { get; set; }
 

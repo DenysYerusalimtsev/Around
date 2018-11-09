@@ -1,5 +1,4 @@
 ﻿using Around.Core.Entities;
-using Around.Core.Enums;
 
 namespace Around.Web.Models
 {
@@ -10,6 +9,8 @@ namespace Around.Web.Models
             Id = copter.Id;
             Name = copter.Name;
             Status = copter.Status.ToString();
+            Latitude = copter.Latitude;
+            Longitude = copter.Longitude;
             CostPerMinute = copter.CostPerMinute;
             BrandName = copter.Brand.Name;
             MaxSpeed = copter.MaxSpeed;
@@ -23,6 +24,10 @@ namespace Around.Web.Models
         public string Name { get; set; }
 
         public string Status { get; set; }
+
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
 
         public double CostPerMinute { get; set; }
 
