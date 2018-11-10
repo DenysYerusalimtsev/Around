@@ -19,6 +19,9 @@ import { PlacesTableComponent } from './places-table/places-table.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { MapComponent } from './map-component/map-component';
+import { ListCopterComponent } from './list-copter/list-copter.component';
+import { DialogCopterComponent } from './dialog-copter/dialog-copter.component';
+import { CopterService } from './service/copter.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { MapComponent } from './map-component/map-component';
     SelectPlacesDialogComponent,
     PlacesTableComponent,
     ConfirmDialogComponent,
-    MapComponent
+    MapComponent,
+    ListCopterComponent,
+    DialogCopterComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,7 @@ import { MapComponent } from './map-component/map-component';
   entryComponents: [
     DialogBrandComponent
   ],
-  providers: [BrandService, ApiService, PlacesApiService, StateService],
+  providers: [BrandService, ApiService, PlacesApiService, StateService, CopterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

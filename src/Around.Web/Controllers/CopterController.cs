@@ -18,7 +18,6 @@ namespace Around.Web.Controllers
         }
 
         [HttpGet]
-        [Route("copters")]
         public async Task<IActionResult> GetCopter()
         {
             List<Copter> copters = await _copterRepository.GetAllAsync();
@@ -32,7 +31,7 @@ namespace Around.Web.Controllers
         }
 
         [HttpGet]
-        [Route("copters/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> GetCopter(int id)
         {
             return Json(await _copterRepository.Get(id));
@@ -42,7 +41,7 @@ namespace Around.Web.Controllers
         [Route("create")]
         public void CreateCopter(Copter copter) => _copterRepository.Create(copter);
 
-        [HttpPost]
+        [HttpDelete]
         [Route("{id}")]
         public void DeleteCopter(int id) => _copterRepository.Delete(id);
 
