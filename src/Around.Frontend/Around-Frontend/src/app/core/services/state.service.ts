@@ -39,11 +39,4 @@ export class StateService {
     });
 
   }
-
-  removePlace(placeRemove) {
-    const places = this.places$.getValue();
-    const newPlaceArray = places.filter(place => place.id !== placeRemove.id);
-    this.places$.next(newPlaceArray);
-  }
-
 }

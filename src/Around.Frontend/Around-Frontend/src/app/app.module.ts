@@ -22,6 +22,7 @@ import { MapComponent } from './map-component/map-component';
 import { ListCopterComponent } from './list-copter/list-copter.component';
 import { DialogCopterComponent } from './dialog-copter/dialog-copter.component';
 import { CopterService } from './service/copter.service';
+import { CopterTableComponent } from './copter-table/copter-table.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CopterService } from './service/copter.service';
     ConfirmDialogComponent,
     MapComponent,
     ListCopterComponent,
-    DialogCopterComponent
+    DialogCopterComponent,
+    CopterTableComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { PlacesTableDataSource } from './places-table-datasource';
-import * as models from '../core/models'
+import * as models from '../core/models';
 import { OriginConnectionPosition } from '@angular/cdk/overlay';
 import { StateService } from '../core/services';
 import { MatDialog } from '@angular/material';
@@ -27,27 +27,7 @@ export class PlacesTableComponent implements OnInit {
     this.dataSource = new PlacesTableDataSource(this.paginator, this.sort, this.stateService);
   }
 
-  removePlace(place: models.Place) {
-    this.openDialog(place);
-  }
-
   markOnMap(place: models.Place) {
     this.stateService.currentPlaceGeometry$.next(place.geometry);
   }
-
-  openDialog(place: models.Place) {
-
-    let dialog = this.dialog.open(ConfirmDialogComponent, {
-      data: 'Are you sure you want to remove "' + place.name + '"?'
-    });
-    dialog.afterClosed().subscribe(confirmed => {
-      if (confirmed) {
-        this.stateService.removePlace(place);
-      }
-    }
-
-    )
-  }
-
 }
-

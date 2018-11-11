@@ -40,7 +40,7 @@ export class GoogleMapComponent implements OnInit {
       if (geometry) {
         point = new google.maps.LatLng(geometry.location.lat, geometry.location.lng);
       } else {
-        point = new google.maps.LatLng(47.892705, 35.1350068);
+        point = new google.maps.LatLng(50.00566244, 36.22920255);
       }
       const mapOptions = {
         center: point,

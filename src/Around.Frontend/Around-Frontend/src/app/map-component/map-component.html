@@ -1,9 +1,6 @@
 <mat-sidenav-container class="places-manager-container">
   <mat-sidenav #sidenav mode="side" opened class="places-manager-sidenav">
-    <!--div class="places-data-container"-->
-    <app-search-place class="search-place-card"></app-search-place>
-    <app-places-table *ngIf="(places$ | async)?.length"></app-places-table>
-    <!--/div-->
+    <app-copter-table></app-copter-table>
   </mat-sidenav>
 
   <mat-sidenav-content>
