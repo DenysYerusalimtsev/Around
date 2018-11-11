@@ -14,7 +14,7 @@ export class CopterService {
     id: new FormControl(null),
     name: new FormControl('', Validators.required),
     status: new FormControl(null),
-    latidude: new FormControl(null),
+    latitude: new FormControl(null),
     longitude: new FormControl(null),
     brandName: new FormControl('', Validators.required),
     costPerMinute: new FormControl(null),
@@ -36,11 +36,11 @@ export class CopterService {
     return this.http.post(this.baseUrl, copter);
   }
 
-  updateBrand(copter: Copter) {
+  updateCopter(copter: Copter) {
     return this.http.put(this.baseUrl + '/' + copter.id, copter);
   }
 
-  deleteBrand(id: number) {
+  deleteCopter(id: number) {
     return this.http.delete(this.baseUrl + '/' + id);
   }
 
@@ -48,7 +48,15 @@ export class CopterService {
     this.form.setValue({
       id: 0,
       name: '',
-      country: '',
+      status: 0,
+      latitude: 0,
+      longitude: 0,
+      costPerMinute: 0,
+      brandName: '',
+      maxSpeed: 0,
+      maxFlightHeight: 0,
+      control: 0,
+      droneType: 0
     });
   }
 }

@@ -1,7 +1,9 @@
 <mat-toolbar>
     <span>{{service.form.controls['id'].value?"Modify Brand":"New Brand"}}</span>
     <span class="fill-remaining-space"></span>
-    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+      <mat-icon>clear</mat-icon>
+    </button>
   </mat-toolbar>
   <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
     <mat-grid-list cols="2" rowHeight="300px">
@@ -9,13 +11,48 @@
         <div class="controles-container">
           <input type="hidden" formControlName="id">
           <mat-form-field>
-            <input formControlName="name" matInput placeholder="Brand name*">
+            <input formControlName="name" matInput placeholder="Name*">
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
+          <mat-radio-group formControlName="status"height="300px">
+            <mat-radio-button value="0">Free</mat-radio-button>
+            <mat-radio-button value="1">Ordered</mat-radio-button>
+          </mat-radio-group>
           <mat-form-field>
-            <input formControlName="country" matInput placeholder="Country">
-            <mat-error *ngIf="service.form.controls['country'].errors?.required">This field is mandatory.</mat-error>
-            <mat-error *ngIf="service.form.controls['country'].errors?.minlength">Minimum 2 charactors needed.</mat-error>       
+            <input formControlName="latitude" matInput placeholder="Latitude*">
+            <mat-error>This field is mandatory.</mat-error>
+            </mat-form-field>  
+          <mat-form-field>
+            <input formControlName="longitude" matInput placeholder="Longitude*">
+            <mat-error>This field is mandatory.</mat-error>
+          </mat-form-field> 
+          <mat-form-field>
+              <input formControlName="brandName" matInput placeholder="Brand name*">
+              <mat-error>This field is mandatory.</mat-error>
+          </mat-form-field>  
+          <mat-form-field>
+              <input formControlName="costPerMinute" matInput placeholder="Cost per minute*">
+              <mat-error>This field is mandatory.</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field>
+              <input formControlName="maxSpeed" matInput placeholder="Max speed*">
+              <mat-error>This field is mandatory.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <input formControlName="maxFlightHeight" matInput placeholder="Max flight height*">
+              <mat-error>This field is mandatory.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <input formControlName="control" matInput placeholder="Control*">
+              <mat-error>This field is mandatory.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <input formControlName="droneType" matInput placeholder="DroneType*">
+              <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
         </div>
       </mat-grid-tile>

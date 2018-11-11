@@ -2,7 +2,7 @@ export interface CopterDto {
     id: number;
     name: string;
     status: string;
-    latidude: string;
+    latitude: string;
     longitude: string;
     brandName: string;
     costPerMinute: number;

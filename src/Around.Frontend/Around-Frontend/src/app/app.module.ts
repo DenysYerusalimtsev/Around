@@ -48,7 +48,8 @@ import { CopterService } from './service/copter.service';
     HttpClientModule
   ],
   entryComponents: [
-    DialogBrandComponent
+    DialogBrandComponent,
+    DialogCopterComponent
   ],
   providers: [BrandService, ApiService, PlacesApiService, StateService, CopterService],
   bootstrap: [AppComponent]

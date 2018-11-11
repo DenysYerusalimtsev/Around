@@ -55,7 +55,8 @@ export class ListCopterComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false;
       dialogConfig.autoFocus = true;
-      dialogConfig.width = '60%';
+      dialogConfig.height = '80%';
+      dialogConfig.width = '80%';
       this.dialog.open(DialogCopterComponent, dialogConfig);
     }
 
@@ -63,13 +64,14 @@ export class ListCopterComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false;
       dialogConfig.autoFocus = true;
-      dialogConfig.width = '60%';
+      dialogConfig.height = '80%';
+      dialogConfig.width = '80%';
       this.dialog.open(DialogCopterComponent, dialogConfig);
     }
 
     onDelete(id: number) {
       if (confirm('Are you sure to delete this record ?')) {
-      this.service.deleteBrand(id);
+      this.service.deleteCopter(id);
       this.notificationService.warn('! Deleted successfully');
       }
     }

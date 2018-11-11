@@ -1,6 +1,4 @@
-import { CopterDto } from '../interface/copter-dto';
-
-export class Copter {
+export class CopterAggregate {
     constructor(
         public id: number,
         public name: string,
@@ -13,11 +11,5 @@ export class Copter {
         public maxFlightHeight: number,
         public control: string,
         public droneType: string) {
-    }
-    public static Create(dto: CopterDto): Copter {
-        return new Copter(dto.id, dto.name, dto.status,
-            dto.latitude, dto.longitude, dto.costPerMinute,
-            dto.brandName, dto.maxSpeed, dto.maxFlightHeight,
-            dto.control, dto.droneType);
     }
 }
