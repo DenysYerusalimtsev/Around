@@ -3,6 +3,7 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Copter } from '../model/copter';
 import { CopterDto } from '../interface/copter-dto';
 import { CopterService } from '../service/copter.service';
+import { StateService } from '../core/services';
 
 @Component({
   selector: 'app-copter-table',
@@ -11,14 +12,15 @@ import { CopterService } from '../service/copter.service';
 })
 export class CopterTableComponent implements OnInit {
 
-  constructor(private service: CopterService) {
+  constructor(private service: CopterService, private stateService: StateService) {
       this.dataSource = new MatTableDataSource();
-     }
+  }
 
+    googleMap = 'https://www.google.com/maps/dir/?api=1&destination=';
     dataSource: MatTableDataSource<CopterDto>;
     displayedColumns: string[] =
-    ['name', 'status',
-    'brandName', 'costPerMinute', 'actions'];
+    ['name', 'status', 'brandName',
+    'costPerMinute', 'actions'];
     copters: Copter[] = [];
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -42,5 +44,9 @@ export class CopterTableComponent implements OnInit {
 
     applyFilter() {
       this.dataSource.filter = this.searchKey.trim().toLowerCase();
+    }
+
+    markOnMap(copter: Copter) {
+      this.stateService.currentPlaceGeometry$.next(copter);
     }
    }

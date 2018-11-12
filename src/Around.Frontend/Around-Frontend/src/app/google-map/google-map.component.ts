@@ -35,10 +35,10 @@ export class GoogleMapComponent implements OnInit {
 
   showMap() {
 
-    this.stateService.currentPlaceGeometry$.subscribe(geometry => {
+    this.stateService.currentPlaceGeometry$.subscribe(copter => {
       let point;
-      if (geometry) {
-        point = new google.maps.LatLng(geometry.location.lat, geometry.location.lng);
+      if (copter) {
+        point = new google.maps.LatLng(copter.latitude, copter.longitude);
       } else {
         point = new google.maps.LatLng(50.00566244, 36.22920255);
       }

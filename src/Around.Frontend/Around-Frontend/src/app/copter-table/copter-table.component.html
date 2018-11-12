@@ -28,12 +28,12 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button mat-icon-button color="primary" (click)="onEdit(row)">
+          <button mat-icon-button color="primary" (click)="markOnMap(row)">
             <mat-icon>navigation</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
-  
+
       <ng-container matColumnDef="loading">
         <mat-footer-cell *matFooterCellDef colspan="6">
           Loading data...
