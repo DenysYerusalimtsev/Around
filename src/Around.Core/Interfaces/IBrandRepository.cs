@@ -12,7 +12,7 @@ namespace Around.Core.Interfaces
 
         void Create(Brand brand);
 
-        void Update(Brand brand);
+        void Update(int id, Brand brand);
 
         List<Brand> Search(string search);
 

@@ -52,10 +52,22 @@ namespace Around.Web.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public void DeleteBrand(int id) => _brandRepository.Delete(id);
+        public IActionResult DeleteBrand(int id)
+        {
+            _brandRepository.Delete(id);
+
+            return Ok("Success");
+        }
+
 
         [HttpPost]
         [Route("{id}")]
-        public void UpdateBrand(Brand brand) => _brandRepository.Update(brand);
+        public IActionResult UpdateBrand(int id, [FromBody] BrandAggregate brandDto)
+        {
+            var brand = new Brand(brandDto.Name, brandDto.CountryCode);
+            _brandRepository.Update(id, brand);
+
+            return Ok("Success");
+        }
     }
 }

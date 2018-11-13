@@ -28,11 +28,13 @@ namespace Around.DataAccess.SqlServer.Repositories
         public void Create(Rent rent)
         {
             _context.Rents.Add(rent);
+            _context.SaveChanges();
         }
 
         public void Update(Rent rent)
         {
             _context.Rents.Update(rent);
+            _context.SaveChanges();
         }
 
         public List<Rent> Search(string search)
@@ -45,6 +47,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             var rent = _context.Rents.Find(id);
             if (rent != null)
                 _context.Rents.Remove(rent);
+            _context.SaveChanges();
         }
     }
 }

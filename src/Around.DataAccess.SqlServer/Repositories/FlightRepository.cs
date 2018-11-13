@@ -28,11 +28,13 @@ namespace Around.DataAccess.SqlServer.Repositories
         public void Create(Flight flight)
         {
             _context.Flights.Add(flight);
+            _context.SaveChanges();
         }
 
         public void Update(Flight flight)
         {
             _context.Flights.Update(flight);
+            _context.SaveChanges();
         }
 
         public List<Cheque> Search(string search)
@@ -45,6 +47,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             var flight = _context.Flights.Find(id);
             if (flight != null)
                 _context.Flights.Remove(flight);
+            _context.SaveChanges();
         }
     }
 }

@@ -19,5 +19,13 @@ namespace Around.Core.Entities
         public virtual Country Country { get; set; }
 
         public virtual List<Copter> Copters { get; set; }
+
+        public Brand Update(Brand newBrand)
+        {
+            Name = newBrand.Name;
+            CountryCode = newBrand.CountryCode;
+
+            return this;
+        }
     }
 }

@@ -28,11 +28,13 @@ namespace Around.DataAccess.SqlServer.Repositories
         public void Create(Discount discount)
         {
             _context.Discounts.Add(discount);
+            _context.SaveChanges();
         }
 
         public void Update(Discount discount)
         {
             _context.Discounts.Update(discount);
+            _context.SaveChanges();
         }
 
         public List<Discount> Search(string search)
@@ -45,6 +47,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             var discount = _context.Discounts.Find(id);
             if (discount != null)
                 _context.Discounts.Remove(discount);
+            _context.SaveChanges();
         }
     }
 }

@@ -38,15 +38,26 @@ namespace Around.Web.Controllers
         }
 
         [HttpPost]
-        [Route("create")]
-        public void CreateCopter(Copter copter) => _copterRepository.Create(copter);
+        public IActionResult CreateCopter([FromBody] CopterAggregate copterDto)
+        {
+            var copter = new Copter().CreateFromDto(copterDto);
+            _copterRepository.Create(copter);
+
+            return Ok("Success");
+        }
 
         [HttpDelete]
         [Route("{id}")]
         public void DeleteCopter(int id) => _copterRepository.Delete(id);
 
         [HttpPost]
-        [Route("update")]
-        public void UpdateCopter(Copter copter) => _copterRepository.Update(copter);
+        [Route("{id}")]
+        public IActionResult UpdateCopter(int id, [FromBody] CopterAggregate copterDto)
+        {
+            var copter = new Copter().CreateFromDto(copterDto);
+            _copterRepository.Update(id, copter);
+
+            return Ok("Success");
+        }
     }
 }

@@ -28,11 +28,13 @@ namespace Around.DataAccess.SqlServer.Repositories
         public void Create(Country country)
         {
             _context.Countries.Add(country);
+            _context.SaveChanges();
         }
 
         public void Update(Country country)
         {
             _context.Countries.Update(country);
+            _context.SaveChanges();
         }
 
         public List<Country> Search(string search)
@@ -45,6 +47,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             var country = _context.Countries.Find(code);
             if (country != null)
                 _context.Countries.Remove(country);
+            _context.SaveChanges();
         }
     }
 }

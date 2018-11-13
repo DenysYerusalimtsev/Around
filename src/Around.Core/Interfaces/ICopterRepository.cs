@@ -12,7 +12,7 @@ namespace Around.Core.Interfaces
 
         void Create(Copter copter);
 
-        void Update(Copter copter);
+        void Update(int id, Copter copter);
 
         List<Copter> Search(string search);
 

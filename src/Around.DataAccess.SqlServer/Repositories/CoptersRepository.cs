@@ -32,11 +32,19 @@ namespace Around.DataAccess.SqlServer.Repositories
         public void Create(Copter copter)
         {
             _context.Copters.Add(copter);
+            _context.SaveChanges();
         }
 
-        public void Update(Copter copter)
+        public void Update(int id, Copter copter)
         {
-            _context.Copters.Update(copter);
+            var existedCopter = _context.Copters.Find(id);
+            if (existedCopter != null)
+            {         
+                existedCopter.Update(copter);
+                _context.Copters.Update(existedCopter);
+            }
+
+            _context.SaveChanges();
         }
 
         public List<Copter> Search(string search)
@@ -49,6 +57,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             var copter = _context.Copters.Find(id);
             if (copter != null)
                 _context.Copters.Remove(copter);
+            _context.SaveChanges();
         }
     }
 }

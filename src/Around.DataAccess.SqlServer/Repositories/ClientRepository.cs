@@ -28,11 +28,13 @@ namespace Around.DataAccess.SqlServer.Repositories
         public void Create(Client client)
         {
             _context.Clients.Add(client);
+            _context.SaveChanges();
         }
 
         public void Update(Client client)
         {
             _context.Clients.Update(client);
+            _context.SaveChanges();
         }
 
         public List<Client> Search(string search)
@@ -45,6 +47,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             var client = _context.Clients.Find(id);
             if (client != null)
                 _context.Clients.Remove(client);
+            _context.SaveChanges();
         }
     }
 }

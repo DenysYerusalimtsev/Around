@@ -48,9 +48,16 @@ namespace Around.DataAccess.SqlServer.Repositories
             throw new System.NotImplementedException();
         }
 
-        public void Update(Brand brand)
+        public void Update(int id, Brand brand)
         {
-            _context.Brands.Update(brand);
+            var existedBrand = _context.Brands.Find(id);
+            if (existedBrand != null)
+            {
+                existedBrand.Update(brand);
+                _context.Brands.Update(existedBrand);
+            }
+
+            _context.SaveChanges();
         }
     }
 }

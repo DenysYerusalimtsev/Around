@@ -1,5 +1,4 @@
-﻿using System.Net.NetworkInformation;
-using Around.Core.Enums;
+﻿using Around.Core.Enums;
 
 namespace Around.Core.Entities
 {
@@ -32,5 +31,37 @@ namespace Around.Core.Entities
         public virtual Brand Brand { get; set; }
 
         public virtual FullCharacteristics FullCharacteristics { get; set; }
+
+        public Copter CreateFromDto(CopterAggregate copter)
+        {
+            Name = copter.Name;
+            Status = (Status)copter.Status;
+            Latitude = copter.Latitude;
+            Longitude = copter.Longitude;
+            CostPerMinute = copter.CostPerMinute;
+            BrandId = copter.BrandId;
+            MaxSpeed = copter.MaxSpeed;
+            MaxFlightHeight = copter.MaxFlightHeight;
+            Control = (Control)copter.Control;
+            DroneType = (DroneType)copter.DroneType;
+
+            return this;
+        }
+
+        public Copter Update(Copter newCopter)
+        {
+            Name = newCopter.Name;
+            Status = newCopter.Status;
+            Latitude = newCopter.Latitude;
+            Longitude = newCopter.Longitude;
+            CostPerMinute = newCopter.CostPerMinute;
+            BrandId = newCopter.BrandId;
+            MaxSpeed = newCopter.MaxSpeed;
+            MaxFlightHeight = newCopter.MaxFlightHeight;
+            Control = newCopter.Control;
+            DroneType = newCopter.DroneType;
+
+            return this;
+        }
     }
 }

@@ -28,11 +28,13 @@ namespace Around.DataAccess.SqlServer.Repositories
         public void Create(Cheque cheque)
         {
             _context.Cheques.Add(cheque);
+            _context.SaveChanges();
         }
 
         public void Update(Cheque cheque)
         {
             _context.Cheques.Update(cheque);
+            _context.SaveChanges();
         }
 
         public List<Cheque> Search(string search)
@@ -45,6 +47,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             var cheque = _context.Cheques.Find(id);
             if (cheque != null)
                 _context.Cheques.Remove(cheque);
+            _context.SaveChanges();
         }
     }
 }
