@@ -19,7 +19,6 @@ export class SelectPlacesDialogComponent {
 
   // TODO return value from dialog to component and call state changing method from there
   savePlaces() {
-    this.stateService.setNewPlaces(this.selectedPlaces);
   }
 
   onNgModelChange($event) {

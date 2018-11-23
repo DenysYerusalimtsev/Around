@@ -21,7 +21,7 @@ import * as Material from '@angular/material';
     Material.MatPaginatorModule,
     Material.MatSortModule,
     Material.MatDialogModule,
-
+    Material.MatProgressSpinnerModule
   ],
   exports: [
     Material.MatToolbarModule,
@@ -42,7 +42,8 @@ import * as Material from '@angular/material';
     Material.MatDialogModule,
     Material.MatCardModule,
     Material.MatListModule,
-    Material.MatSidenavModule
+    Material.MatSidenavModule,
+    Material.MatProgressSpinnerModule
   ],
   declarations: []
 })

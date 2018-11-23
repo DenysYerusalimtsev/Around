@@ -16,7 +16,6 @@ export class MapComponent implements OnInit {
   constructor(private stateService: StateService) {}
 
   ngOnInit() {
-    this.places$ = this.stateService.places$;
   }
 
   changeActionName() {
