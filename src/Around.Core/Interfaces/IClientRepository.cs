@@ -10,6 +10,8 @@ namespace Around.Core.Interfaces
 
         Task<Client> Get(int id);
 
+        Task<Client> Get(string email);
+
         void Create(Client client);
 
         void Update(Client client);

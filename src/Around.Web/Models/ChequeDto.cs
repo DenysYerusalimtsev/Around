@@ -13,7 +13,6 @@ namespace Around.Web.Models
             CopterBrand = cheque.Rent.Copter.Brand.Name;
             CopterName = cheque.Rent.Copter.Name;
             StartTime = cheque.Rent.StartTime;
-            FinishTime = cheque.Rent.FinishTime;
             DateOfCreation = cheque.DateOfCreation;
             TotalPrice = cheque.TotalPrice;
         }

@@ -5,7 +5,7 @@ namespace Around.Core.Entities
 {
     public class Passport
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string RecordNumber { get; set; }
 

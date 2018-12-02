@@ -31,7 +31,13 @@ namespace Around.Web.Controllers
 
         [HttpPost]
         [Route("create")]
-        public void CreateCheques(Cheque cheque) => _chequeRepository.Create(cheque);
+        public IActionResult CreateCheques([FromBody] ChequeAggregate chequeDto)
+        {
+            var cheque = new Cheque().CreateFromDto(chequeDto);
+            _chequeRepository.Create(cheque);
+
+            return Ok("Success");      
+        }
 
         [HttpPost]
         [Route("{id}")]

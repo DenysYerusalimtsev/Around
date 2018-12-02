@@ -13,7 +13,6 @@ namespace Around.Web.Models
             CopterBrand = rent.Copter.Brand.Name;
             CopterName = rent.Copter.Name;
             StartTime = rent.StartTime;
-            FinishTime = rent.FinishTime;
         }
 
         public int Id { get; set; }
@@ -25,7 +24,5 @@ namespace Around.Web.Models
         public string CopterName { get; set; }
 
         public DateTime StartTime { get; set; }
-
-        public DateTime FinishTime { get; set; }
     }
 }

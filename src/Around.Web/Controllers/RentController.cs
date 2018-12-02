@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Around.Core.Entities;
+using Around.Core.Enums;
 using Around.Core.Interfaces;
+using Around.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Around.Web.Controllers
@@ -9,36 +12,59 @@ namespace Around.Web.Controllers
     public class RentController : Controller
     {
         private readonly IRentRepository _rentRepository;
+        private readonly ICopterRepository _copterRepository;
 
-        public RentController(IRentRepository rentRepository)
+        public RentController(
+            IRentRepository rentRepository,
+            ICopterRepository copterRepository)
         {
             _rentRepository = rentRepository;
+            _copterRepository = copterRepository;
         }
 
         [HttpGet]
         [Route("rents")]
-        public async Task<JsonResult> GetRents()
+        public async Task<IActionResult> GetRents()
         {
-            return Json(await _rentRepository.GetAllAsync());
+            List<Rent> rents = await _rentRepository.GetAllAsync();
+            var response = new List<RentDto>();
+
+            foreach (var rent in rents)
+            {
+                response.Add(new RentDto(rent));
+            }
+            return Ok(response);
         }
 
         [HttpGet]
         [Route("rents/{id}")]
-        public async Task<JsonResult> GetRent(int id)
+        public async Task<IActionResult> GetRent(int id)
         {
-            return Json(await _rentRepository.Get(id));
+            Rent rent = await _rentRepository.Get(id);
+            var response = new RentDto(rent);
+
+            return Ok(response);
         }
 
         [HttpPost]
         [Route("create")]
-        public void CreateRent(Rent rent) => _rentRepository.Create(rent);
+        public IActionResult CreateRent(RentAggregate rentDto)
+        {
+            var copter = _copterRepository.Get(rentDto.CopterId);
+            if (copter.Result.Status != Status.Ordered)
+            {
+                _copterRepository.UpdateStatus(rentDto.CopterId);
+                var rent = new Rent().CreateFromDto(rentDto);
+                _rentRepository.Create(rent);
+
+                return Ok("Success");
+            }
+
+            return BadRequest();
+        }
 
         [HttpPost]
         [Route("{id}")]
         public void DeleteRent(int id) => _rentRepository.Delete(id);
-
-        [HttpPost]
-        [Route("update")]
-        public void UpdateRent(Rent rent) => _rentRepository.Update(rent);
     }
 }

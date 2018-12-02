@@ -22,7 +22,12 @@ namespace Around.DataAccess.SqlServer.Repositories
 
         public async Task<Client> Get(int id)
         {
-            return await _context.Clients.FirstOrDefaultAsync(b => b.Id == id);
+            return await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<Client> Get(string email)
+        {
+            return await _context.Clients.FirstOrDefaultAsync(c => c.Email == email);
         }
 
         public void Create(Client client)

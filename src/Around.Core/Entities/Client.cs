@@ -17,5 +17,18 @@ namespace Around.Core.Entities
         public virtual Discount Discount { get; set; }
 
         public virtual List<Rent> Rent { get; set; }
+
+        public Client CreateFromDto(ClientAggregate client)
+        {
+            Id = client.Id;
+            FirstName = client.FirstName;
+            LastName = client.LastName;
+            Email = client.Email;
+            PhoneNumber = client.PhoneNumber;
+            CreditCardNumber = client.CreditCardNumber;
+            DiscountId = client.DiscountId;
+
+            return this;
+        }
     }
 }

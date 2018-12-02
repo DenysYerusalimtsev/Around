@@ -1,22 +1,28 @@
-﻿using Around.Core.Entities;
-
-namespace Around.Web.Models
+﻿namespace Around.Core.Entities
 {
-    public class ClientDto
+    public class ClientAggregate
     {
-        public ClientDto(Client client)
+        public ClientAggregate(Client client)
         {
             Id = client.Id;
+            FirstName = client.FirstName;
+            LastName = client.LastName;
             Email = client.Email;
             PhoneNumber = client.PhoneNumber;
             PassportNumber = client.Passport.Id;
             CreditCardNumber = client.CreditCardNumber;
-            DiscountPercentage = client.Discount.Percentage;
+            DiscountId = client.Discount.Id;
         }
 
         public int Id { get; set; }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
         public string Email { get; set; }
+
+        public string Password { get; set; }
 
         public string PhoneNumber { get; set; }
 
@@ -24,6 +30,6 @@ namespace Around.Web.Models
 
         public string CreditCardNumber { get; set; }
 
-        public double DiscountPercentage { get; set; }
+        public int DiscountId { get; set; }
     }
 }

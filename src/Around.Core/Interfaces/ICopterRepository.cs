@@ -6,10 +6,6 @@ namespace Around.Core.Interfaces
 {
     public interface ICopterRepository
     {
-        List<Copter> GetAll();
-
-        Copter GetCopter(int id);
-
         Task<List<Copter>> GetAllAsync();
 
         Task<Copter> Get(int id);
@@ -17,6 +13,8 @@ namespace Around.Core.Interfaces
         void Create(Copter copter);
 
         void Update(int id, Copter copter);
+
+        void UpdateStatus(int id);
 
         List<Copter> Search(string search);
 

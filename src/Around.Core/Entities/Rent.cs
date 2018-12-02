@@ -12,12 +12,19 @@ namespace Around.Core.Entities
 
         public DateTime StartTime { get; set; }
 
-        public DateTime FinishTime { get; set; }
-
         public virtual Client Client { get; set; }
 
         public virtual Copter Copter { get; set; }
 
         public virtual Cheque Cheque { get; set; }
+
+        public Rent CreateFromDto(RentAggregate rentDto)
+        {
+            ClientId = rentDto.ClientId;
+            CopterId = rentDto.CopterId;
+            StartTime = DateTime.Now;
+
+            return this;
+        }
     }
 }

@@ -1,8 +1,10 @@
-﻿using Around.Core.Interfaces;
+﻿using System;
+using Around.Core.Interfaces;
 using Around.DataAccess.SqlServer;
 using Around.DataAccess.SqlServer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +30,7 @@ namespace Around.Web
             services.AddDbContext<DronesharingContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
-            
+
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<IChequeRepository, ChequeRepository>();

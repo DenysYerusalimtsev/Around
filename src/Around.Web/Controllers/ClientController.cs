@@ -43,7 +43,12 @@ namespace Around.Web.Controllers
 
         [HttpPost]
         [Route("create")]
-        public void CreateClient(Client client) => _clientRepository.Create(client);
+        public IActionResult CreateClient([FromBody]ClientAggregate clientDto)
+        {
+            var client = new Client().CreateFromDto(clientDto);
+            _clientRepository.Create(client);
+            return Ok("Success");
+        }
 
         [HttpPost]
         [Route("{id}")]
@@ -52,5 +57,6 @@ namespace Around.Web.Controllers
         [HttpPost]
         [Route("update")]
         public void UpdateClient(Client client) => _clientRepository.Update(client);
+       
     }
 }
