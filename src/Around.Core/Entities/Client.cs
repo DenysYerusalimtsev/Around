@@ -16,7 +16,6 @@ namespace Around.Core.Entities
 
         public Client CreateFromDto(ClientAggregate client)
         {
-            Id = client.Id;
             FirstName = client.FirstName;
             LastName = client.LastName;
             Email = client.Email;

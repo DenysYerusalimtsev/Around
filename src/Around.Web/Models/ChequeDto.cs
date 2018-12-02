@@ -8,8 +8,8 @@ namespace Around.Web.Models
         public ChequeDto(Cheque cheque)
         {
             Id = cheque.Id;
-            ClientName = $"{cheque.Rent.Client.Passport.FirstName} " +
-                         $"{cheque.Rent.Client.Passport.LastName}";
+            ClientName = $"{cheque.Rent.Client.FirstName} " +
+                         $"{cheque.Rent.Client.LastName}";
             CopterBrand = cheque.Rent.Copter.Brand.Name;
             CopterName = cheque.Rent.Copter.Name;
             StartTime = cheque.Rent.StartTime;

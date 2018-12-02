@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Around.Core.Entities
+﻿namespace Around.Core.Entities
 {
     public abstract class User
     {
@@ -10,7 +8,7 @@ namespace Around.Core.Entities
 
         public string LastName { get; set; }
 
-        public string PassportId { get; set; }
+        public string PassportSnapshot { get; set; }
 
         public string Email { get; set; }
 
@@ -19,7 +17,5 @@ namespace Around.Core.Entities
         public byte[] PasswordSalt { get; set; }
 
         public string PhoneNumber { get; set; }
-
-        public virtual Passport Passport { get; set; }
     }
 }

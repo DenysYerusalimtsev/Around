@@ -28,8 +28,6 @@ namespace Around.DataAccess.SqlServer
 
         public DbSet<Discount> Discounts { get; set; }
 
-        public DbSet<Passport> Passports { get; set; }
-
         public DbSet<Rent> Rents { get; set; }
 
 
@@ -43,7 +41,6 @@ namespace Around.DataAccess.SqlServer
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new CreditCardConfiguration());
             modelBuilder.ApplyConfiguration(new DiscountConfiguration());
-            modelBuilder.ApplyConfiguration(new PassportConfiguration());
             modelBuilder.ApplyConfiguration(new RentConfiguration());
             modelBuilder.ApplyConfiguration(new CharacteristicsConfiguration());
             modelBuilder.ApplyConfiguration(new FullCharacteristicsConfiguration());

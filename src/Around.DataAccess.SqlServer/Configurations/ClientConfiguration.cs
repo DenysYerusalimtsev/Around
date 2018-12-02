@@ -20,11 +20,6 @@ namespace Around.DataAccess.SqlServer.Configurations
                 .HasForeignKey<Discount>(x => x.ClientId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(x => x.Passport)
-                .WithOne(x => x.Client)
-                .HasForeignKey<Passport>(x => x.Id)
-                .OnDelete(DeleteBehavior.Cascade);
-
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
         }

@@ -8,8 +8,8 @@ namespace Around.Web.Models
         public RentDto(Rent rent)
         {
             Id = rent.Id;
-            ClientName = $"{rent.Client.Passport.FirstName} " +
-                         $"{rent.Client.Passport.LastName}";
+            ClientName = $"{rent.Client.FirstName} " +
+                         $"{rent.Client.LastName}";
             CopterBrand = rent.Copter.Brand.Name;
             CopterName = rent.Copter.Name;
             StartTime = rent.StartTime;
