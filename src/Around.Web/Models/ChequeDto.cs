@@ -27,10 +27,8 @@ namespace Around.Web.Models
 
         public DateTime StartTime { get; set; }
 
-        public DateTime FinishTime { get; set; }
-
         public DateTime DateOfCreation { get; set; }
 
-        public decimal TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
     }
 }

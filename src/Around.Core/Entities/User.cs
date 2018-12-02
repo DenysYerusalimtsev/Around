@@ -10,6 +10,8 @@ namespace Around.Core.Entities
 
         public string LastName { get; set; }
 
+        public string PassportId { get; set; }
+
         public string Email { get; set; }
 
         public byte[] PasswordHash { get; set; }
@@ -17,5 +19,7 @@ namespace Around.Core.Entities
         public byte[] PasswordSalt { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public virtual Passport Passport { get; set; }
     }
 }
