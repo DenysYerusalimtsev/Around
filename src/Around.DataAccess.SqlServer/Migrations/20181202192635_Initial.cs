@@ -4,10 +4,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Around.DataAccess.SqlServer.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Admins",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    PassportSnapshot = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admins", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Cheques",
                 columns: table => new
@@ -16,29 +35,11 @@ namespace Around.DataAccess.SqlServer.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     RentId = table.Column<int>(nullable: false),
                     DateOfCreation = table.Column<DateTime>(nullable: false),
-                    TotalPrice = table.Column<decimal>(nullable: false)
+                    TotalPrice = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cheques", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PassportId = table.Column<int>(nullable: false),
-                    CreditCardNumber = table.Column<string>(nullable: true),
-                    DiscountId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,71 +55,17 @@ namespace Around.DataAccess.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CreditCards",
-                columns: table => new
-                {
-                    Number = table.Column<string>(nullable: false),
-                    ValidThru = table.Column<string>(nullable: true),
-                    Cvv = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CreditCards", x => x.Number);
-                    table.ForeignKey(
-                        name: "FK_CreditCards_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Discounts",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Type = table.Column<string>(nullable: true),
-                    Percentage = table.Column<double>(nullable: false),
-                    ClientId = table.Column<int>(nullable: false)
+                    Percentage = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Discounts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Discounts_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Passports",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false),
-                    RecordNumber = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Nationality = table.Column<string>(nullable: true),
-                    BirthPlace = table.Column<string>(nullable: true),
-                    FromDate = table.Column<DateTime>(nullable: false),
-                    ToDate = table.Column<DateTime>(nullable: false),
-                    Sex = table.Column<int>(nullable: false),
-                    TechnicalCenter = table.Column<string>(nullable: true),
-                    Snapshot = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Passports", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Passports_Clients_Id",
-                        column: x => x.Id,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -142,23 +89,28 @@ namespace Around.DataAccess.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Admins",
+                name: "Clients",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    PassportSnapshot = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    PassportId = table.Column<int>(nullable: false)
+                    CreditCardNumber = table.Column<string>(nullable: true),
+                    DiscountId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admins", x => x.Id);
+                    table.PrimaryKey("PK_Clients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Admins_Passports_PassportId",
-                        column: x => x.PassportId,
-                        principalTable: "Passports",
+                        name: "FK_Clients_Discounts_DiscountId",
+                        column: x => x.DiscountId,
+                        principalTable: "Discounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -171,13 +123,15 @@ namespace Around.DataAccess.SqlServer.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
+                    Latitude = table.Column<double>(nullable: false),
+                    Longitude = table.Column<double>(nullable: false),
                     CostPerMinute = table.Column<double>(nullable: false),
                     BrandId = table.Column<int>(nullable: false),
                     MaxSpeed = table.Column<double>(nullable: false),
                     MaxFlightHeight = table.Column<double>(nullable: false),
                     Control = table.Column<int>(nullable: false),
                     DroneType = table.Column<int>(nullable: false),
-                    FullCharacteristicsId = table.Column<int>(nullable: false)
+                    FullCharacteristicsId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -187,7 +141,27 @@ namespace Around.DataAccess.SqlServer.Migrations
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CreditCards",
+                columns: table => new
+                {
+                    Number = table.Column<string>(nullable: false),
+                    ValidThru = table.Column<string>(nullable: true),
+                    Cvv = table.Column<string>(nullable: true),
+                    ClientId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CreditCards", x => x.Number);
+                    table.ForeignKey(
+                        name: "FK_CreditCards_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -227,8 +201,7 @@ namespace Around.DataAccess.SqlServer.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClientId = table.Column<int>(nullable: false),
                     CopterId = table.Column<int>(nullable: false),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    FinishTime = table.Column<DateTime>(nullable: false)
+                    StartTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -452,12 +425,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Admins_PassportId",
-                table: "Admins",
-                column: "PassportId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Brands_CountryCode",
                 table: "Brands",
                 column: "CountryCode");
@@ -469,6 +436,11 @@ namespace Around.DataAccess.SqlServer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Clients_DiscountId",
+                table: "Clients",
+                column: "DiscountId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Copters_BrandId",
                 table: "Copters",
                 column: "BrandId");
@@ -477,12 +449,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                 name: "IX_CreditCards_ClientId",
                 table: "CreditCards",
                 column: "ClientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Discounts_ClientId",
-                table: "Discounts",
-                column: "ClientId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FullCharacteristics_CopterId",
@@ -522,9 +488,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                 name: "CreditCards");
 
             migrationBuilder.DropTable(
-                name: "Discounts");
-
-            migrationBuilder.DropTable(
                 name: "Equipment");
 
             migrationBuilder.DropTable(
@@ -543,7 +506,7 @@ namespace Around.DataAccess.SqlServer.Migrations
                 name: "TransportCharacteristics");
 
             migrationBuilder.DropTable(
-                name: "Passports");
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Cheques");
@@ -552,7 +515,7 @@ namespace Around.DataAccess.SqlServer.Migrations
                 name: "FullCharacteristics");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "Discounts");
 
             migrationBuilder.DropTable(
                 name: "Copters");

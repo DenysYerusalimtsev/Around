@@ -17,7 +17,9 @@ namespace Around.DataAccess.SqlServer.Repositories
 
         public async Task<List<Client>> GetAll()
         {
-            return await _context.Clients.ToListAsync();
+            return await _context.Clients
+                .Include(navigationPropertyPath: x => x.Discount)
+                .ToListAsync();
         }
 
         public async Task<Client> Get(int id)

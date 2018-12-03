@@ -4,14 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Around.DataAccess.SqlServer.Configurations
 {
-    public class DiscountConfiguration : IEntityTypeConfiguration<Discount>
+    public class DiscountConfigurations : IEntityTypeConfiguration<Discount>
     {
         public void Configure(EntityTypeBuilder<Discount> builder)
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Id)
-                .ValueGeneratedOnAdd();
+            builder.HasMany(x => x.Client)
+                .WithOne(x => x.Discount)
+                .HasForeignKey(x => x.DiscountId);
         }
     }
 }

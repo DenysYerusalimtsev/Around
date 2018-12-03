@@ -10,7 +10,6 @@ namespace Around.Web.Models
             Email = client.Email;
             PhoneNumber = client.PhoneNumber;
             PassportSnaphot = client.PassportSnapshot;
-            CreditCardNumber = client.CreditCardNumber;
             DiscountPercentage = client.Discount.Percentage;
         }
 
@@ -21,8 +20,6 @@ namespace Around.Web.Models
         public string PhoneNumber { get; set; }
 
         public string PassportSnaphot { get; set; }
-
-        public string CreditCardNumber { get; set; }
 
         public double DiscountPercentage { get; set; }
     }

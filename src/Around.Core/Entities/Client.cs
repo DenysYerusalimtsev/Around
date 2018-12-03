@@ -4,8 +4,6 @@ namespace Around.Core.Entities
 {
     public class Client : User
     {
-        public string CreditCardNumber { get; set; }
-
         public int DiscountId { get; set; }
 
         public virtual List<CreditCard> CreditCards { get; set; }
@@ -20,7 +18,6 @@ namespace Around.Core.Entities
             LastName = client.LastName;
             Email = client.Email;
             PhoneNumber = client.PhoneNumber;
-            CreditCardNumber = client.CreditCardNumber;
             DiscountId = client.DiscountId;
 
             return this;

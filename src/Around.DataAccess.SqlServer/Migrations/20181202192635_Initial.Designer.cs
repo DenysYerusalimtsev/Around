@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Around.DataAccess.SqlServer.Migrations
 {
     [DbContext(typeof(DronesharingContext))]
-    [Migration("20181109182813_UpdateCopterEntity")]
-    partial class UpdateCopterEntity
+    [Migration("20181202192635_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,16 +29,19 @@ namespace Around.DataAccess.SqlServer.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<int>("PassportId");
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PassportSnapshot");
+
+                    b.Property<byte[]>("PasswordHash");
+
+                    b.Property<byte[]>("PasswordSalt");
 
                     b.Property<string>("PhoneNumber");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PassportId")
-                        .IsUnique();
 
                     b.ToTable("Admins");
                 });
@@ -153,7 +156,7 @@ namespace Around.DataAccess.SqlServer.Migrations
 
                     b.Property<int>("RentId");
 
-                    b.Property<decimal>("TotalPrice");
+                    b.Property<double>("TotalPrice");
 
                     b.HasKey("Id");
 
@@ -172,13 +175,21 @@ namespace Around.DataAccess.SqlServer.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<int>("PassportId");
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PassportSnapshot");
+
+                    b.Property<byte[]>("PasswordHash");
+
+                    b.Property<byte[]>("PasswordSalt");
 
                     b.Property<string>("PhoneNumber");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DiscountId");
 
                     b.ToTable("Clients");
                 });
@@ -197,7 +208,7 @@ namespace Around.DataAccess.SqlServer.Migrations
 
                     b.Property<int>("DroneType");
 
-                    b.Property<int>("FullCharacteristicsId");
+                    b.Property<int?>("FullCharacteristicsId");
 
                     b.Property<double>("Latitude");
 
@@ -254,16 +265,11 @@ namespace Around.DataAccess.SqlServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClientId");
-
                     b.Property<double>("Percentage");
 
                     b.Property<string>("Type");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId")
-                        .IsUnique();
 
                     b.ToTable("Discounts");
                 });
@@ -380,35 +386,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.ToTable("Modes");
                 });
 
-            modelBuilder.Entity("Around.Core.Entities.Passport", b =>
-                {
-                    b.Property<int>("Id");
-
-                    b.Property<string>("BirthPlace");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<DateTime>("FromDate");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("Nationality");
-
-                    b.Property<string>("RecordNumber");
-
-                    b.Property<int>("Sex");
-
-                    b.Property<string>("Snapshot");
-
-                    b.Property<string>("TechnicalCenter");
-
-                    b.Property<DateTime>("ToDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Passports");
-                });
-
             modelBuilder.Entity("Around.Core.Entities.Rent", b =>
                 {
                     b.Property<int>("Id")
@@ -418,8 +395,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.Property<int>("ClientId");
 
                     b.Property<int>("CopterId");
-
-                    b.Property<DateTime>("FinishTime");
 
                     b.Property<DateTime>("StartTime");
 
@@ -445,14 +420,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TransportCharacteristics");
-                });
-
-            modelBuilder.Entity("Around.Core.Entities.Admin", b =>
-                {
-                    b.HasOne("Around.Core.Entities.Passport", "Passport")
-                        .WithOne("Admin")
-                        .HasForeignKey("Around.Core.Entities.Admin", "PassportId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Around.Core.Entities.Aircraft", b =>
@@ -495,12 +462,20 @@ namespace Around.DataAccess.SqlServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Around.Core.Entities.Client", b =>
+                {
+                    b.HasOne("Around.Core.Entities.Discount", "Discount")
+                        .WithMany("Client")
+                        .HasForeignKey("DiscountId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Around.Core.Entities.Copter", b =>
                 {
                     b.HasOne("Around.Core.Entities.Brand", "Brand")
                         .WithMany("Copters")
                         .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Around.Core.Entities.CreditCard", b =>
@@ -508,14 +483,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.HasOne("Around.Core.Entities.Client", "Client")
                         .WithMany("CreditCards")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Around.Core.Entities.Discount", b =>
-                {
-                    b.HasOne("Around.Core.Entities.Client", "Client")
-                        .WithOne("Discount")
-                        .HasForeignKey("Around.Core.Entities.Discount", "ClientId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -556,14 +523,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                     b.HasOne("Around.Core.Entities.FullCharacteristics", "FullCharacteristics")
                         .WithOne("Modes")
                         .HasForeignKey("Around.Core.Entities.Modes", "Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Around.Core.Entities.Passport", b =>
-                {
-                    b.HasOne("Around.Core.Entities.Client", "Client")
-                        .WithOne("Passport")
-                        .HasForeignKey("Around.Core.Entities.Passport", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

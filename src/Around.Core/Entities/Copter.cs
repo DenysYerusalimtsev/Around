@@ -8,33 +8,6 @@ namespace Around.Core.Entities
         {
         }
 
-        public Copter(int id,
-            string name,
-            Status status,
-            double latitude,
-            double longitude,
-            double costPerMinute,
-            int brandId,
-            double maxSpeed,
-            double maxFlightHeight,
-            Control control,
-            DroneType droneType,
-            int? fullCharacteristicsId)
-        {
-            Id = id;
-            Name = name;
-            Status = status;
-            Latitude = latitude;
-            Longitude = longitude;
-            CostPerMinute = costPerMinute;
-            BrandId = brandId;
-            MaxSpeed = maxSpeed;
-            MaxFlightHeight = maxFlightHeight;
-            Control = control;
-            DroneType = droneType;
-            FullCharacteristicsId = fullCharacteristicsId;
-        }
-
         public int Id { get; set; }
 
         public string Name { get; set; }

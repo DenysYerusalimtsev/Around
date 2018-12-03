@@ -40,7 +40,7 @@ namespace Around.DataAccess.SqlServer
             modelBuilder.ApplyConfiguration(new CopterConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new CreditCardConfiguration());
-            modelBuilder.ApplyConfiguration(new DiscountConfiguration());
+            modelBuilder.ApplyConfiguration(new DiscountConfigurations());
             modelBuilder.ApplyConfiguration(new RentConfiguration());
             modelBuilder.ApplyConfiguration(new CharacteristicsConfiguration());
             modelBuilder.ApplyConfiguration(new FullCharacteristicsConfiguration());

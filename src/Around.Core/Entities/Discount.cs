@@ -1,4 +1,6 @@
-﻿namespace Around.Core.Entities
+﻿using System.Collections.Generic;
+
+namespace Around.Core.Entities
 {
     public class Discount
     {
@@ -8,8 +10,6 @@
 
         public double Percentage { get; set; }
 
-        public virtual int ClientId { get; set; }
-
-        public virtual Client Client { get; set; }
+        public virtual List<Client> Client { get; set; }
     }
 }

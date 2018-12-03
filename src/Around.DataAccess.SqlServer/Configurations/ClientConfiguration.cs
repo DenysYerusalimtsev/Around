@@ -14,12 +14,7 @@ namespace Around.DataAccess.SqlServer.Configurations
                 .WithOne(x => x.Client)
                 .HasForeignKey(x => x.ClientId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasOne(x => x.Discount)
-                .WithOne(x => x.Client)
-                .HasForeignKey<Discount>(x => x.ClientId)
-                .OnDelete(DeleteBehavior.Cascade);
-
+            
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
         }
