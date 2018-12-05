@@ -10,6 +10,6 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
-    <NameOfLastUsedPublishProfile>AroundWeb - Web Deploy</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>AroundWebApp - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

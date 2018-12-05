@@ -56,5 +56,12 @@ namespace Around.DataAccess.SqlServer.Repositories
                 _context.Clients.Remove(client);
             _context.SaveChanges();
         }
+
+        public async Task AddCreditCardAsync(CreditCard card, int userId)
+        {
+            var client = await Get(userId);
+            client.CreditCards.Add(card);
+            _context.SaveChanges();
+        }
     }
 }

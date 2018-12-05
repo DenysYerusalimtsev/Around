@@ -1,4 +1,5 @@
-﻿using Around.Core.Enums;
+﻿using System.Collections.Generic;
+using Around.Core.Enums;
 
 namespace Around.Core.Entities
 {
@@ -33,6 +34,8 @@ namespace Around.Core.Entities
         public int? FullCharacteristicsId { get; set; }
 
         public virtual Brand Brand { get; set; }
+
+        public virtual List<Rent> Rents { get; set; }
 
         public virtual FullCharacteristics FullCharacteristics { get; set; }
 

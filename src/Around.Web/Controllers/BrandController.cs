@@ -42,6 +42,7 @@ namespace Around.Web.Controllers
         }
 
         [HttpPost]
+        [Route("create")]
         public IActionResult CreateBrand([FromBody] BrandAggregate brandDto)
         {
             var brand = new Brand(brandDto.Name, brandDto.CountryCode);

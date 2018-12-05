@@ -51,6 +51,14 @@ namespace Around.Web.Controllers
         }
 
         [HttpPost]
+        [Route("card")]
+        public IActionResult AddClientCreditCard([FromBody]CreditCard creditCard, int userId)
+        {
+            _clientRepository.AddCreditCardAsync(creditCard, userId);
+            return Ok("Success");
+        }
+
+        [HttpPost]
         [Route("{id}")]
         public void DeleteClient(int id) => _clientRepository.Delete(id);
 

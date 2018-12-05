@@ -17,7 +17,11 @@ namespace Around.DataAccess.SqlServer.Repositories
 
         public async Task<List<Rent>> GetAllAsync()
         {
-            return await _context.Rents.ToListAsync();
+            return await _context.Rents
+                .Include(x => x.Copter)
+                .ThenInclude(c => c.Brand)
+                .Include(x => x.Client)
+                .ToListAsync();
         }
 
         public async Task<Rent> Get(int id)

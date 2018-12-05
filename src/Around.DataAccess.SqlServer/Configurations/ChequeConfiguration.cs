@@ -10,11 +10,6 @@ namespace Around.DataAccess.SqlServer.Configurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.Rent)
-                .WithOne(x => x.Cheque)
-                .HasForeignKey<Rent>(x => x.Id)
-                .OnDelete(DeleteBehavior.Restrict);
-
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
         }

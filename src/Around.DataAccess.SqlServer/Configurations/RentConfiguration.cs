@@ -10,6 +10,21 @@ namespace Around.DataAccess.SqlServer.Configurations
         {
             builder.HasKey(x => x.Id);
 
+            builder.HasOne(r => r.Client)
+                .WithMany(c => c.Rent)
+                .HasForeignKey(p => p.ClientId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(r => r.Copter)
+                .WithMany(c => c.Rents)
+                .HasForeignKey(p => p.CopterId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            /*builder.HasOne(x => x.Cheque)
+                .WithOne(x => x.Rent)
+                .HasForeignKey<Cheque>(x => x.RentId)
+                .OnDelete(DeleteBehavior.Cascade);*/
+
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
         }

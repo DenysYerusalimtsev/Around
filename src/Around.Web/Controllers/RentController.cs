@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Enums;
@@ -48,14 +49,23 @@ namespace Around.Web.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult CreateRent(RentAggregate rentDto)
+        public async Task<IActionResult> CreateRent(RentAggregate rentDto)
         {
-            var copter = _copterRepository.Get(rentDto.CopterId);
-            if (copter.Result.Status != Status.Ordered)
+            var copter = await _copterRepository.Get(rentDto.CopterId);
+            if (copter.Status != Status.Ordered)
             {
                 _copterRepository.UpdateStatus(rentDto.CopterId);
                 var rent = new Rent().CreateFromDto(rentDto);
-                _rentRepository.Create(rent);
+                try
+                {
+                    _rentRepository.Create(rent);
+                }
+                catch (Exception e)
+                {
+                    string ex = e.Message;
+                    string ir = e.InnerException.Message;
+                    throw;
+                }
 
                 return Ok("Success");
             }

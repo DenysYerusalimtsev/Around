@@ -4,14 +4,16 @@ using Around.DataAccess.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Around.DataAccess.SqlServer.Migrations
 {
     [DbContext(typeof(DronesharingContext))]
-    partial class DronesharingContextModelSnapshot : ModelSnapshot
+    [Migration("20181205215311_UpdateDb")]
+    partial class UpdateDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -401,8 +403,6 @@ namespace Around.DataAccess.SqlServer.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("CopterId");
-
                     b.ToTable("Rents");
                 });
 
@@ -542,7 +542,7 @@ namespace Around.DataAccess.SqlServer.Migrations
 
                     b.HasOne("Around.Core.Entities.Copter", "Copter")
                         .WithMany("Rents")
-                        .HasForeignKey("CopterId")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

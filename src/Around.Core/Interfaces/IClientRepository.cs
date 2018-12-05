@@ -19,5 +19,7 @@ namespace Around.Core.Interfaces
         List<Client> Search(string search);
 
         void Delete(int id);
+
+        Task AddCreditCardAsync(CreditCard card, int userId);
     }
 }
