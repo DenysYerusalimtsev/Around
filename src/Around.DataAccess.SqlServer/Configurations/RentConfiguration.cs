@@ -20,10 +20,10 @@ namespace Around.DataAccess.SqlServer.Configurations
                 .HasForeignKey(p => p.CopterId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            /*builder.HasOne(x => x.Cheque)
+            builder.HasOne(x => x.Cheque)
                 .WithOne(x => x.Rent)
                 .HasForeignKey<Cheque>(x => x.RentId)
-                .OnDelete(DeleteBehavior.Cascade);*/
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();

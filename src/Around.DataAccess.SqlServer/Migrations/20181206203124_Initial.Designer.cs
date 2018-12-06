@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Around.DataAccess.SqlServer.Migrations
 {
     [DbContext(typeof(DronesharingContext))]
-    [Migration("20181205220022_UpdateDbConfig")]
-    partial class UpdateDbConfig
+    [Migration("20181206203124_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -28,21 +28,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cheques",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RentId = table.Column<int>(nullable: false),
-                    DateOfCreation = table.Column<DateTime>(nullable: false),
-                    TotalPrice = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cheques", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Countries",
                 columns: table => new
                 {
@@ -101,7 +86,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                     PasswordHash = table.Column<byte[]>(nullable: true),
                     PasswordSalt = table.Column<byte[]>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    CreditCardNumber = table.Column<string>(nullable: true),
                     DiscountId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -218,12 +202,6 @@ namespace Around.DataAccess.SqlServer.Migrations
                         principalTable: "Copters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Rents_Cheques_Id",
-                        column: x => x.Id,
-                        principalTable: "Cheques",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -424,6 +402,27 @@ namespace Around.DataAccess.SqlServer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Cheques",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RentId = table.Column<int>(nullable: false),
+                    DateOfCreation = table.Column<DateTime>(nullable: false),
+                    TotalPrice = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cheques", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cheques_Rents_RentId",
+                        column: x => x.RentId,
+                        principalTable: "Rents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Brands_CountryCode",
                 table: "Brands",
@@ -433,6 +432,12 @@ namespace Around.DataAccess.SqlServer.Migrations
                 name: "IX_Characteristics_FullCharacteristicsId",
                 table: "Characteristics",
                 column: "FullCharacteristicsId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cheques_RentId",
+                table: "Cheques",
+                column: "RentId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -485,6 +490,9 @@ namespace Around.DataAccess.SqlServer.Migrations
                 name: "Characteristics");
 
             migrationBuilder.DropTable(
+                name: "Cheques");
+
+            migrationBuilder.DropTable(
                 name: "CreditCards");
 
             migrationBuilder.DropTable(
@@ -500,25 +508,22 @@ namespace Around.DataAccess.SqlServer.Migrations
                 name: "Modes");
 
             migrationBuilder.DropTable(
-                name: "Rents");
-
-            migrationBuilder.DropTable(
                 name: "TransportCharacteristics");
 
             migrationBuilder.DropTable(
-                name: "Clients");
-
-            migrationBuilder.DropTable(
-                name: "Cheques");
+                name: "Rents");
 
             migrationBuilder.DropTable(
                 name: "FullCharacteristics");
 
             migrationBuilder.DropTable(
-                name: "Discounts");
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Copters");
+
+            migrationBuilder.DropTable(
+                name: "Discounts");
 
             migrationBuilder.DropTable(
                 name: "Brands");
