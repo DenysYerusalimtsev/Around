@@ -10,11 +10,15 @@ namespace Around.Core.Interfaces
 
         Task<Cheque> Get(int id);
 
-        void Create(Cheque brand);
+        void Create(Cheque cheque);
 
-        void Update(Cheque brand);
+        void Update(Cheque cheque);
+
+        Cheque GetLast();
 
         List<Cheque> Search(string search);
+
+        void AddCost();
 
         void Delete(int id);
     }

@@ -18,9 +18,12 @@ namespace Around.Core.Entities
         {
             RentId = cheque.RentId;
             DateOfCreation = DateTime.Now;
-            TotalPrice = Rent.Copter.CostPerMinute * (DateOfCreation - Rent.StartTime).Minutes;
 
             return this;
+        }
+
+        public void CalculateCost()
+        {
         }
     }
 }

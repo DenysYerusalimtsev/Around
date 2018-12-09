@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
+using Around.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Around.Web.Controllers
@@ -17,16 +19,24 @@ namespace Around.Web.Controllers
 
         [HttpGet]
         [Route("cheques")]
-        public async Task<JsonResult> GetCheques()
+        public async Task<IActionResult> GetCheques()
         {
-            return Json(await _chequeRepository.GetAllAsync());
+            List<Cheque> cheques = await _chequeRepository.GetAllAsync();
+            var response = new List<ChequeDto>();
+
+            foreach (var cheque in cheques)
+            {
+                response.Add(new ChequeDto(cheque));
+            }
+
+            return Ok(response);
         }
 
         [HttpGet]
         [Route("cheques/{id}")]
-        public async Task<JsonResult> GetCheques(int id)
+        public IActionResult GetCheques(int id)
         {
-            return Json(await _chequeRepository.Get(id));
+            return Ok(_chequeRepository.Get(id));
         }
 
         [HttpPost]
@@ -35,11 +45,12 @@ namespace Around.Web.Controllers
         {
             var cheque = new Cheque().CreateFromDto(chequeDto);
             _chequeRepository.Create(cheque);
+            _chequeRepository.AddCost();
 
             return Ok("Success");      
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("{id}")]
         public void DeleteCheques(int id) => _chequeRepository.Delete(id);
 

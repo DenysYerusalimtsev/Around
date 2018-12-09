@@ -24,7 +24,7 @@ namespace Around.DataAccess.SqlServer.Repositories
         }
 
         public async Task<Copter> Get(int id)
-        {
+         {
             return await _context.Copters
                 .Include(navigationPropertyPath: c => c.Brand)
                 .FirstOrDefaultAsync(predicate: c => c.Id == id);
