@@ -48,6 +48,17 @@ namespace Around.DataAccess.SqlServer.Repositories
                 .Last();
         }
 
+        public Task<Cheque> GetLastAsync()
+        {
+            return _context.Cheques
+                .Include(x => x.Rent)
+                .ThenInclude(x => x.Copter)
+                .ThenInclude(x => x.Brand)
+                .Include(x => x.Rent)
+                .ThenInclude(x => x.Client)
+                .LastAsync();
+        }
+
         public void Create(Cheque cheque)
         {
             _context.Cheques.Add(cheque);

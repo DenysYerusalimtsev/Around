@@ -1,5 +1,6 @@
 ﻿using System;
 using Around.Core.Interfaces;
+using Around.Core.Services;
 using Around.DataAccess.SqlServer;
 using Around.DataAccess.SqlServer.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +41,7 @@ namespace Around.Web
             services.AddTransient<IDiscountRepository, DiscountRepository>();
             services.AddTransient<IFlightRepository, FlightRepository>();
             services.AddTransient<IRentRepository, RentRepository>();
+            services.AddTransient<IReportRenderer, ReportRenderer>();
 
             services.AddSwaggerGen(c =>
             {

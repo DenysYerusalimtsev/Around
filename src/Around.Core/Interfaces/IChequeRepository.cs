@@ -16,6 +16,8 @@ namespace Around.Core.Interfaces
 
         Cheque GetLast();
 
+        Task<Cheque> GetLastAsync();
+
         List<Cheque> Search(string search);
 
         void AddCost();
