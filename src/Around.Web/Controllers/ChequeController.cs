@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
@@ -13,13 +12,18 @@ namespace Around.Web.Controllers
     {
         private readonly IChequeRepository _chequeRepository;
         private readonly IReportRenderer _reportRenderer;
+        private readonly IMailBox _mailBox;
         private const string PdfContentType = "application/pdf";
         private const string FileName = "AroundCheckReport.pdf";
 
-        public ChequeController(IChequeRepository chequeRepository, IReportRenderer reportRenderer)
+        public ChequeController(
+            IChequeRepository chequeRepository,
+            IReportRenderer reportRenderer,
+            IMailBox mailBox)
         {
             _chequeRepository = chequeRepository;
             _reportRenderer = reportRenderer;
+            _mailBox = mailBox;
         }
 
         [HttpGet]
@@ -60,12 +64,10 @@ namespace Around.Web.Controllers
         public async Task<IActionResult> RenderReport()
         {
             var cheque = await _chequeRepository.GetLastAsync();
+            var attachment = _reportRenderer.Render(cheque);
+            await _mailBox.Send(attachment);
 
-            var stream = new MemoryStream();
-            await _reportRenderer.RenderAsync(new MemoryStream(), cheque);
-            stream.Position = 0;
-
-            return File(stream, PdfContentType, FileName);
+            return Ok();
         }
 
         [HttpDelete]

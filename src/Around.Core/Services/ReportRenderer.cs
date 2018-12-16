@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
@@ -12,17 +11,14 @@ namespace Around.Core.Services
 {
     public class ReportRenderer : IReportRenderer
     {
-        public Task RenderAsync(Stream stream, Cheque cheque)
+        public MemoryStream Render(Cheque cheque)
         {
-            if (stream == null)
-            {
-                throw new ArgumentNullException(nameof(stream));
-            }
-
-            return Task.Run(() => ConstructReport(stream, cheque));
+            var stream = new MemoryStream();
+            return ConstructReport(stream, cheque);
         }
 
-        private void ConstructReport(Stream stream, Cheque cheque)
+        private T ConstructReport<T>(T stream, Cheque cheque)
+            where T : Stream
         {
             using (var writer = new PdfWriter(stream))
             using (var pdf = new PdfDocument(writer))
@@ -32,8 +28,11 @@ namespace Around.Core.Services
 
                 document.Add(new HeaderSection(cheque).Render())
                     .Add(new ReportParagraph(cheque).Render());
-
                 SetDocumentInfo(pdf.GetDocumentInfo());
+
+                stream.Position = 0;
+
+                return stream;
             }
         }
 
@@ -41,7 +40,7 @@ namespace Around.Core.Services
         {
             documentInfo
                 .SetCreator("Denis Yerusalimtsev")
-                .SetSubject("App report")
+                .SetSubject("Around cheque")
                 .SetTitle("Cheque");
         }
     }

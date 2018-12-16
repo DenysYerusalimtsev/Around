@@ -38,14 +38,20 @@ namespace Around.Core.Report
 
         private List<ReportLine> Construct()
         {
-            Paragraph neurocheck = new Paragraph();
-            Paragraph coma = new Paragraph(", ");
-            Paragraph patientInfo = new Paragraph();
+            var neurocheck = new Paragraph("Around");
+            var coma = new Paragraph(", ");
+            var firstName = new Paragraph(_cheque.Rent.Client.FirstName);
+            var lastName = new Paragraph(_cheque.Rent.Client.LastName);
+
+            var patientInfo = new Paragraph()
+                .Add(lastName)
+                .Add(coma)
+                .Add(firstName);
 
             return new List<ReportLine>
             {
-                new ReportLine(patientInfo, neurocheck),
-                new ReportLine(new Paragraph(),  new Paragraph())
+                new ReportLine(new Paragraph(), neurocheck),
+                new ReportLine(patientInfo,  new Paragraph())
             };
         }
 
