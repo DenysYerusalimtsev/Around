@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Around.Core.Entities;
 using iText.Kernel.Colors;
 using iText.Layout;
 using iText.Layout.Borders;
@@ -9,6 +10,12 @@ namespace Around.Core.Report
 {
     public class ReportParagraph
     {
+        private readonly Cheque _cheque;
+        public ReportParagraph(Cheque cheque)
+        {
+            _cheque = cheque;
+        }
+
         public IBlockElement Render()
         {
             List<Cell> valueCells = GetValueCells();

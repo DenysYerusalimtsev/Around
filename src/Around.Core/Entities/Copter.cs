@@ -31,13 +31,10 @@ namespace Around.Core.Entities
 
         public DroneType DroneType { get; set; }
 
-        public int? FullCharacteristicsId { get; set; }
-
         public virtual Brand Brand { get; set; }
 
         public virtual List<Rent> Rents { get; set; }
 
-        public virtual FullCharacteristics FullCharacteristics { get; set; }
 
         public Copter CreateFromDto(CopterAggregate copter)
         {

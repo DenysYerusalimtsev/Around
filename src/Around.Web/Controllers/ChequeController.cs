@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
@@ -18,7 +14,7 @@ namespace Around.Web.Controllers
         private readonly IChequeRepository _chequeRepository;
         private readonly IReportRenderer _reportRenderer;
         private const string PdfContentType = "application/pdf";
-        private const string FileName = "NeurocheckLogReport.pdf";
+        private const string FileName = "AroundCheckReport.pdf";
 
         public ChequeController(IChequeRepository chequeRepository, IReportRenderer reportRenderer)
         {
@@ -63,18 +59,10 @@ namespace Around.Web.Controllers
         [Route("report")]
         public async Task<IActionResult> RenderReport()
         {
+            var cheque = await _chequeRepository.GetLastAsync();
+
             var stream = new MemoryStream();
-            try
-            {
-                await _reportRenderer.RenderAsync(new MemoryStream(),
-                    await _chequeRepository.GetLastAsync());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
+            await _reportRenderer.RenderAsync(new MemoryStream(), cheque);
             stream.Position = 0;
 
             return File(stream, PdfContentType, FileName);

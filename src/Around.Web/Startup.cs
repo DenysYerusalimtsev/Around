@@ -39,7 +39,6 @@ namespace Around.Web
             services.AddTransient<ICopterRepository, CoptersRepository>();
             services.AddTransient<ICountryRepository, CountryRepository>();
             services.AddTransient<IDiscountRepository, DiscountRepository>();
-            services.AddTransient<IFlightRepository, FlightRepository>();
             services.AddTransient<IRentRepository, RentRepository>();
             services.AddTransient<IReportRenderer, ReportRenderer>();
 

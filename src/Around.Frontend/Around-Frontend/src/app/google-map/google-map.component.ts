@@ -23,10 +23,9 @@ export class GoogleMapComponent implements OnInit {
     s.type = 'text/javascript';
     s.src = 'https://maps.googleapis.com/maps/api/js?key=' + environment.apiKey;
     this.elementRef.nativeElement.appendChild(s);
-
   }
+
   ngOnInit() {
-    // TODO use npm package for gmaps loading
     const self = this;
     setTimeout(function () {
       self.showMap();

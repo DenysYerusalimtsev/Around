@@ -12,7 +12,7 @@ namespace Around.DataAccess.SqlServer.Configurations
 
             builder.HasOne(p => p.Client)
                .WithMany(b => b.CreditCards)
-               .HasForeignKey(p => p.ClientId)
+               .HasForeignKey(с => с.ClientId)
                .OnDelete(DeleteBehavior.Cascade);
         }
     }

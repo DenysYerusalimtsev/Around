@@ -30,8 +30,8 @@ namespace Around.Core.Services
             {
                 writer.SetCloseStream(false);
 
-                document.Add(new HeaderSection().Render())
-                    .Add(new ReportParagraph().Render());
+                document.Add(new HeaderSection(cheque).Render())
+                    .Add(new ReportParagraph(cheque).Render());
 
                 SetDocumentInfo(pdf.GetDocumentInfo());
             }
