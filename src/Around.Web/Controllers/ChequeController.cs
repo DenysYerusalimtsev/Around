@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
@@ -67,7 +68,17 @@ namespace Around.Web.Controllers
             var attachment = _reportRenderer.Render(cheque);
             await _mailBox.Send(attachment);
 
-            return Ok();
+            return Ok($"Message sent to {cheque.Rent.Client.Email}");
+        }
+
+        [HttpPost]
+        [Route("r")]
+        public async Task<IActionResult> Report()
+        {
+            var cheque = await _chequeRepository.GetLastAsync();
+            var attachment = _reportRenderer.Render(cheque);
+            attachment.Position = 0;
+            return File(attachment, "application/pdf", "AroundCheque.pdf");
         }
 
         [HttpDelete]

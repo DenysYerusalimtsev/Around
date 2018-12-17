@@ -6,6 +6,7 @@ using Around.Core.Report;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
+using iText.Layout.Element;
 
 namespace Around.Core.Services
 {
@@ -17,23 +18,22 @@ namespace Around.Core.Services
             return ConstructReport(stream, cheque);
         }
 
-        private T ConstructReport<T>(T stream, Cheque cheque)
-            where T : Stream
+        private MemoryStream ConstructReport<T>(T stream, Cheque cheque)
+            where T : MemoryStream
         {
             using (var writer = new PdfWriter(stream))
             using (var pdf = new PdfDocument(writer))
             using (var document = new Document(pdf, PageSize.A4))
             {
                 writer.SetCloseStream(false);
-
+                SetDocumentInfo(pdf.GetDocumentInfo());
                 document.Add(new HeaderSection(cheque).Render())
                     .Add(new ReportParagraph(cheque).Render());
-                SetDocumentInfo(pdf.GetDocumentInfo());
 
-                stream.Position = 0;
-
-                return stream;
             }
+            var bytes = stream.ToArray();
+
+            return new MemoryStream(bytes);
         }
 
         private void SetDocumentInfo(PdfDocumentInfo documentInfo)

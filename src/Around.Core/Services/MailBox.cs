@@ -25,7 +25,7 @@ namespace Around.Core.Services
             {
                 message.Subject = "Test";
                 message.Body = "Body";
-                message.Attachments.Add(new Attachment(attachment, new ContentType("application/pdf")));
+                message.Attachments.Add(new Attachment(attachment, "AroundCheque","application/pdf"));
                 try
                 {
                     await smtpClient.SendMailAsync(message);
