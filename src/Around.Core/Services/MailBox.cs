@@ -2,10 +2,8 @@
 using System.IO;
 using System.Net;
 using System.Net.Mail;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using Around.Core.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Around.Core.Services
 {

@@ -1,12 +1,10 @@
 ﻿using System.IO;
-using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
 using Around.Core.Report;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
-using iText.Layout.Element;
 
 namespace Around.Core.Services
 {
