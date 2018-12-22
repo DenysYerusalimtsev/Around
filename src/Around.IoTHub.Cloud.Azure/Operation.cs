@@ -2,7 +2,7 @@
 {
     internal enum Operation
     {
-        Undefined = 0,
+        Free = 0,
         Booked = 1
     }
 }

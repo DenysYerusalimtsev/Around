@@ -12,18 +12,23 @@ namespace Around.Web.Controllers
     {
         private readonly IChequeRepository _chequeRepository;
         private readonly IReportRenderer _reportRenderer;
+        private readonly ICopterRepository _copterRepository;
         private readonly IMailBox _mailBox;
+        private readonly IIoTHub _hub;
         private const string PdfContentType = "application/pdf";
         private const string FileName = "AroundCheckReport.pdf";
 
         public ChequeController(
             IChequeRepository chequeRepository,
             IReportRenderer reportRenderer,
-            IMailBox mailBox)
+            IMailBox mailBox, 
+            IIoTHub hub, ICopterRepository copterRepository)
         {
             _chequeRepository = chequeRepository;
             _reportRenderer = reportRenderer;
+            _copterRepository = copterRepository;
             _mailBox = mailBox;
+            _hub = hub;
         }
 
         [HttpGet]
@@ -50,11 +55,16 @@ namespace Around.Web.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult CreateCheques([FromBody] ChequeAggregate chequeDto)
+        public IActionResult CreateCheque([FromBody] ChequeAggregate chequeDto)
         {
             var cheque = new Cheque().CreateFromDto(chequeDto);
             _chequeRepository.Create(cheque);
             _chequeRepository.AddCost();
+
+            var updatedCheque = _chequeRepository.GetLast();
+
+            _copterRepository.UpdateStatus(cheque.Rent.CopterId);
+            _hub.FinishUsingCopterAsync(updatedCheque);
 
             return Ok("Success");
         }

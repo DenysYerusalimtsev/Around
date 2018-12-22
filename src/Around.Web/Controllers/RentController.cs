@@ -58,9 +58,7 @@ namespace Around.Web.Controllers
             {
                 var rent = Rent.CreateFromDto(rentDto);
                 rent = await _rentRepository.Create(rent);
-
                 await _hub.StartUsingCopter(rent);
-
                 _copterRepository.UpdateStatus(rentDto.CopterId);
 
                 return Ok("Success");

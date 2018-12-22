@@ -40,9 +40,15 @@ namespace Around.IoT.Device
                     switch (oper)
                     {
                         case Operation.Booked:
-                            var processor = new BookedMessageProcessor();
-                            var dto = JsonConvert.DeserializeObject<BookedMessage>(payload);
-                            await processor.Process(dto);
+                            var bookedProcessor = new BookedMessageProcessor();
+                            var bookedMessageDto = JsonConvert.DeserializeObject<BookedMessage>(payload);
+                            await bookedProcessor.Process(bookedMessageDto);
+                            break;
+
+                        case Operation.Free:
+                            var freeProcessor = new FreeMessageProcessor();
+                            var freeMessageDto = JsonConvert.DeserializeObject<FreeMessage>(payload);
+                            await freeProcessor.Process(freeMessageDto);
                             break;
                     }
                 }
