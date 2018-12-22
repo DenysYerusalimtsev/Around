@@ -26,15 +26,19 @@ namespace Around.DataAccess.SqlServer.Repositories
 
         public async Task<Rent> Get(int id)
         {
-            return await _context.Rents.FirstOrDefaultAsync(r => r.Id == id);
+            return await _context.Rents
+                .Include(x => x.Copter)
+                .ThenInclude(c => c.Brand)
+                .Include(x => x.Client)
+                .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public Rent Create(Rent rent)
+        public async Task<Rent> Create(Rent rent)
         {
             var created = _context.Rents.Add(rent);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            return created.Entity;
+            return await Get(created.Entity.Id);
         }
 
         public void Update(Rent rent)

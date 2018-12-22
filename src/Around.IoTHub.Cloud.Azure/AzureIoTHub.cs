@@ -22,9 +22,10 @@ namespace Around.IoTHub.Cloud.Azure
             var json = JsonConvert.SerializeObject(dto);
 
             var message = new Message(Encoding.ASCII.GetBytes(json));
+            message.Properties.Add("Operation", dto.Operation.ToString());
             await _serviceClient.SendAsync(HubCopterIdFor(rent.Copter), message);
         }
 
-        private string HubCopterIdFor(Copter copter) => $"{copter.Name}-{copter.Id}";
+        private string HubCopterIdFor(Copter copter) => copter.Name;
     }
 }

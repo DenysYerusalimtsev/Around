@@ -1,4 +1,5 @@
-﻿using Around.IoT.Device.MessageProcessors;
+﻿using System;
+using Around.IoT.Device.MessageProcessors;
 using Around.IoT.Device.Models;
 using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
@@ -20,26 +21,31 @@ namespace Around.IoT.Device
         {
             while (true)
             {
-                Message receivedMessage = await _client.ReceiveAsync();
+                Message receivedMessage = await _client.ReceiveAsync(TimeSpan.FromSeconds(2));
                 if (receivedMessage == null) continue;
 
-                var payload = Encoding.ASCII.GetString(receivedMessage.GetBytes());
-                var message = JsonConvert.DeserializeObject<IMessage>(payload);
-
-                await Process(message);
+                await Process(receivedMessage);
 
                 await _client.CompleteAsync(receivedMessage);
             }
         }
 
-        private async Task Process(IMessage message)
+        private async Task Process(Message message)
         {
-            switch (message.Operation)
+            if (message.Properties.ContainsKey("Operation"))
             {
-                case Operation.Booked:
-                    var processor = new BookedMessageProcessor();
-                    await processor.Process(message as BookedMessage);
-                    break;
+                if (Enum.TryParse(message.Properties["Operation"], out Operation oper))
+                {
+                    var payload = Encoding.ASCII.GetString(message.GetBytes());
+                    switch (oper)
+                    {
+                        case Operation.Booked:
+                            var processor = new BookedMessageProcessor();
+                            var dto = JsonConvert.DeserializeObject<BookedMessage>(payload);
+                            await processor.Process(dto);
+                            break;
+                    }
+                }
             }
         }
     }

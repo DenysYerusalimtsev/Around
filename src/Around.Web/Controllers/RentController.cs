@@ -18,10 +18,11 @@ namespace Around.Web.Controllers
 
         public RentController(
             IRentRepository rentRepository,
-            ICopterRepository copterRepository)
+            ICopterRepository copterRepository, IIoTHub hub)
         {
             _rentRepository = rentRepository;
             _copterRepository = copterRepository;
+            _hub = hub;
         }
 
         [HttpGet]
@@ -56,7 +57,7 @@ namespace Around.Web.Controllers
             if (copter.Status != Status.Ordered)
             {
                 var rent = Rent.CreateFromDto(rentDto);
-                rent = _rentRepository.Create(rent);
+                rent = await _rentRepository.Create(rent);
 
                 await _hub.StartUsingCopter(rent);
 
