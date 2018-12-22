@@ -5,7 +5,7 @@ namespace Around.IoT.Device
 {
     class Program
     {
-        private const string ConnectionString = "";
+        private const string ConnectionString = "HostName=AroundIoT.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=qttYCZnkTx2zLYZl1YPuGqUNMhBBgMy7wjEWXXZi8Hw=";
 
         static void Main(string[] args)
         {
