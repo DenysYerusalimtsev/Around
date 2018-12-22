@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
@@ -78,7 +77,7 @@ namespace Around.Web.Controllers
             var cheque = await _chequeRepository.GetLastAsync();
             var attachment = _reportRenderer.Render(cheque);
             attachment.Position = 0;
-            return File(attachment, "application/pdf", "AroundCheque.pdf");
+            return File(attachment, PdfContentType, FileName);
         }
 
         [HttpDelete]

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using Around.Core.Entities;
 using iText.Kernel.Colors;
 using iText.Layout;
@@ -43,13 +44,15 @@ namespace Around.Core.Report
             return new List<Cell>
             {
                 new Cell()
-                    .Add(new Paragraph()),
+                    .Add(new Paragraph(_cheque.Rent.StartTime.ToString("dddd, dd MMMM yyyy", 
+                        CultureInfo.InvariantCulture))),
                 new Cell()
-                    .Add(new Paragraph()),
+                    .Add(new Paragraph(_cheque.Rent.Copter.Name)),
                 new Cell()
-                    .Add(new Paragraph()),
+                    .Add(new Paragraph(_cheque.DateOfCreation.ToString("dddd, dd MMMM yyyy", 
+                        CultureInfo.InvariantCulture))),
                 new Cell()
-                    .Add(new Paragraph())
+                    .Add(new Paragraph(_cheque.TotalPrice.ToString(CultureInfo.InvariantCulture)))
                     .SetBorderRight(Border.NO_BORDER)
             };
         }
@@ -59,13 +62,13 @@ namespace Around.Core.Report
             return new List<Cell>
             {
                 new Cell()
-                    .Add(new Paragraph()),
+                    .Add(new Paragraph("Start time")),
                 new Cell()
-                    .Add(new Paragraph()),
+                    .Add(new Paragraph("Copter")),
                 new Cell()
-                    .Add(new Paragraph()),
+                    .Add(new Paragraph("Finish time")),
                 new Cell()
-                    .Add(new Paragraph())
+                    .Add(new Paragraph("Total price"))
                     .SetBorderRight(Border.NO_BORDER)
             };
         }

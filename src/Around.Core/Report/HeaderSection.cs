@@ -38,7 +38,7 @@ namespace Around.Core.Report
 
         private List<ReportLine> Construct()
         {
-            var neurocheck = new Paragraph("Around");
+            var aroundLabel = new Paragraph("Around");
             var coma = new Paragraph(", ");
             var firstName = new Paragraph(_cheque.Rent.Client.FirstName);
             var lastName = new Paragraph(_cheque.Rent.Client.LastName);
@@ -48,10 +48,12 @@ namespace Around.Core.Report
                 .Add(coma)
                 .Add(firstName);
 
+            var label = new Paragraph("Around cheque");
+
             return new List<ReportLine>
             {
-                new ReportLine(new Paragraph(), neurocheck),
-                new ReportLine(patientInfo,  new Paragraph())
+                new ReportLine(patientInfo, aroundLabel),
+                new ReportLine(label,  new Paragraph())
             };
         }
 
