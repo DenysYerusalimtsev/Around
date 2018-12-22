@@ -3,6 +3,7 @@ using Around.Core.Interfaces;
 using Around.Core.Services;
 using Around.DataAccess.SqlServer;
 using Around.DataAccess.SqlServer.Repositories;
+using Around.IoTHub.Cloud.Azure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +43,8 @@ namespace Around.Web
             services.AddTransient<IRentRepository, RentRepository>();
             services.AddTransient<IReportRenderer, ReportRenderer>();
             services.AddTransient<IMailBox, MailBox>();
+            services.AddTransient<IIoTHub>(provider => 
+                new AzureIoTHub(Configuration.GetConnectionString("IoTHub")));
 
             services.AddSwaggerGen(c =>
             {

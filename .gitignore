@@ -6,3 +6,11 @@ src/Around.DataAccess.SqlServer/obj/
 src/Around.Web/bin/
 src/Around.Web/obj/
 src/Around.Web/Properties
+*.dll
+/src/Around.IoTDevice/bin/Debug
+/src/Around.IoTDevice/obj/Debug
+/src/Around.IoT.Device/obj
+/src/Around.IoT.Device/bin/Debug/netcoreapp2.2
+/src/Around.IoTHub.Cloud.Azure/bin/Debug
+/src/Around.IoTHub.Cloud.Azure/obj
+/src/packages

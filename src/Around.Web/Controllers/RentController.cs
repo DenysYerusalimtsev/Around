@@ -14,6 +14,7 @@ namespace Around.Web.Controllers
     {
         private readonly IRentRepository _rentRepository;
         private readonly ICopterRepository _copterRepository;
+        private readonly IIoTHub _hub;
 
         public RentController(
             IRentRepository rentRepository,
@@ -54,18 +55,12 @@ namespace Around.Web.Controllers
             var copter = await _copterRepository.Get(rentDto.CopterId);
             if (copter.Status != Status.Ordered)
             {
+                var rent = Rent.CreateFromDto(rentDto);
+                rent = _rentRepository.Create(rent);
+
+                await _hub.StartUsingCopter(rent);
+
                 _copterRepository.UpdateStatus(rentDto.CopterId);
-                var rent = new Rent().CreateFromDto(rentDto);
-                try
-                {
-                    _rentRepository.Create(rent);
-                }
-                catch (Exception e)
-                {
-                    string ex = e.Message;
-                    string ir = e.InnerException.Message;
-                    throw;
-                }
 
                 return Ok("Success");
             }

@@ -10,7 +10,7 @@ namespace Around.Core.Interfaces
 
         Task<Rent> Get(int id);
 
-        void Create(Rent rent);
+        Rent Create(Rent rent);
 
         void Update(Rent rent);
 

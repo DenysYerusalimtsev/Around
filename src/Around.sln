@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Around.DataAccess.SqlServer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Around.Web", "Around.Web\Around.Web.csproj", "{7A45F771-B66D-4623-8600-D4A9242C671E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Around.IoTHub.Cloud.Azure", "Around.IoTHub.Cloud.Azure\Around.IoTHub.Cloud.Azure.csproj", "{67A7330F-DD31-485E-AEAA-7C606A622A42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Around.IoT.Device", "Around.IoT.Device\Around.IoT.Device.csproj", "{66CAE500-6B2C-4A36-AFC8-5F90B3B04A67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,11 +31,20 @@ Global
 		{7A45F771-B66D-4623-8600-D4A9242C671E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A45F771-B66D-4623-8600-D4A9242C671E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A45F771-B66D-4623-8600-D4A9242C671E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67A7330F-DD31-485E-AEAA-7C606A622A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67A7330F-DD31-485E-AEAA-7C606A622A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67A7330F-DD31-485E-AEAA-7C606A622A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67A7330F-DD31-485E-AEAA-7C606A622A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66CAE500-6B2C-4A36-AFC8-5F90B3B04A67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CAE500-6B2C-4A36-AFC8-5F90B3B04A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CAE500-6B2C-4A36-AFC8-5F90B3B04A67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CAE500-6B2C-4A36-AFC8-5F90B3B04A67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
 		SolutionGuid = {F31844E2-3284-4A65-A063-13AE2B412FDC}
 	EndGlobalSection
 EndGlobal

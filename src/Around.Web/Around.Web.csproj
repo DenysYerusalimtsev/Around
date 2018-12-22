@@ -12,13 +12,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Around.Core\Around.Core.csproj" />
     <ProjectReference Include="..\Around.DataAccess.SqlServer\Around.DataAccess.SqlServer.csproj" />
+    <ProjectReference Include="..\Around.IoTHub.Cloud.Azure\Around.IoTHub.Cloud.Azure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,13 +18,12 @@ namespace Around.Core.Entities
 
         public virtual Cheque Cheque { get; set; }
 
-        public Rent CreateFromDto(RentAggregate rentDto)
-        {
-            ClientId = rentDto.ClientId;
-            CopterId = rentDto.CopterId;
-            StartTime = DateTime.Now;
-
-            return this;
-        }
+        public static Rent CreateFromDto(RentAggregate rentDto) =>
+            new Rent
+            {
+                ClientId = rentDto.ClientId,
+                CopterId = rentDto.CopterId,
+                StartTime = DateTime.Now
+            };
     }
 }

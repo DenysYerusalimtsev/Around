@@ -29,10 +29,12 @@ namespace Around.DataAccess.SqlServer.Repositories
             return await _context.Rents.FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public void Create(Rent rent)
+        public Rent Create(Rent rent)
         {
-            _context.Rents.Add(rent);
+            var created = _context.Rents.Add(rent);
             _context.SaveChanges();
+
+            return created.Entity;
         }
 
         public void Update(Rent rent)
