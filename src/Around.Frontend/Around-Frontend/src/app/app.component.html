@@ -1,1 +1,17 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container mat-typography">
+        <mat-sidenav #sidenav mode="side">
+            <div>Content</div>
+        </mat-sidenav>
+      
+        <mat-sidenav-content>
+          <mat-toolbar>
+            <div class="flex-left">
+              <mat-icon id="main-nav-button" (click)="sidenav.toggle()">menu</mat-icon>
+            </div>
+          </mat-toolbar>
+          <main>
+            <router-outlet></router-outlet>
+          </main>
+      
+        </mat-sidenav-content>
+</mat-sidenav-container>

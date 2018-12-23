@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,7 +7,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { BrandService } from './service/brand.service';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ListBrandComponent } from './list-brand/list-brand.component';
 import { DialogBrandComponent } from './dialog-brand/dialog-brand.component';
 import { ApiService, PlacesApiService, StateService } from './core/services';
@@ -22,6 +21,9 @@ import { CopterService } from './service/copter.service';
 import { CopterTableComponent } from './copter-table/copter-table.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashcardComponent } from './dashcard/dashcard.component';
+import { Ng2OdometerModule } from 'ng2-odometer';
 
 @NgModule({
   declarations: [
@@ -37,17 +39,19 @@ import { RegistrationComponent } from './registration/registration.component';
     DialogCopterComponent,
     CopterTableComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DashboardComponent,
+    DashcardComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    NoopAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2OdometerModule
   ],
   entryComponents: [
     DialogBrandComponent,
