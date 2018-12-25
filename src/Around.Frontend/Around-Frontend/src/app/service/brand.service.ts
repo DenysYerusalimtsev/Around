@@ -28,18 +28,29 @@ export class BrandService {
   createBrand(brand: BrandAggregate) {
     console.log(brand);
 
-    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post(this.baseUrl, brand, options)
+    return this.http.post(this.baseUrl + 'create', brand,
+    {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text'
+    })
     .subscribe(data => console.log('Works!'));
   }
 
   updateBrand(brand: BrandAggregate) {
-    return this.http.put(this.baseUrl + 'brand/', brand)
+    return this.http.put(this.baseUrl + 'brand/', brand,
+    {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text'
+    })
     .subscribe(data => console.log('Works!'));
   }
 
   deleteBrand(id: number) {
-    return this.http.delete(this.baseUrl + '/' + id)
+    return this.http.delete(this.baseUrl + '/' + id,
+    {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text'
+    })
     .subscribe(data => console.log('Works!'));
   }
 

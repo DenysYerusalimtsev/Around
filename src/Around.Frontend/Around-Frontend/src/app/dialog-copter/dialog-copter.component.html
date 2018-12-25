@@ -14,10 +14,7 @@
             <input formControlName="name" matInput placeholder="Name*">
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
-          <mat-radio-group formControlName="status"height="300px">
-            <mat-radio-button value="0">Free</mat-radio-button>
-            <mat-radio-button value="1">Ordered</mat-radio-button>
-          </mat-radio-group>
+ 
           <mat-form-field>
             <input formControlName="latitude" matInput placeholder="Latitude*">
             <mat-error>This field is mandatory.</mat-error>
@@ -46,26 +43,38 @@
               <input formControlName="maxFlightHeight" matInput placeholder="Max flight height*">
               <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
+
           <mat-form-field>
-              <input formControlName="control" matInput placeholder="Control*">
-              <mat-error>This field is mandatory.</mat-error>
+            <mat-select formControlName="control" placeholder="Select control type">
+              <mat-option value="0">Remote control</mat-option>
+              <mat-option value="1">Smartphone</mat-option>
+            </mat-select>
+            <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
+          
           <mat-form-field>
-              <input formControlName="droneType" matInput placeholder="DroneType*">
-              <mat-error>This field is mandatory.</mat-error>
+            <mat-select formControlName="droneType" placeholder="Select drone type">
+              <mat-option value="0">Filming</mat-option>
+              <mat-option value="1">Cargo transportation</mat-option>
+              <mat-option value="2">Vehiche</mat-option>
+            </mat-select>
+            <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
+
+          <mat-radio-group formControlName="status"height="300px">
+            <mat-radio-button value="0">Free</mat-radio-button>
+            <mat-radio-button value="1">Ordered</mat-radio-button>
+          </mat-radio-group>
         </div>
       </mat-grid-tile>
       <mat-grid-tile>
-        <div class="controles-container">
-          <div class="add-bottom-padding">
-          </div>
-          <div class="button-row">
-            <button mat-raised-button color="primary" type="submit" 
-            [disabled]="service.form.invalid">Submit</button>
-            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
-          </div>
-        </div>
+          <div class="controles-container">
+              <div class="button-row">
+                <button mat-raised-button color="primary" type="submit" 
+                [disabled]="service.form.invalid">Submit</button>
+                <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+              </div>
+            </div>
       </mat-grid-tile>
     </mat-grid-list>
   </form>

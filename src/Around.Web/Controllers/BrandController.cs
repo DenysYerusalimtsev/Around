@@ -12,16 +12,18 @@ namespace Around.Web.Controllers
     public class BrandController : Controller
     {
         private readonly IBrandRepository _brandRepository;
+        private readonly ICountryRepository _countryRepository;
 
-        public BrandController(IBrandRepository brandRepository)
+        public BrandController(IBrandRepository brandRepository, ICountryRepository countryRepository)
         {
             _brandRepository = brandRepository;
+            _countryRepository = countryRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllBrands()
         {
-            List<Brand> brands = await _brandRepository.GetAllAsync();
+            var brands = await _brandRepository.GetAllAsync();
             var response = new List<BrandDto>();
 
             foreach (var brand in brands)
@@ -32,10 +34,19 @@ namespace Around.Web.Controllers
         }
 
         [HttpGet]
+        [Route("countries")]
+        public async Task<IActionResult> GetCountries()
+        {
+            var countries = await _countryRepository.GetAllAsync();
+
+            return Ok(countries);
+        }
+
+        [HttpGet]
         [Route("brand/{id}")]
         public async Task<IActionResult> GetBrand(int id)
         {
-            Brand brand = await _brandRepository.Get(id);
+            var brand = await _brandRepository.Get(id);
             var response = new BrandDto(brand);
            
             return Ok(response);

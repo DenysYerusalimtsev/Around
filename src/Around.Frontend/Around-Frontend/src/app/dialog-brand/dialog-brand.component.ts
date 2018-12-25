@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../service/notification.service';
 import { BrandService } from '../service/brand.service';
 import { MatDialogRef } from '@angular/material';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Country } from '../model/country';
+import { CountryService } from '../service/country.service';
 import { BrandAggregate } from '../model/brand-aggregate';
 
 @Component({
@@ -11,40 +14,63 @@ import { BrandAggregate } from '../model/brand-aggregate';
 })
 export class DialogBrandComponent implements OnInit {
 
-    constructor(private service: BrandService,
+  brandFormGroup!: FormGroup;
+
+  countries: Country[];
+
+    constructor(private brandService: BrandService,
+      private countryService: CountryService,
       private notificationService: NotificationService,
       public dialogRef: MatDialogRef<DialogBrandComponent>) { }
 
     ngOnInit() {
-      this.service.getBrands();
-    }
+        this.brandFormGroup = new FormGroup({
+          id : new FormControl(null),
+          name: new FormControl('', {
+              validators: [Validators.required]
+          }),
+          country: new FormControl('', {
+              validators: [Validators.required]
+          })
+      });
 
-    onClear() {
-      this.service.form.reset();
-      this.service.initializeFormGroup();
+      this.countryService.getCountries()
+        .subscribe( data => {
+          this.countries = data;
+          console.log(this.countries);
+        });
+
     }
 
     onSubmit() {
-      if (this.service.form.valid) {
+      const brand = new BrandAggregate(
+        this.brandFormGroup.value.name,
+        this.brandFormGroup.value.country
+      );
+
+      this.brandService.createBrand(brand);
+      this.notificationService.success(':: Submitted successfully');
+      this.onClose();
+
+
+      /*
+      if (this.brandService.form.valid) {
         const brand = new BrandAggregate(
-          this.service.form.controls['name'].value,
-          this.service.form.controls['country'].value);
-        this.service.createBrand(brand);
+          this.brandService.form.controls['name'].value,
+          this.brandService.form.controls['country'].value);
+        this.brandService.createBrand(brand);
       } else {
           const brand = new BrandAggregate(
-          this.service.form.controls['name'].value,
-          this.service.form.controls['country'].value);
-          this.service.updateBrand(brand);
+          this.brandService.form.controls['name'].value,
+          this.brandService.form.controls['country'].value);
+          this.brandService.updateBrand(brand);
         }
-        this.service.form.reset();
-        this.service.initializeFormGroup();
         this.notificationService.success(':: Submitted successfully');
-        this.onClose();
+        this.onClose();*/
       }
 
     onClose() {
-      this.service.form.reset();
-      this.service.initializeFormGroup();
+      this.brandFormGroup.reset();
       this.dialogRef.close();
     }
 }

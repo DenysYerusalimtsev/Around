@@ -17,7 +17,7 @@ export class ListCopterComponent implements OnInit {
     private dialog: MatDialog,
     private notificationService: NotificationService) {
       this.dataSource = new MatTableDataSource();
-     }
+    }
 
     dataSource: MatTableDataSource<CopterDto>;
     displayedColumns: string[] =

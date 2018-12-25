@@ -1,21 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import 'rxjs/add/operator/map';
-import { CountryDto } from '../interface/country-dto';
+import { Country } from '../interface/country-dto';
 
 @Injectable()
-export class BrandService {
+export class CountryService {
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://localhost:55555/api/Country/';
-
-  form: FormGroup = new FormGroup({
-    id: new FormControl(null),
-    name: new FormControl('', Validators.required),
-    country: new FormControl('', Validators.required),
-  });
+  baseUrl = 'http://localhost:55555/api/Brand/countries';
 
   getCountries() {
-    return this.http.get<CountryDto>(this.baseUrl);
+    return this.http.get<Country[]>(this.baseUrl);
   }
 }
