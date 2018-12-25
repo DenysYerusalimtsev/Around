@@ -15,7 +15,6 @@ import { BrandAggregate } from '../model/brand-aggregate';
 export class DialogBrandComponent implements OnInit {
 
   brandFormGroup!: FormGroup;
-
   countries: Country[];
 
     constructor(private brandService: BrandService,
