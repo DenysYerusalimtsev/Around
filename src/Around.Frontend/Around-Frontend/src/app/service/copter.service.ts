@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { Copter } from '../model/copter';
 import { CopterDto } from '../interface/copter-dto';
+import { CopterAggregate } from '../model/copter-aggregate';
 
 @Injectable()
 export class CopterService {
@@ -18,8 +19,13 @@ export class CopterService {
     return this.http.get<CopterDto>(this.baseUrl + '/' + id);
   }
 
-  createCopter(copter: Copter) {
-    return this.http.post(this.baseUrl, copter);
+  createCopter(copter: CopterAggregate) {
+    return this.http.post(this.baseUrl, copter,
+    {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text'
+    })
+    .subscribe(data => console.log('Works!'));
   }
 
   updateCopter(copter: Copter) {

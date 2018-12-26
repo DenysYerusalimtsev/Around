@@ -70,22 +70,25 @@ export class DialogCopterComponent implements OnInit {
   }
 
   onSubmit() {
-    /*
-    if (this.service.form.valid) {
+    if (this.coptersForm.valid) {
       const copter = new CopterAggregate(
-        this.service.form.controls['name'].value,
-        this.service.form.controls['status'].value,
-        this.service.form.controls['latitude'].value,
-        this.service.form.controls['longitude'].value,
-        this.service.form.controls['costPerMinute'].value,
-        this.service.form.controls['brandName'].value,
-        this.service.form.controls['costPerMinute'].value,
-        this.service.form.controls['maxSpeed'].value,
-        this.service.form.controls['maxFlightHeight'].value,
-        this.service.form.controls['control'].value,
-        this.service.form.controls['droneType'].value);
-      this.service.createCopter(copter);
-    } else {
+        this.coptersForm.value.name,
+        this.coptersForm.value.status,
+        this.coptersForm.value.latitude,
+        this.coptersForm.value.longitude,
+        this.coptersForm.value.costPerMinute,
+        this.coptersForm.value.brandName,
+        this.coptersForm.value.maxSpeed,
+        this.coptersForm.value.maxFlightHeight,
+        this.coptersForm.value.control,
+        this.coptersForm.value.droneType);
+      this.copterService.createCopter(copter);
+      console.log(copter);
+      this.onClose();
+      this.notificationService.success(':: Submitted successfully');
+    }
+
+    /*else {
       const copter = new CopterAggregate(
         this.service.form.controls['name'].value,
         this.service.form.controls['status'].value,
