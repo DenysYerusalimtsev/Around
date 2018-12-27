@@ -25,6 +25,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashcardComponent } from './dashcard/dashcard.component';
 import { Ng2OdometerModule } from 'ng2-odometer';
 import { CountryService } from './service/country.service';
+import { RentService } from './service/rent.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,13 @@ import { CountryService } from './service/country.service';
     DialogBrandComponent,
     DialogCopterComponent
   ],
-  providers: [BrandService, ApiService, PlacesApiService, StateService, CopterService, CountryService],
+  providers: [BrandService,
+    ApiService,
+    PlacesApiService,
+    StateService,
+    CopterService,
+    CountryService,
+    RentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

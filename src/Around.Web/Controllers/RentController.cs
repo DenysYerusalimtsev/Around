@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Enums;
@@ -26,7 +25,6 @@ namespace Around.Web.Controllers
         }
 
         [HttpGet]
-        [Route("rents")]
         public async Task<IActionResult> GetRents()
         {
             List<Rent> rents = await _rentRepository.GetAllAsync();
@@ -40,7 +38,7 @@ namespace Around.Web.Controllers
         }
 
         [HttpGet]
-        [Route("rents/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> GetRent(int id)
         {
             Rent rent = await _rentRepository.Get(id);
@@ -51,7 +49,7 @@ namespace Around.Web.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CreateRent(RentAggregate rentDto)
+        public async Task<IActionResult> CreateRent([FromBody] RentAggregate rentDto)
         {
             var copter = await _copterRepository.Get(rentDto.CopterId);
             if (copter.Status != Status.Ordered)
@@ -67,7 +65,7 @@ namespace Around.Web.Controllers
             return BadRequest();
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("{id}")]
         public void DeleteRent(int id) => _rentRepository.Delete(id);
     }

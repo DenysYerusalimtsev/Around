@@ -1,8 +1,6 @@
 export interface RentDto {
     id: number;
-    clientName: string;
-    copterBrand: string;
-    copterName: string;
+    clientId: number;
+    copterId: number;
     startTime: Date;
-    finishTime: Date;
 }

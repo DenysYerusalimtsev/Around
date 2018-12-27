@@ -9,7 +9,7 @@ namespace Around.DataAccess.SqlServer.Repositories
 {
     public class CoptersRepository : ICopterRepository
     {
-        private DronesharingContext _context;
+        private readonly DronesharingContext _context;
        
         public CoptersRepository(DronesharingContext context)
         {

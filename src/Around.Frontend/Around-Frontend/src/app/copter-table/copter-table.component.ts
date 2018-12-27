@@ -4,6 +4,10 @@ import { Copter } from '../model/copter';
 import { CopterDto } from '../interface/copter-dto';
 import { CopterService } from '../service/copter.service';
 import { StateService } from '../core/services';
+import { RentAggregate } from '../model/rent-aggregate';
+import { RentService } from '../service/rent.service';
+import { Rent } from '../model/rent';
+import { RentDto } from '../interface/rent-dto';
 
 @Component({
   selector: 'app-copter-table',
@@ -12,7 +16,9 @@ import { StateService } from '../core/services';
 })
 export class CopterTableComponent implements OnInit {
 
-  constructor(private service: CopterService, private stateService: StateService) {
+  constructor(private copterService: CopterService,
+    private rentService: RentService,
+    private stateService: StateService) {
       this.dataSource = new MatTableDataSource();
   }
 
@@ -27,7 +33,12 @@ export class CopterTableComponent implements OnInit {
     searchKey: string;
 
     ngOnInit() {
-      this.service.getCopters()
+      this.rentService.getRents()
+        .subscribe((data: RentDto[]) => {
+        console.log(data.map(dto => Rent.Create(dto)));
+        });
+
+      this.copterService.getCopters()
         .subscribe((data: CopterDto[]) => {
             this.copters = data.map(dto => Copter.Create(dto));
 
@@ -49,4 +60,21 @@ export class CopterTableComponent implements OnInit {
     markOnMap(copter: Copter) {
       this.stateService.currentPlaceGeometry$.next(copter);
     }
-   }
+
+    book(copter: Copter) {
+      console.log(copter);
+
+      if (copter.status !== 'Ordered') {
+
+        console.log('Start booking...');
+
+        const rent = new RentAggregate(1, copter.id);
+
+        console.log('Rent on frontend', JSON.stringify(rent));
+
+        this.rentService.createRent(rent);
+
+        console.log('Rent created...');
+      }
+    }
+  }

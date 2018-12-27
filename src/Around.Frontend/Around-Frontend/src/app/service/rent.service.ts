@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { RentDto } from '../interface/rent-dto';
 import { Rent } from '../model/rent';
+import { RentAggregate } from '../model/rent-aggregate';
 
 @Injectable()
 export class RentService {
@@ -16,31 +17,28 @@ export class RentService {
     country: new FormControl('', Validators.required),
   });
 
-  getBrands() {
+  getRents() {
     return this.http.get<RentDto[]>(this.baseUrl);
 }
 
-  getBrandById(id: number) {
-    return this.http.get<RentDto>(this.baseUrl + '/' + id);
+  getRentById(id: number) {
+    return this.http.get<RentDto>(this.baseUrl + id);
   }
 
-  createBrand(rent: Rent) {
-    return this.http.post(this.baseUrl, rent);
+  createRent(rent: RentAggregate) {
+    return this.http.post(this.baseUrl + 'create', rent,
+    {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text'
+    })
+    .subscribe(data => console.log(JSON.stringify(rent)));
   }
 
-  updateBrand(rent: Rent) {
+  updateRent(rent: Rent) {
     return this.http.put(this.baseUrl + '/' + rent.id, rent);
   }
 
-  deleteBrand(id: number) {
+  deleteRent(id: number) {
     return this.http.delete(this.baseUrl + '/' + id);
-  }
-
-  initializeFormGroup() {
-    this.form.setValue({
-      id: 0,
-      name: '',
-      country: '',
-    });
   }
 }
