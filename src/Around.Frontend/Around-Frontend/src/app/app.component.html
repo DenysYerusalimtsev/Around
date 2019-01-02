@@ -1,17 +1,19 @@
-<mat-sidenav-container class="example-container mat-typography">
+<mat-sidenav-container class="container" style="height: 100%">
         <mat-sidenav #sidenav mode="side">
-            <div>Content</div>
+          <mat-nav-list>
+            <a mat-list-item routerLink="map">Map</a>
+            <a mat-list-item routerLink="brands">Brands</a>
+            <a mat-list-item routerLink="copters">Copters</a>
+          </mat-nav-list>
         </mat-sidenav>
       
         <mat-sidenav-content>
           <mat-toolbar>
-            <div class="flex-left">
-              <mat-icon id="main-nav-button" (click)="sidenav.toggle()">menu</mat-icon>
-            </div>
+            <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
           </mat-toolbar>
           <main>
+              <router-outlet></router-outlet>
           </main>
       
         </mat-sidenav-content>
 </mat-sidenav-container>
-<router-outlet></router-outlet>
