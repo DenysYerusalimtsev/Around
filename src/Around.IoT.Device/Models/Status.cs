@@ -1,9 +1,8 @@
 ﻿namespace Around.IoT.Device.Models
 {
-    public enum Operation
+    public enum Status
     {
         Free = 0,
-        Booked = 1,
-        Telemetry = 2
+        Ordered = 1
     }
 }

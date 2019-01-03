@@ -3,6 +3,7 @@
     internal enum Operation
     {
         Free = 0,
-        Booked = 1
+        Booked = 1,
+        Telemetry = 2
     }
 }
