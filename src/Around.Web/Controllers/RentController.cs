@@ -47,6 +47,16 @@ namespace Around.Web.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        [Route("user/{userId}")]
+        public async Task<IActionResult> GetRentByUserId(int userId)
+        {
+            Rent rent = await _rentRepository.GetByUserId(userId);
+            var response = new RentDto(rent);
+
+            return Ok(response);
+        }
+
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> CreateRent([FromBody] RentAggregate rentDto)

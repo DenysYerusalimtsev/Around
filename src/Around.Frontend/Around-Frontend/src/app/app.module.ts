@@ -26,6 +26,8 @@ import { DashcardComponent } from './dashcard/dashcard.component';
 import { Ng2OdometerModule } from 'ng2-odometer';
 import { CountryService } from './service/country.service';
 import { RentService } from './service/rent.service';
+import { RentModeComponent } from './rent-mode/rent-mode.component';
+import { ChequeService } from './service/cheque.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { RentService } from './service/rent.service';
     LoginComponent,
     RegistrationComponent,
     DashboardComponent,
-    DashcardComponent
+    DashcardComponent,
+    RentModeComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { RentService } from './service/rent.service';
   ],
   entryComponents: [
     DialogBrandComponent,
-    DialogCopterComponent
+    DialogCopterComponent,
+    RentModeComponent
   ],
   providers: [BrandService,
     ApiService,
@@ -65,7 +69,8 @@ import { RentService } from './service/rent.service';
     StateService,
     CopterService,
     CountryService,
-    RentService],
+    RentService,
+    ChequeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

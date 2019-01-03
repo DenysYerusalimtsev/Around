@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { ChequeDto } from '../interface/cheque-dto';
 import { Cheque } from '../model/сheque';
+import { ChequeAggregate } from '../model/cheque-aggregate';
 
 @Injectable()
 export class ChequeService {
   constructor(private http: HttpClient) { }
   baseUrl = 'http://localhost:55555/api/Cheque/';
-
-  form: FormGroup = new FormGroup({
-    id: new FormControl(null),
-    name: new FormControl('', Validators.required),
-    country: new FormControl('', Validators.required),
-  });
 
   getCheques() {
     return this.http.get<ChequeDto[]>(this.baseUrl);
@@ -24,8 +18,13 @@ export class ChequeService {
     return this.http.get<ChequeDto>(this.baseUrl + '/' + id);
   }
 
-  createCheque(cheque: Cheque) {
-    return this.http.post(this.baseUrl, cheque);
+  createCheque(cheque: ChequeAggregate) {
+    return this.http.post(this.baseUrl + 'create', cheque,
+    {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text'
+    })
+    .subscribe(data => console.log('Works!'));
   }
 
   updateCheque(cheque: Cheque) {
@@ -34,13 +33,5 @@ export class ChequeService {
 
   deleteCheque(id: number) {
     return this.http.delete(this.baseUrl + '/' + id);
-  }
-
-  initializeFormGroup() {
-    this.form.setValue({
-      id: 0,
-      name: '',
-      country: '',
-    });
   }
 }

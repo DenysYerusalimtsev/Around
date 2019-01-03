@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { Copter } from '../model/copter';
 import { CopterDto } from '../interface/copter-dto';
 import { CopterService } from '../service/copter.service';
@@ -8,6 +8,7 @@ import { RentAggregate } from '../model/rent-aggregate';
 import { RentService } from '../service/rent.service';
 import { Rent } from '../model/rent';
 import { RentDto } from '../interface/rent-dto';
+import { RentModeComponent } from '../rent-mode/rent-mode.component';
 
 @Component({
   selector: 'app-copter-table',
@@ -16,7 +17,9 @@ import { RentDto } from '../interface/rent-dto';
 })
 export class CopterTableComponent implements OnInit {
 
+  createdRent: RentDto;
   constructor(private copterService: CopterService,
+    private dialog: MatDialog,
     private rentService: RentService,
     private stateService: StateService) {
       this.dataSource = new MatTableDataSource();
@@ -69,10 +72,22 @@ export class CopterTableComponent implements OnInit {
         console.log('Start booking...');
 
         const rent = new RentAggregate(1, copter.id);
-
         console.log('Rent on frontend', JSON.stringify(rent));
-
         this.rentService.createRent(rent);
+
+        this.rentService.getRentByUserId(rent.clientId)
+        .subscribe((data: RentDto) => {
+          this.createdRent = Rent.Create(data);
+
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.disableClose = false;
+          dialogConfig.autoFocus = true;
+          dialogConfig.height = '30%';
+          dialogConfig.width = '40%';
+          dialogConfig.data = this.createdRent;
+
+          this.dialog.open(RentModeComponent, dialogConfig);
+        });
 
         console.log('Rent created...');
       }

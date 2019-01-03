@@ -25,6 +25,10 @@ export class RentService {
     return this.http.get<RentDto>(this.baseUrl + id);
   }
 
+  getRentByUserId(userId: number) {
+    return this.http.get<RentDto>(this.baseUrl + 'user/' + userId);
+  }
+
   createRent(rent: RentAggregate) {
     return this.http.post(this.baseUrl + 'create', rent,
     {

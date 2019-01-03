@@ -10,6 +10,8 @@ namespace Around.Core.Interfaces
 
         Task<Rent> Get(int id);
 
+        Task<Rent> GetByUserId(int userId);
+
         Task<Rent> Create(Rent rent);
 
         void Update(Rent rent);

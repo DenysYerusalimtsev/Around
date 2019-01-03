@@ -30,7 +30,16 @@ namespace Around.DataAccess.SqlServer.Repositories
                 .Include(x => x.Copter)
                 .ThenInclude(c => c.Brand)
                 .Include(x => x.Client)
-                .FirstOrDefaultAsync(r => r.Id == id);
+                .LastOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task<Rent> GetByUserId(int userId)
+        {
+            return await _context.Rents
+                .Include(x => x.Copter)
+                .ThenInclude(c => c.Brand)
+                .Include(x => x.Client)
+                .LastOrDefaultAsync(r => r.ClientId == userId);
         }
 
         public async Task<Rent> Create(Rent rent)
