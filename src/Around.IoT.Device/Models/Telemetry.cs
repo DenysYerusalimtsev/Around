@@ -4,13 +4,6 @@ namespace Around.IoT.Device.Models
 {
     public class Telemetry
     {
-        public Telemetry(string name, double latitude, double longitude)
-        {
-            Name = name;
-            Latitude = latitude;
-            Longitude = longitude;
-        }
-
         public Telemetry(string name)
         {
             Name = name;
