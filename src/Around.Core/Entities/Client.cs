@@ -4,6 +4,10 @@ namespace Around.Core.Entities
 {
     public class Client
     {
+        public Client()
+        {
+        }
+
         public Client(ClientAggregate clientAggregate)
         {
             FirstName = clientAggregate.FirstName;

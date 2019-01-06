@@ -46,6 +46,7 @@ namespace Around.Web
             services.AddTransient<IDiscountRepository, DiscountRepository>();
             services.AddTransient<IRentRepository, RentRepository>();
             services.AddTransient<IReportRenderer, ReportRenderer>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IMailBox, MailBox>();
             services.AddTransient<IIoTHub>(provider => 
                 new AzureIoTHub(Configuration.GetConnectionString("IoTHub")));

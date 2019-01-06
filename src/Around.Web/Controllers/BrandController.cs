@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Around.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Around.Web.Controllers
         public async Task<IActionResult> GetAllBrands()
         {
             var brands = await _brandRepository.GetAllAsync();
+
             var response = new List<BrandDto>();
 
             foreach (var brand in brands)

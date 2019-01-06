@@ -4,14 +4,16 @@ using Around.DataAccess.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Around.DataAccess.SqlServer.Migrations
 {
     [DbContext(typeof(DronesharingContext))]
-    partial class DronesharingContextModelSnapshot : ModelSnapshot
+    [Migration("20190106130956_UpdateClientEntity")]
+    partial class UpdateClientEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
