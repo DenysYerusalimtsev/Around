@@ -48,7 +48,12 @@ namespace Around.DataAccess.SqlServer.Repositories
 
         public void Update(int id, Client client)
         {
-            _context.Clients.Update(client);
+            var existedClient = _context.Clients.Find(id);
+            if (existedClient != null)
+            {
+                _context.Clients.Update(existedClient);
+            }
+
             _context.SaveChanges();
         }
 

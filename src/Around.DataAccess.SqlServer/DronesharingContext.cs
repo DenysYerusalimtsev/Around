@@ -10,8 +10,6 @@ namespace Around.DataAccess.SqlServer
         {
         }
 
-        public DbSet<Admin> Admins { get; set; }
-
         public DbSet<Brand> Brands { get; set; }
 
         public DbSet<Copter> Copters { get; set; }
@@ -31,7 +29,6 @@ namespace Around.DataAccess.SqlServer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AdminConfigurations());
             modelBuilder.ApplyConfiguration(new BrandConfiguration());
             modelBuilder.ApplyConfiguration(new ChequeConfiguration());
             modelBuilder.ApplyConfiguration(new ClientConfiguration());

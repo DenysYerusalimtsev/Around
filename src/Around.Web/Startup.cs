@@ -39,7 +39,6 @@ namespace Around.Web
             );
 
             services.AddTransient<IBrandRepository, BrandRepository>();
-            services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<IChequeRepository, ChequeRepository>();
             services.AddTransient<IClientRepository, ClientRepository>();
             services.AddTransient<ICopterRepository, CoptersRepository>();
