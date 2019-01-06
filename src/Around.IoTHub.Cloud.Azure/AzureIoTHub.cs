@@ -20,7 +20,6 @@ namespace Around.IoTHub.Cloud.Azure
         {
             var dto = new FreeCopterDto(cheque.Rent.ClientId, cheque.Rent.Id);
             var json = JsonConvert.SerializeObject(dto);
-
             var message = new Message(Encoding.ASCII.GetBytes(json));
             message.Properties.Add("Operation", dto.Operation.ToString());
             await _serviceClient.SendAsync(HubCopterIdFor(cheque.Rent.Copter), message);

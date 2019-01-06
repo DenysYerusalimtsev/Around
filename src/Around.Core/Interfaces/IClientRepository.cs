@@ -12,9 +12,11 @@ namespace Around.Core.Interfaces
 
         Task<Client> Get(string email);
 
+        Task<bool> GetAny(string email);
+
         void Create(Client client);
 
-        void Update(Client client);
+        void Update(int id, Client client);
 
         List<Client> Search(string search);
 

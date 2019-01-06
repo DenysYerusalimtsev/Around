@@ -1,7 +1,7 @@
 ﻿namespace Around.Core.Entities
 {
     public class ClientAggregate
-    {  
+    {
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

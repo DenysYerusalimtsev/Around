@@ -1,19 +1,105 @@
 ﻿using Around.Core.Entities;
 using Around.Core.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Around.Core.Services
 {
     public class UserService : IUserService
     {
-        private readonly IClientRepository _repository;
+        private readonly IClientRepository _clientRepository;
 
-        public UserService(IClientRepository repository)
+        public UserService(IClientRepository clientRepository)
         {
-            _repository = repository;
+            _clientRepository = clientRepository;
         }
 
-        
+        public async Task<Client> Authenticate(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return null;
+
+            Client user = await _clientRepository.Get(username);
+
+            // check if username exists
+            if (user == null)
+                return null;
+
+            // check if password is correct
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return null;
+
+            // authentication successful
+            return user;
+        }
+
+        public async Task<Client> GetById(int id)
+        {
+            return await _clientRepository.Get(id);
+        }
+
+        public async Task<Client> Create(ClientAggregate clientAggregate)
+        {
+            // validation
+            if (string.IsNullOrWhiteSpace(clientAggregate.Password))
+                throw new Exception("Password is required");
+
+            if (await _clientRepository.GetAny(clientAggregate.Email))
+                throw new Exception("Username \"" + clientAggregate.Email + "\" is already taken");
+
+            CreatePasswordHash(clientAggregate.Password, out var passwordHash, out var passwordSalt);
+
+            var client = new Client(clientAggregate)
+            {
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
+            };
+
+            _clientRepository.Create(client);
+
+            return client;
+        }
+
+        public async Task Update(int id, ClientAggregate clientAggregate)
+        {
+            var client = await _clientRepository.Get(id);
+
+            if (client == null)
+                throw new Exception("User not found");
+
+            if (clientAggregate.Email != client.Email)
+            {
+                // username has changed so check if the new username is already taken
+                if (await _clientRepository.GetAny(clientAggregate.Email))
+                    throw new Exception("Username " + clientAggregate.Email + " is already taken");
+            }
+
+            // update password if it was entered
+            if (!string.IsNullOrWhiteSpace(clientAggregate.Password))
+            {
+                CreatePasswordHash(clientAggregate.Password, out var passwordHash, out var passwordSalt);
+
+                client.PasswordHash = passwordHash;
+                client.PasswordSalt = passwordSalt;
+            }
+
+            client.Update(clientAggregate);
+
+            _clientRepository.Update(id, client);
+        }
+
+        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            if (password == null) throw new ArgumentNullException("password");
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
         private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
             if (password == null) throw new ArgumentNullException("password");
@@ -31,11 +117,6 @@ namespace Around.Core.Services
             }
 
             return true;
-        }
-
-        public User Authenticate(string username, string password)
-        {
-            throw new NotImplementedException();
         }
     }
 }

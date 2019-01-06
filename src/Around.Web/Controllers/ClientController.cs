@@ -11,10 +11,12 @@ namespace Around.Web.Controllers
     public class ClientController : Controller
     {
         private readonly IClientRepository _clientRepository;
+        private readonly IUserService _userService;
 
-        public ClientController(IClientRepository clientRepository)
+        public ClientController(IClientRepository clientRepository, IUserService userService)
         {
             _clientRepository = clientRepository;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -45,7 +47,7 @@ namespace Around.Web.Controllers
         [Route("create")]
         public IActionResult CreateClient([FromBody]ClientAggregate clientDto)
         {
-            var client = new Client().CreateFromDto(clientDto);
+            var client = new Client(clientDto);
             _clientRepository.Create(client);
             return Ok("Success");
         }
@@ -63,8 +65,12 @@ namespace Around.Web.Controllers
         public void DeleteClient(int id) => _clientRepository.Delete(id);
 
         [HttpPost]
-        [Route("update")]
-        public void UpdateClient(Client client) => _clientRepository.Update(client);
-       
+        [Route("update/{id}")]
+        public IActionResult UpdateBrand(int id, [FromBody] ClientAggregate clientDto)
+        {
+            _userService.Update(id, clientDto);
+
+            return Ok("Success");
+        }
     }
 }

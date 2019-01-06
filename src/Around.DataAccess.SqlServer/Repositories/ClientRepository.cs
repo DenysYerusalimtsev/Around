@@ -18,18 +18,26 @@ namespace Around.DataAccess.SqlServer.Repositories
         public async Task<List<Client>> GetAll()
         {
             return await _context.Clients
-                .Include(navigationPropertyPath: x => x.Discount)
+                .Include(x => x.Discount)
                 .ToListAsync();
         }
 
         public async Task<Client> Get(int id)
         {
-            return await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Clients
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Client> Get(string email)
         {
-            return await _context.Clients.FirstOrDefaultAsync(c => c.Email == email);
+            return await _context.Clients
+                .FirstOrDefaultAsync(c => c.Email == email);
+        }
+
+        public async Task<bool> GetAny(string email)
+        {
+            return await _context.Clients
+                .AnyAsync(c => c.Email == email);
         }
 
         public void Create(Client client)
@@ -38,7 +46,7 @@ namespace Around.DataAccess.SqlServer.Repositories
             _context.SaveChanges();
         }
 
-        public void Update(Client client)
+        public void Update(int id, Client client)
         {
             _context.Clients.Update(client);
             _context.SaveChanges();
