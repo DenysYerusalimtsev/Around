@@ -62,7 +62,7 @@ namespace Around.Core.Services
 
         public async Task Update(int id, ClientAggregate clientAggregate)
         {
-            var client = await _clientRepository.Get(id);
+            var client = _clientRepository.Get(id).Result;
 
             if (client == null)
                 throw new Exception("User not found");

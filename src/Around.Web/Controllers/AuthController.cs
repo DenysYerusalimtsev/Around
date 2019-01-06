@@ -8,19 +8,22 @@ using Around.Web.Helpers;
 using Around.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Around.Web.Controllers
 {
+    [Route("api/[controller]")]
     public class AuthController : Controller
     {
         private readonly IUserService _userService;
         private readonly AppSettings _appSettings;
 
-        public AuthController(IUserService userService, AppSettings appSettings)
+        public AuthController(IUserService userService,
+            IOptions<AppSettings> appSettings)
         {
             _userService = userService;
-            _appSettings = appSettings;
+            _appSettings = appSettings.Value;
         }
 
         [AllowAnonymous]
