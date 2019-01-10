@@ -61,7 +61,7 @@ namespace Around.Web.Controllers
         [Route("create")]
         public async Task<IActionResult> CreateRent([FromBody] RentAggregate rentDto)
         {
-            var copter = await _copterRepository.Get(rentDto.CopterId);
+            var copter = _copterRepository.Get(rentDto.CopterId).Result;
             if (copter.Status != Status.Ordered)
             {
                 var rent = Rent.CreateFromDto(rentDto);
