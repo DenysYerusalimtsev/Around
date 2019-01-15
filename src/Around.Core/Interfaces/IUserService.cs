@@ -5,7 +5,7 @@ namespace Around.Core.Interfaces
 {
     public interface IUserService
     {
-        Task<Client> Authenticate(string username, string password);
+        Client Authenticate(string username, string password);
 
         Task<Client> Create(ClientAggregate clientAggregate);
 

@@ -14,12 +14,12 @@ namespace Around.Core.Services
             _clientRepository = clientRepository;
         }
 
-        public async Task<Client> Authenticate(string username, string password)
+        public Client Authenticate(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
 
-            Client user = await _clientRepository.Get(username);
+            Client user = _clientRepository.Get(username).Result;
 
             // check if username exists
             if (user == null)

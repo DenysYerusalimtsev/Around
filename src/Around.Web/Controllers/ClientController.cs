@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
@@ -21,9 +22,10 @@ namespace Around.Web.Controllers
 
         [HttpGet]
         [Route("clients")]
-        public async Task<IActionResult> GetClients()
+        public IActionResult GetClients()
         {
-            List<Client> clients = await _clientRepository.GetAll();
+            List<Client> clients = _clientRepository.GetAll().Result;
+
             var response = new List<ClientDto>();
 
             foreach (var client in clients)
@@ -66,7 +68,7 @@ namespace Around.Web.Controllers
 
         [HttpPost]
         [Route("update/{id}")]
-        public IActionResult UpdateBrand(int id, [FromBody] ClientAggregate clientDto)
+        public IActionResult UpdateClient(int id, [FromBody] ClientAggregate clientDto)
         {
             _userService.Update(id, clientDto);
 
