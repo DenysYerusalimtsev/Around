@@ -20,13 +20,14 @@ export class AuthenticationService {
     }
 
     login(loginModel: LoginModel) {
-        return this.http.post<any>(`https://localhost:55555/api/Auth/authenticate`, loginModel)
+        return this.http.post<any>(`https://aroundtest.azurewebsites.net/api/Auth/authenticate`, loginModel)
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
+                    console.log('works');
                 }
 
                 return user;
