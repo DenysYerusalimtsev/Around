@@ -4,13 +4,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Client } from '../model/client';
 import { LoginModel } from '../model/login-model';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<Client>;
     public currentUser: Observable<Client>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+        private router: Router) {
         this.currentUserSubject = new BehaviorSubject<Client>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -28,6 +30,7 @@ export class AuthenticationService {
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
                     console.log('works');
+                    this.router.navigateByUrl('/map');
                 }
 
                 return user;

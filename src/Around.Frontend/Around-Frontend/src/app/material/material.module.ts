@@ -43,7 +43,8 @@ import * as Material from '@angular/material';
     Material.MatCardModule,
     Material.MatListModule,
     Material.MatSidenavModule,
-    Material.MatProgressSpinnerModule
+    Material.MatProgressSpinnerModule,
+    Material.MatTabsModule
   ],
   declarations: []
 })

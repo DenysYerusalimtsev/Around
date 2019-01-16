@@ -28,6 +28,8 @@ import { CountryService } from './service/country.service';
 import { RentService } from './service/rent.service';
 import { RentModeComponent } from './rent-mode/rent-mode.component';
 import { ChequeService } from './service/cheque.service';
+import { DashboardCarouselComponent } from './dashboard-carousel/dashboard-carousel.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { ChequeService } from './service/cheque.service';
     RegistrationComponent,
     DashboardComponent,
     DashcardComponent,
-    RentModeComponent
+    RentModeComponent,
+    DashboardCarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { ChequeService } from './service/cheque.service';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    Ng2OdometerModule
+    Ng2OdometerModule,
+    NgbModule
   ],
   entryComponents: [
     DialogBrandComponent,
