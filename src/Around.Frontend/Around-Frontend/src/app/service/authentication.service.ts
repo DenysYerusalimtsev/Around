@@ -30,7 +30,6 @@ export class AuthenticationService {
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
                     console.log('works');
-                    this.router.navigateByUrl('/map');
                 }
 
                 return user;
