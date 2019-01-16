@@ -30,6 +30,8 @@ import { RentModeComponent } from './rent-mode/rent-mode.component';
 import { ChequeService } from './service/cheque.service';
 import { DashboardCarouselComponent } from './dashboard-carousel/dashboard-carousel.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ListClientComponent } from './list-client/list-client.component';
+import { ClientService } from './service/client.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DashboardComponent,
     DashcardComponent,
     RentModeComponent,
-    DashboardCarouselComponent
+    DashboardCarouselComponent,
+    ListClientComponent
   ],
   imports: [
     BrowserModule,
@@ -67,14 +70,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DialogCopterComponent,
     RentModeComponent
   ],
-  providers: [BrandService,
+  providers: [
+    BrandService,
     ApiService,
     PlacesApiService,
     StateService,
     CopterService,
     CountryService,
     RentService,
-    ChequeService],
+    ChequeService,
+    ClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

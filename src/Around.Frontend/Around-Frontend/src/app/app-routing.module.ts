@@ -6,6 +6,7 @@ import { ListCopterComponent } from './list-copter/list-copter.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListClientComponent } from './list-client/list-client.component';
 
 const routes: Routes = [
   { path: 'brands', component: ListBrandComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'copters', component: ListCopterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'dashboard', component: DashboardComponent}
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'clients', component: ListClientComponent }
 ];
 
 @NgModule({

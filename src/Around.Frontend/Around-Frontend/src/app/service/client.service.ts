@@ -9,7 +9,7 @@ export class ClientService {
   baseUrl = 'http://localhost:55555/api/Client/';
 
   getClients() {
-    return this.http.get<ClientDto[]>(this.baseUrl);
+    return this.http.get<ClientDto[]>(this.baseUrl + 'clients');
 }
 
   getClientById(id: number) {
