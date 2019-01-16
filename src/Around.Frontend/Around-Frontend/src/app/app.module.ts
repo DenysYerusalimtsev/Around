@@ -32,6 +32,7 @@ import { DashboardCarouselComponent } from './dashboard-carousel/dashboard-carou
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListClientComponent } from './list-client/list-client.component';
 import { ClientService } from './service/client.service';
+import { DiscountService } from './service/discount.service';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { ClientService } from './service/client.service';
     CountryService,
     RentService,
     ChequeService,
-    ClientService],
+    ClientService,
+    DiscountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

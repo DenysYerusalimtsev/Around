@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Client } from '../model/client';
 import { LoginModel } from '../model/login-model';
 import { Router } from '@angular/router';
+import { ClientAggregate } from '../model/client-aggregate';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<Client>;
     public currentUser: Observable<Client>;
+    registerUrl = 'https://localhost:55555/api/Auth/register';
 
     constructor(private http: HttpClient,
         private router: Router) {
@@ -40,5 +42,13 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+    }
+
+    register(client: ClientAggregate) {
+        return this.http.post(this.registerUrl, client,
+        {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+            responseType: 'text'
+        }).subscribe(data => console.log('Works!'));
     }
 }

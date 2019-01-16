@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Around.Core.Entities;
 using Around.Core.Interfaces;
@@ -13,11 +12,16 @@ namespace Around.Web.Controllers
     {
         private readonly IClientRepository _clientRepository;
         private readonly IUserService _userService;
+        private readonly IDiscountRepository _discountRepository;
 
-        public ClientController(IClientRepository clientRepository, IUserService userService)
+        public ClientController(
+            IClientRepository clientRepository, 
+            IUserService userService, 
+            IDiscountRepository discountRepository)
         {
             _clientRepository = clientRepository;
             _userService = userService;
+            _discountRepository = discountRepository;
         }
 
         [HttpGet]
@@ -73,6 +77,13 @@ namespace Around.Web.Controllers
             _userService.Update(id, clientDto);
 
             return Ok("Success");
+        }
+
+        [HttpGet]
+        [Route("discounts")]
+        public IActionResult GetDiscounts()
+        {
+            return Ok(_discountRepository.GetAllAsync().Result);
         }
     }
 }
