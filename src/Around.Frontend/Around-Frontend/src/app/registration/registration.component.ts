@@ -34,15 +34,15 @@ export class RegistrationComponent implements OnInit {
         password: new FormControl('', {
           validators: [Validators.required]
         }),
-        discount: new FormControl('', {
-          validators: [Validators.required]
-        }),
         phoneNumber: new FormControl('', {
           validators: [Validators.required]
         }),
         passportNumber: new FormControl('', {
           validators: [Validators.required]
-        })
+        }),
+        discount: new FormControl('', {
+          validators: [Validators.required]
+        }),
     });
 
     this.discountService.getDiscounts()
@@ -59,11 +59,11 @@ export class RegistrationComponent implements OnInit {
         this.registrationForm.value.lastName,
         this.registrationForm.value.email,
         this.registrationForm.value.password,
-        this.registrationForm.value.discount,
         this.registrationForm.value.phoneNumber,
-        this.registrationForm.value.passportNumber);
-      this.authService.register(client);
+        this.registrationForm.value.passportNumber,
+        this.registrationForm.value.discount);
       console.log(client);
+      this.authService.register(client);
       this.notificationService.success(':: Submitted successfully');
     }
   }

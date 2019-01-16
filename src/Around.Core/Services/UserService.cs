@@ -38,13 +38,13 @@ namespace Around.Core.Services
             return await _clientRepository.Get(id);
         }
 
-        public async Task<Client> Create(ClientAggregate clientAggregate)
+        public Client Create(ClientAggregate clientAggregate)
         {
             // validation
             if (string.IsNullOrWhiteSpace(clientAggregate.Password))
                 throw new Exception("Password is required");
 
-            if (await _clientRepository.GetAny(clientAggregate.Email))
+            if (_clientRepository.GetAny(clientAggregate.Email).Result)
                 throw new Exception("Username \"" + clientAggregate.Email + "\" is already taken");
 
             CreatePasswordHash(clientAggregate.Password, out var passwordHash, out var passwordSalt);

@@ -11,7 +11,7 @@ import { ClientAggregate } from '../model/client-aggregate';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<Client>;
     public currentUser: Observable<Client>;
-    registerUrl = 'https://localhost:55555/api/Auth/register';
+    registerUrl = 'http://localhost:55555/api/Auth/register';
 
     constructor(private http: HttpClient,
         private router: Router) {

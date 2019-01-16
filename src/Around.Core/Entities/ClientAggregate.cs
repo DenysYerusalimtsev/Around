@@ -14,8 +14,6 @@
 
         public string PassportNumber { get; set; }
 
-        public string CreditCardNumber { get; set; }
-
-        public int DiscountId { get; set; }
+        public int Discount { get; set; }
     }
 }

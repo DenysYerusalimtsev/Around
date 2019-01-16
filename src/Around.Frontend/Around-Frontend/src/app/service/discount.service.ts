@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Country } from '../interface/country-dto';
+import { DiscountDto } from '../interface/discount-dto';
 
 @Injectable()
 export class DiscountService {
@@ -8,6 +8,6 @@ export class DiscountService {
   baseUrl = 'http://localhost:55555/api/Client/discounts';
 
   getDiscounts() {
-    return this.http.get<Country[]>(this.baseUrl);
+    return this.http.get<DiscountDto[]>(this.baseUrl);
   }
 }

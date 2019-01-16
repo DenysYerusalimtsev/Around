@@ -7,7 +7,7 @@ namespace Around.Core.Interfaces
     {
         Client Authenticate(string username, string password);
 
-        Task<Client> Create(ClientAggregate clientAggregate);
+        Client Create(ClientAggregate clientAggregate);
 
         Task Update(int id, ClientAggregate clientAggregate);
 

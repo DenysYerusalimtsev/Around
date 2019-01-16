@@ -14,8 +14,8 @@ namespace Around.Core.Entities
             LastName = clientAggregate.LastName;
             Email = clientAggregate.Email;
             PhoneNumber = clientAggregate.PhoneNumber;
-            DiscountId = clientAggregate.DiscountId;
-            CreditCard = clientAggregate.CreditCardNumber;
+            DiscountId = clientAggregate.Discount;
+
         }
 
         public int Id { get; set; }
@@ -48,8 +48,7 @@ namespace Around.Core.Entities
             LastName = clientAggregate.LastName;
             Email = clientAggregate.Email;
             PhoneNumber = clientAggregate.PhoneNumber;
-            DiscountId = clientAggregate.DiscountId;
-            CreditCard = clientAggregate.CreditCardNumber;
+            DiscountId = clientAggregate.Discount;
 
             return this;
         }
