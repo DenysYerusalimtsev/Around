@@ -21,8 +21,8 @@ namespace Around.Core.Services
 
             using (var message = new MailMessage("ontouragetest@gmail.com", "denis.yerusalimtsev@gmail.com"))
             {
-                message.Subject = "Test";
-                message.Body = "Body";
+                message.Subject = "Copter rent";
+                message.Body = "Thank you for using Around system, here is your cheque. Have a nice day. Regards, Around Team";
                 message.Attachments.Add(new Attachment(attachment, "AroundCheque","application/pdf"));
                 try
                 {

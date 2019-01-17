@@ -55,7 +55,7 @@ namespace Around.Web.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult CreateCheque([FromBody] ChequeAggregate chequeDto)
+        public async Task<IActionResult> CreateCheque([FromBody] ChequeAggregate chequeDto)
         {
             var cheque = new Cheque().CreateFromDto(chequeDto);
             _chequeRepository.Create(cheque);
@@ -64,7 +64,9 @@ namespace Around.Web.Controllers
             var updatedCheque = _chequeRepository.GetLast();
 
             _copterRepository.UpdateStatus(cheque.Rent.CopterId);
-            _hub.FinishUsingCopterAsync(updatedCheque);
+            await _hub.FinishUsingCopterAsync(updatedCheque);
+            var attachment = _reportRenderer.Render(cheque);
+            await _mailBox.Send(attachment);
 
             return Ok("Success");
         }
@@ -73,7 +75,7 @@ namespace Around.Web.Controllers
         [Route("report")]
         public async Task<IActionResult> RenderReport()
         {
-            var cheque = await _chequeRepository.GetLastAsync();
+            var cheque = _chequeRepository.GetLastAsync().Result;
             var attachment = _reportRenderer.Render(cheque);
             await _mailBox.Send(attachment);
 
