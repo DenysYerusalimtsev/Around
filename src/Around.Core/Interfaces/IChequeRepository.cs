@@ -10,7 +10,7 @@ namespace Around.Core.Interfaces
 
         Task<Cheque> Get(int id);
 
-        void Create(Cheque cheque);
+        int Create(Cheque cheque);
 
         void Update(Cheque cheque);
 
@@ -20,7 +20,7 @@ namespace Around.Core.Interfaces
 
         List<Cheque> Search(string search);
 
-        void AddCost();
+        Task<Cheque> AddCost(int chequeId);
 
         void Delete(int id);
     }

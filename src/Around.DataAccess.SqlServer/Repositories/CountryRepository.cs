@@ -25,10 +25,12 @@ namespace Around.DataAccess.SqlServer.Repositories
             return await _context.Countries.FirstOrDefaultAsync(c => c.Code == code);
         }
 
-        public void Create(Country country)
+        public string Create(Country country)
         {
             _context.Countries.Add(country);
             _context.SaveChanges();
+
+            return country.Code;
         }
 
         public void Update(Country country)

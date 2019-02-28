@@ -14,7 +14,7 @@ namespace Around.Core.Interfaces
 
         Task<bool> GetAny(string email);
 
-        void Create(Client client);
+        int Create(Client client);
 
         void Update(int id, Client client);
 

@@ -10,7 +10,7 @@ namespace Around.Core.Interfaces
 
         Task<Discount> Get(int id);
 
-        void Create(Discount discount);
+        int Create(Discount discount);
 
         void Update(Discount discount);
 

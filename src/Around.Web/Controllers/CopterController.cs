@@ -41,14 +41,19 @@ namespace Around.Web.Controllers
         public IActionResult CreateCopter([FromBody] CopterAggregate copterDto)
         {
             var copter = new Copter().CreateFromDto(copterDto);
-            _copterRepository.Create(copter);
+            var id = _copterRepository.Create(copter);
 
-            return Ok("Success");
+            return Ok($"Copter with ID: {copter.Id} were successfully created");
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public void DeleteCopter(int id) => _copterRepository.Delete(id);
+        public IActionResult DeleteCopter(int id)
+        {
+            _copterRepository.Delete(id);
+
+            return Ok($"Copter with ID: {id} were deleted");
+        }
 
         [HttpPost]
         [Route("{id}")]
@@ -57,7 +62,7 @@ namespace Around.Web.Controllers
             var copter = new Copter().CreateFromDto(copterDto);
             _copterRepository.Update(id, copter);
 
-            return Ok("Success");
+            return Ok($"Copter {copter.Brand} {copter.Name} with ID: {copter.Id} were successfully updated");
         }
     }
 }

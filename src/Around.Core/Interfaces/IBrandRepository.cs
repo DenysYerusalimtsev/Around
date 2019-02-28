@@ -10,7 +10,7 @@ namespace Around.Core.Interfaces
 
         Task<Brand> Get(int id);
 
-        void Create(Brand brand);
+        int Create(Brand brand);
 
         void Update(int id, Brand brand);
 

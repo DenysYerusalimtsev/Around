@@ -10,7 +10,7 @@ namespace Around.Core.Interfaces
 
         Task<Country> Get(string code);
 
-        void Create(Country country);
+        string Create(Country country);
 
         void Update(Country country);
 

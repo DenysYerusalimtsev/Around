@@ -30,10 +30,12 @@ namespace Around.DataAccess.SqlServer.Repositories
                 .FirstOrDefaultAsync(predicate: c => c.Id == id);
         }
 
-        public void Create(Copter copter)
+        public int Create(Copter copter)
         {
             _context.Copters.Add(entity: copter);
             _context.SaveChanges();
+
+            return copter.Id;
         }
 
         public void Update(int id, Copter copter)

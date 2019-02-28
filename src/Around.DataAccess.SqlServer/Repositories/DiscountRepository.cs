@@ -25,10 +25,12 @@ namespace Around.DataAccess.SqlServer.Repositories
             return await _context.Discounts.FirstOrDefaultAsync(d => d.Id == id);
         }
 
-        public void Create(Discount discount)
+        public int Create(Discount discount)
         {
             _context.Discounts.Add(discount);
             _context.SaveChanges();
+
+            return discount.Id;
         }
 
         public void Update(Discount discount)

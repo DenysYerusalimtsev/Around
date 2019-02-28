@@ -76,7 +76,7 @@ namespace Around.Web.Controllers
         {
             _userService.Update(id, clientDto);
 
-            return Ok("Success");
+            return Ok($"Client {clientDto.FirstName} {clientDto.LastName} with ID: {id} were successfully updated");
         }
 
         [HttpGet]

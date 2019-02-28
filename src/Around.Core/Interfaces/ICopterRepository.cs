@@ -10,7 +10,7 @@ namespace Around.Core.Interfaces
 
         Task<Copter> Get(int id);
 
-        void Create(Copter copter);
+        int Create(Copter copter);
 
         void Update(int id, Copter copter);
 

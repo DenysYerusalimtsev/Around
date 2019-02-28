@@ -15,10 +15,12 @@ namespace Around.DataAccess.SqlServer.Repositories
             _context = context;
         }
 
-        public void Create(Brand brand)
+        public int Create(Brand brand)
         {
             _context.Brands.Add(brand);
             _context.SaveChanges();
+
+            return brand.Id;
         }
 
         public void Delete(int id)

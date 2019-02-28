@@ -40,10 +40,12 @@ namespace Around.DataAccess.SqlServer.Repositories
                 .AnyAsync(c => c.Email == email);
         }
 
-        public void Create(Client client)
+        public int Create(Client client)
         {
             _context.Clients.Add(client);
             _context.SaveChanges();
+
+            return client.Id;
         }
 
         public void Update(int id, Client client)

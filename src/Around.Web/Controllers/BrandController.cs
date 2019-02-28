@@ -61,7 +61,7 @@ namespace Around.Web.Controllers
             var brand = new Brand(brandDto.Name, brandDto.CountryCode);
             _brandRepository.Create(brand);
 
-            return Ok("Success");
+            return Ok($"Brand {brand.Name} has ID: {brand.Id}");
         }
 
         [HttpDelete]
@@ -70,7 +70,7 @@ namespace Around.Web.Controllers
         {
             _brandRepository.Delete(id);
 
-            return Ok("Success");
+            return Ok($"Successfully deleted: brand with ID: {id}");
         }
 
 
@@ -81,7 +81,7 @@ namespace Around.Web.Controllers
             var brand = new Brand(brandDto.Name, brandDto.CountryCode);
             _brandRepository.Update(id, brand);
 
-            return Ok("Success");
+            return Ok($"Brand with ID: {brand.Id} successfully updated");
         }
     }
 }

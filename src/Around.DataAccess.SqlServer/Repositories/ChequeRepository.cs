@@ -9,7 +9,7 @@ namespace Around.DataAccess.SqlServer.Repositories
 {
     public class ChequeRepository : IChequeRepository
     {
-        private DronesharingContext _context;
+        private readonly DronesharingContext _context;
 
         public ChequeRepository(DronesharingContext context)
         {
@@ -59,19 +59,23 @@ namespace Around.DataAccess.SqlServer.Repositories
                 .LastAsync();
         }
 
-        public void Create(Cheque cheque)
+        public int Create(Cheque cheque)
         {
             _context.Cheques.Add(cheque);
             _context.SaveChanges();
+
+            return cheque.Id;
         }
 
-        public void AddCost()
+        public async Task<Cheque> AddCost(int id)
         {
-            var chequeToUpdate = GetLast();
+            var chequeToUpdate = await Get(id);
             chequeToUpdate.TotalPrice = chequeToUpdate.Rent.Copter.CostPerMinute
                                         * (chequeToUpdate.DateOfCreation - chequeToUpdate.Rent.StartTime)
                                         .Minutes;
             Update(chequeToUpdate);
+
+            return await Get(chequeToUpdate.Id);
         }
 
         public void Update(Cheque cheque)

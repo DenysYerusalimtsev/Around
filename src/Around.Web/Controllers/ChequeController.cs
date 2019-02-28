@@ -15,8 +15,6 @@ namespace Around.Web.Controllers
         private readonly ICopterRepository _copterRepository;
         private readonly IMailBox _mailBox;
         private readonly IIoTHub _hub;
-        private const string PdfContentType = "application/pdf";
-        private const string FileName = "AroundCheckReport.pdf";
 
         public ChequeController(
             IChequeRepository chequeRepository,
@@ -58,17 +56,15 @@ namespace Around.Web.Controllers
         public async Task<IActionResult> CreateCheque([FromBody] ChequeAggregate chequeDto)
         {
             var cheque = new Cheque().CreateFromDto(chequeDto);
-            _chequeRepository.Create(cheque);
-            _chequeRepository.AddCost();
-
-            var updatedCheque = _chequeRepository.GetLast();
+            var chequeId =_chequeRepository.Create(cheque);
+            var updatedCheque = await _chequeRepository.AddCost(chequeId);
 
             _copterRepository.UpdateStatus(cheque.Rent.CopterId);
-            await _hub.FinishUsingCopterAsync(updatedCheque);
+            //await _hub.FinishUsingCopterAsync(updatedCheque);
             var attachment = _reportRenderer.Render(cheque);
-            await _mailBox.Send(attachment);
+            //await _mailBox.Send(attachment);
 
-            return Ok("Success");
+            return Ok($"Check with ID: {cheque.Id} successfully created");
         }
 
         [HttpPost]
@@ -80,16 +76,6 @@ namespace Around.Web.Controllers
             await _mailBox.Send(attachment);
 
             return Ok($"Message sent to {cheque.Rent.Client.Email}");
-        }
-
-        [HttpPost]
-        [Route("r")]
-        public async Task<IActionResult> Report()
-        {
-            var cheque = await _chequeRepository.GetLastAsync();
-            var attachment = _reportRenderer.Render(cheque);
-            attachment.Position = 0;
-            return File(attachment, PdfContentType, FileName);
         }
 
         [HttpDelete]
